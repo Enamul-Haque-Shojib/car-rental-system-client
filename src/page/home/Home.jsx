@@ -9,17 +9,17 @@ import StatsCar from "../../component/stats/StatsCar";
 
 
 const Home = () => {
-<<<<<<< HEAD
+
     // const{signInWithGoogle,user}=useAuth()
     // const handlegoolegsignup=()=>{
     //     signInWithGoogle()
     
-=======
+
     const{signInWithGoogle,user}=useAuth()
     // const handlegoolegsignup=()=>{
     //     signInWithGoogle()
     // }
->>>>>>> 6431074c445766ef8d68306a3c2692ca21d318d1
+
     return (
         <div>
 
