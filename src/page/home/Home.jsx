@@ -10,6 +10,7 @@ const Home = () => {
             <StatsCar></StatsCar>
             <Categories></Categories>
             <Feedback></Feedback>
+            
         </div>
     );
 };

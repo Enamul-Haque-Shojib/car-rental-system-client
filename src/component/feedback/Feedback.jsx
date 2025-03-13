@@ -42,7 +42,7 @@ const Feedback = () => {
 
     useEffect(() => {
 
-    
+    console.log('Feedback')
         setFeedbacks(feedbackData);
     
 
