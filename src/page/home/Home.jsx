@@ -1,5 +1,12 @@
-import { Button } from "@/components/ui/button"
-import useAuth from "@/hooks/useAuth";
+
+import Categories from "../../component/categories/Categories";
+import Feedback from "../../component/feedback/Feedback";
+import Slider from "../../component/slider/Slider";
+import StatsCar from "../../component/stats/StatsCar";
+
+
+
+
 const Home = () => {
     const{signInWithGoogle,user}=useAuth()
     const handlegoolegsignup=()=>{
@@ -7,10 +14,14 @@ const Home = () => {
     }
     return (
         <div>
-            <h1 className="text-2xl text-red-500">home page </h1>
-            <h1>user name : {user?.displayName}</h1>
-            <Button>Button shadcn </Button>
-            <Button onClick={handlegoolegsignup} >google signup test</Button>
+
+            <Slider></Slider>
+            <StatsCar></StatsCar>
+            <Categories></Categories>
+            <Feedback></Feedback>
+            
+
+           
         </div>
     );
 };
