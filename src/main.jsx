@@ -11,6 +11,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 import AuthProvider from './Provider/AuthProvider'
+import About from './page/about/About'
 
 
 createRoot(document.getElementById('root')).render(
@@ -24,6 +25,7 @@ createRoot(document.getElementById('root')).render(
           <Route index element={<Home />} />
           <Route path='register' element={<Register />} />
           <Route path='login' element={<Login />} />
+          <Route path='about' element={<About></About>} />
 
         </Route>
       </Routes>

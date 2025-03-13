@@ -42,7 +42,7 @@ const Feedback = () => {
 
     useEffect(() => {
 
-    console.log('Feedback')
+  
         setFeedbacks(feedbackData);
     
 
@@ -66,7 +66,7 @@ const Feedback = () => {
           }}
         >
           {feedbacks.map((feedback) => (
-            <SwiperSlide key={feedback._id}>
+            <SwiperSlide key={feedback.id}>
               <div className="flex flex-col items-center justify-evenly w-full h-[350px] p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 bg-white">
                 <img
                   src={feedback.feedbackUserPhoto}
