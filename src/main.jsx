@@ -7,9 +7,17 @@ import Home from './page/home/Home.jsx'
 import Register from './page/Register.jsx'
 import Login from './page/Login.jsx'
 
+import 'swiper/css';
+import 'swiper/css/navigation';
+
+import AuthProvider from './Provider/AuthProvider'
+
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+  <AuthProvider>
     {/* <RouterProvider router={router}></RouterProvider>
+
      */} <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainLayout />}>
@@ -20,5 +28,10 @@ createRoot(document.getElementById('root')).render(
         </Route>
       </Routes>
     </BrowserRouter>
+
+     */}
+     
+    </AuthProvider>
+
   </StrictMode>,
 )
