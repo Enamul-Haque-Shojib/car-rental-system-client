@@ -4,17 +4,22 @@ import { BrowserRouter, Route, Routes } from 'react-router'
 import './index.css'
 import MainLayout from './layout/MainLayout.jsx'
 import Home from './page/home/Home.jsx'
+import AuthProvider from './Provider/AuthProvider'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     {/* <RouterProvider router={router}></RouterProvider>
-     */} <BrowserRouter>
-     <Routes>
-  <Route path="/" element={<MainLayout />}>
-    <Route index element={<Home />} />
-    
-  </Route>
-</Routes>
-</BrowserRouter>
+     */}<AuthProvider>
+      <BrowserRouter>
+      <Routes>
+        
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Home />} />
+
+          </Route>
+        
+      </Routes>
+    </BrowserRouter>
+    </AuthProvider>
   </StrictMode>,
 )
