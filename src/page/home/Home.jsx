@@ -1,4 +1,5 @@
 
+import useAuth from "@/hooks/useAuth";
 import Categories from "../../component/categories/Categories";
 import Feedback from "../../component/feedback/Feedback";
 import Slider from "../../component/slider/Slider";
@@ -9,9 +10,9 @@ import StatsCar from "../../component/stats/StatsCar";
 
 const Home = () => {
     const{signInWithGoogle,user}=useAuth()
-    const handlegoolegsignup=()=>{
-        signInWithGoogle()
-    }
+    // const handlegoolegsignup=()=>{
+    //     signInWithGoogle()
+    // }
     return (
         <div>
 
