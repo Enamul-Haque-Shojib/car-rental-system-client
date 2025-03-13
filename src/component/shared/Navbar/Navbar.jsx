@@ -16,7 +16,7 @@ const Navbar = () => {
           <div className="container mx-auto px-6 py-4 flex justify-between items-center">
             {/* Logo */}
             <Link to="/" className="text-2xl font-extrabold tracking-wider">
-              Parcel Warehouse
+              SmartCar Rentals
             </Link>
     
             {/* Desktop Navigation */}
@@ -37,13 +37,7 @@ const Navbar = () => {
               </NavLink>
         
                 <>
-                  <NavLink
-                    to="/dashboard"
-                    className="transition duration-300 hover:text-yellow-300"
-                    activeclassName="text-yellow-300"
-                  >
-                    Dashboard
-                  </NavLink>
+                 
                   <div className="relative">
                     <img
                       src={"https://via.placeholder.com/40"}
@@ -58,12 +52,7 @@ const Navbar = () => {
                           <p className="text-sm text-gray-500">User</p>
                         </div>
                         <hr />
-                        <Link
-                          to="/dashboard"
-                          className="block w-full text-left px-4 py-2 hover:bg-gray-200"
-                        >
-                          Dashboard
-                        </Link>
+                      
                         <hr />
                         <button
                         
@@ -131,13 +120,7 @@ const Navbar = () => {
                 </NavLink>
             
                   <>
-                    <Link
-                      to="/dashboard"
-                      className="block w-full text-lg px-4 py-2 hover:bg-gray-200"
-                      onClick={handleNavField}
-                    >
-                      Dashboard
-                    </Link>
+                    
                     <button
                   
                       className="block w-full text-lg px-4 py-2 text-red-600 hover:bg-red-100"
