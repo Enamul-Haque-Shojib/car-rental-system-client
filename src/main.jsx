@@ -9,15 +9,17 @@ import AuthProvider from './Provider/AuthProvider'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     {/* <RouterProvider router={router}></RouterProvider>
-     */} <BrowserRouter>
+     */}<AuthProvider>
+      <BrowserRouter>
       <Routes>
-        <AuthProvider>
+        
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
 
           </Route>
-        </AuthProvider>
+        
       </Routes>
     </BrowserRouter>
+    </AuthProvider>
   </StrictMode>,
 )
