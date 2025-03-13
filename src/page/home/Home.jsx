@@ -8,10 +8,10 @@ import StatsCar from "../../component/stats/StatsCar";
 
 
 const Home = () => {
-    const{signInWithGoogle,user}=useAuth()
-    const handlegoolegsignup=()=>{
-        signInWithGoogle()
-    }
+    // const{signInWithGoogle,user}=useAuth()
+    // const handlegoolegsignup=()=>{
+    //     signInWithGoogle()
+    
     return (
         <div>
 
@@ -21,7 +21,7 @@ const Home = () => {
             <Feedback></Feedback>
             
 
-           
+           <h1>hello</h1>
         </div>
     );
 };
