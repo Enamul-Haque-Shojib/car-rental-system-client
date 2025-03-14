@@ -30,7 +30,7 @@ const Login = () => {
 
                 {/* register lottieAnimation */}
                 <div className='hidden md:block max-w-lg'>
-                    <img src={loginPic} className="" alt="" />
+                    <img src="https://carwow-uk-wp-2.imgix.net/2023-Koenigsegg-Jesko-Absolut-front.png?auto=format&cs=tinysrgb&fit=crop&h=800&ixlib=rb-1.1.0&q=60&w=1600" className="" alt="" />
                 </div>
 
 

@@ -7,6 +7,7 @@ import { FilePond } from 'react-filepond';
 import 'filepond/dist/filepond.min.css';
 
 const Register = () => {
+    
     const [error, setError] = useState(null)
     const [files, setFiles] = useState([]);
 
@@ -17,10 +18,10 @@ const Register = () => {
         const form = e.target
         const formData = new FormData(form)
         const data = Object.fromEntries(formData.entries());
-        data.file=files[0].file
-        const { email, password, photo, name } = data
+        // data.file=files[0].file
+        const { email, password,  } = data
 
-       
+       console.log(data)
 
         if (!passwordRegex.test(password)) {
 
@@ -41,7 +42,8 @@ const Register = () => {
 
                 {/* register lottieAnimation */}
                 <div className='hidden md:block min-w-80 max-w-md'>
-                    <Lottie animationData={lottieAnimation} loop={false} />
+                    {/* <Lottie animationData={lottieAnimation} loop={false} /> */}
+                    <img className='object-cover rounded-2xl' src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y2FyfGVufDB8fDB8fHww" alt="image" />
                 </div>
 
 
@@ -75,14 +77,14 @@ const Register = () => {
                             <label className='mb-0.5 block' >
                                 Upload Photo
                             </label>
-                            <FilePond
+                            {/* <FilePond
                                 files={files}
                                 onupdatefiles={setFiles}
                                 allowMultiple={false}
                                 name="file"
                                 labelIdle='Click to choose file'
                                 
-                            />
+                            /> */}
                         </div>
 
 
