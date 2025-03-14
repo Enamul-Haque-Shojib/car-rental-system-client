@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router';
 import "./Navbar.css"
+import useAuth from '@/hooks/useAuth';
+import toast from 'react-hot-toast';
 const Navbar = () => {
      const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
+const {user,logout}=useAuth()
 
   const handleNavField = () => setOpen(!open);
 
  
-
+const handlelogout=()=>{
+  try {
+    logout()
+    toast.success('Logout')
+  } catch (error) {
+    console.log(error)
+  }
+}
   const toggleDropdown = () => setDropdownOpen((prev) => !prev);
     return (
         <div className="bg-gradient-to-r from-purple-600 to-indigo-600 shadow-md text-white sticky top-0 z-50">
@@ -45,6 +54,7 @@ const Navbar = () => {
                       onClick={toggleDropdown}
                       className="w-10 h-10 rounded-full border-2 border-white cursor-pointer"
                     />
+                  <h3>  {user?.email} </h3>
                     {dropdownOpen && (
                       <div className="absolute right-0 mt-2 bg-white text-black rounded shadow-lg w-48">
                         <div className="px-4 py-2">
@@ -55,7 +65,7 @@ const Navbar = () => {
                       
                         <hr />
                         <button
-                        
+                        onClick={handlelogout}
                           className="block w-full text-left px-4 py-2 hover:bg-gray-200 text-red-600"
                         >
                           Logout

@@ -12,6 +12,7 @@ import 'swiper/css/navigation';
 
 import AuthProvider from './Provider/AuthProvider'
 import About from './page/about/About'
+import { Toaster } from 'react-hot-toast'
 
 
 createRoot(document.getElementById('root')).render(
@@ -32,8 +33,8 @@ createRoot(document.getElementById('root')).render(
     </BrowserRouter>
 
      
-     
+    <Toaster position='top-right' reverseOrder={false} />
     </AuthProvider>
-
+    
   </StrictMode>,
 )
