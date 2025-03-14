@@ -8,7 +8,9 @@ import StatsCar from "../../component/stats/StatsCar";
 
 
 const Home = () => {
-    
+
+
+
     return (
         <div>
 
