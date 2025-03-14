@@ -5,15 +5,19 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { FilePond } from 'react-filepond';
 import 'filepond/dist/filepond.min.css';
+import useAuth from '@/hooks/useAuth';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router';
 
 const Register = () => {
-    
+    const{ registerUser, signInWithGoogle}=useAuth()
+    const navigate=useNavigate()
     const [error, setError] = useState(null)
     const [files, setFiles] = useState([]);
 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         const form = e.target
         const formData = new FormData(form)
@@ -21,14 +25,20 @@ const Register = () => {
         // data.file=files[0].file
         const { email, password,  } = data
 
-       console.log(data)
 
         if (!passwordRegex.test(password)) {
 
             return setError("Password must have at least one uppercase letter, one lowercase letter, and be at least 6 characters long.")
         }
 
-            //   rest of the code will be here
+           try {
+            await registerUser(data.email,data.password)
+            toast.success('register successful')
+            navigate('/')
+           } catch (error) {
+            toast.error(error.message)
+            
+           }
 
     }
    

@@ -1,22 +1,28 @@
 ;
-import loginPic from "../assets/images/loginPic.png"
+import useAuth from "@/hooks/useAuth";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { Link } from "react-router";
 
 
 const Login = () => {
-
+    const { login}=useAuth()
     const [error, setError] = useState(null)
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit =async (e) => {
         e.preventDefault();
         const form = e.target
         const formData = new FormData(form)
         const data = Object.fromEntries(formData.entries());
 
         const { email, password } = data
-
+        try {
+            await login(email,password)
+            toast.success('login successful')
+        } catch (error) {
+            toast.error(error.message)
+        }
 
         //   rest of the code will be here
 
@@ -57,7 +63,7 @@ const Login = () => {
 
 
                         <div className="form-control w-full mx-auto mt-2">
-                            <button type="submit" className="btn bg-primaryColor text-white w-full">Register</button>
+                            <button type="submit" className="btn bg-primaryColor text-white w-full">Login</button>
                         </div>
                         <p className="text-center font-semibold my-0.5 text-sm ">OR</p>
                     </form>
