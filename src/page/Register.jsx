@@ -6,6 +6,7 @@ import 'filepond/dist/filepond.min.css';
 import useAuth from '@/hooks/useAuth';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
+import uploadImage from "@/hooks/uploadImage";
 
 const Register = () => {
     const{ registerUser, signInWithGoogle}=useAuth()
@@ -15,30 +16,36 @@ const Register = () => {
 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const form = e.target
-        const formData = new FormData(form)
+        const form = e.target;
+        const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
-        // data.file=files[0].file
-        const { email, password,  } = data
-
-
-        if (!passwordRegex.test(password)) {
-
-            return setError("Password must have at least one uppercase letter, one lowercase letter, and be at least 6 characters long.")
+    
+        if (files.length === 0) {
+            return setError("Please upload an image.");
         }
-
-           try {
-            await registerUser(data.email,data.password)
-            toast.success('register successful')
-            navigate('/')
-           } catch (error) {
-            toast.error(error.message)
+    
+        data.file = files[0].file;
+    
+        try {
+            const imgUrl = await uploadImage(data.file); 
+            data.photoURL = imgUrl; 
             
-           }
-
-    }
+            const { email, password } = data;
+    
+            if (!passwordRegex.test(password)) {
+                return setError("Password must have at least one uppercase letter, one lowercase letter, and be at least 6 characters long.");
+            }
+    
+            await registerUser(email, password);
+    
+            toast.success("Register successful");
+            navigate("/");
+        } catch (error) {
+            toast.error(error.message);
+        }
+    };
    
 
    
@@ -85,14 +92,14 @@ const Register = () => {
                             <label className='mb-0.5 block' >
                                 Upload Photo
                             </label>
-                            {/* <FilePond
+                            <FilePond
                                 files={files}
                                 onupdatefiles={setFiles}
                                 allowMultiple={false}
                                 name="file"
                                 labelIdle='Click to choose file'
                                 
-                            /> */}
+                            />
                         </div>
 
 
