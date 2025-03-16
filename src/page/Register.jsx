@@ -1,33 +1,42 @@
 
-import Lottie from 'lottie-react';
-import lottieAnimation from "../assets/lottieAnimation/registerLottie.json"
 import { useState } from "react";
 import { Link } from "react-router";
 import { FilePond } from 'react-filepond';
 import 'filepond/dist/filepond.min.css';
+import useAuth from '@/hooks/useAuth';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router';
 
 const Register = () => {
+    const{ registerUser, signInWithGoogle}=useAuth()
+    const navigate=useNavigate()
     const [error, setError] = useState(null)
     const [files, setFiles] = useState([]);
 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         const form = e.target
         const formData = new FormData(form)
         const data = Object.fromEntries(formData.entries());
-        data.file=files[0].file
-        const { email, password, photo, name } = data
+        // data.file=files[0].file
+        const { email, password,  } = data
 
-       
 
         if (!passwordRegex.test(password)) {
 
             return setError("Password must have at least one uppercase letter, one lowercase letter, and be at least 6 characters long.")
         }
 
-            //   rest of the code will be here
+           try {
+            await registerUser(data.email,data.password)
+            toast.success('register successful')
+            navigate('/')
+           } catch (error) {
+            toast.error(error.message)
+            
+           }
 
     }
    
@@ -41,7 +50,8 @@ const Register = () => {
 
                 {/* register lottieAnimation */}
                 <div className='hidden md:block min-w-80 max-w-md'>
-                    <Lottie animationData={lottieAnimation} loop={false} />
+                    {/* <Lottie animationData={lottieAnimation} loop={false} /> */}
+                    <img className='object-cover rounded-2xl' src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y2FyfGVufDB8fDB8fHww" alt="image" />
                 </div>
 
 
@@ -75,14 +85,14 @@ const Register = () => {
                             <label className='mb-0.5 block' >
                                 Upload Photo
                             </label>
-                            <FilePond
+                            {/* <FilePond
                                 files={files}
                                 onupdatefiles={setFiles}
                                 allowMultiple={false}
                                 name="file"
                                 labelIdle='Click to choose file'
                                 
-                            />
+                            /> */}
                         </div>
 
 
