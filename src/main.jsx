@@ -17,24 +17,24 @@ import { Toaster } from 'react-hot-toast'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-  <AuthProvider>
-    {/* <RouterProvider router={router}></RouterProvider>
+    <AuthProvider>
+      {/* <RouterProvider router={router}></RouterProvider>
 
      */} <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainLayout />}>
-          <Route index element={<Home />} />
-          <Route path='register' element={<Register />} />
-          <Route path='login' element={<Login />} />
-          <Route path='about' element={<About></About>} />
+        <Routes>
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<Home />} />
+            <Route path='register' element={<Register />} />
+            <Route path='login' element={<Login />} />
+            <Route path='about' element={<About></About>} />
 
-        </Route>
-      </Routes>
-    </BrowserRouter>
+          </Route>
+        </Routes>
+      </BrowserRouter>
 
-     
-    <Toaster position='top-right' reverseOrder={false} />
+
+      <Toaster position='top-right' reverseOrder={false} />
     </AuthProvider>
-    
+
   </StrictMode>,
 )
