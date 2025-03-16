@@ -9,7 +9,7 @@ const Category = ({category}) => {
           src={category.image}
           alt={category.title}
           fill
-          className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+          className="h-[300px] w-full object-cover transition-transform duration-300 hover:scale-105"
         />
    
       <div className="text-center py-4">

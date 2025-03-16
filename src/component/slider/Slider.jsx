@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 
 const Slider = () => {
     return (
-        <div className="lg:w-[90%] w-[95%] mx-auto rounded-2xl overflow-hidden shadow-lg">
+        <div className="lg:w-[100%] w-[95%] mx-auto overflow-hidden shadow-lg">
         <Swiper
           navigation={{
             nextEl: '.swiper-button-next',

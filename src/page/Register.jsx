@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router';
 import uploadImage from "@/hooks/uploadImage";
 
 const Register = () => {
-    const{ registerUser, signInWithGoogle}=useAuth()
+    const{ registerUser, signInWithGoogle, updateUserProfile}=useAuth()
     const navigate=useNavigate()
     const [error, setError] = useState(null)
     const [files, setFiles] = useState([]);
@@ -39,6 +39,7 @@ const Register = () => {
             }
     
             await registerUser(email, password);
+            await updateUserProfile(data.name, data.photoURL)
     
             toast.success("Register successful");
             navigate("/");
