@@ -1,4 +1,5 @@
 
+import { FeaturedCar } from "@/component/featured/featuredCar";
 import Categories from "../../component/categories/Categories";
 import Feedback from "../../component/feedback/Feedback";
 import Slider from "../../component/slider/Slider";
@@ -17,6 +18,7 @@ const Home = () => {
             <Slider></Slider>
             <StatsCar></StatsCar>
             <Categories></Categories>
+            <FeaturedCar/>
             <Feedback></Feedback>
             
 

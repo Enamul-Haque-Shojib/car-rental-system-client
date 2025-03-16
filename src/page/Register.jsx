@@ -1,6 +1,4 @@
 
-import Lottie from 'lottie-react';
-import lottieAnimation from "../assets/lottieAnimation/registerLottie.json"
 import { useState } from "react";
 import { Link } from "react-router";
 import { FilePond } from 'react-filepond';
