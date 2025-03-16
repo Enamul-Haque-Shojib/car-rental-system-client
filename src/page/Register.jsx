@@ -34,11 +34,11 @@ const Register = () => {
            
             const { email, password } = data;
     
-            // if (!passwordRegex.test(password)) {
-            //     return setError("Password must have at least one uppercase letter, one lowercase letter, and be at least 6 characters long.");
-            // }
+            if (!passwordRegex.test(password)) {
+                return setError("Password must have at least one uppercase letter, one lowercase letter, and be at least 6 characters long.");
+            }
     
-            // await registerUser(email, password);
+            await registerUser(email, password);
     
             toast.success("Register successful");
             navigate("/");
