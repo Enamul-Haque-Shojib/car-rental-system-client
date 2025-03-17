@@ -7,12 +7,14 @@ import useAuth from '@/hooks/useAuth';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
 import uploadImage from "@/hooks/uploadImage";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
 
 const Register = () => {
     const{ registerUser, signInWithGoogle, updateUserProfile}=useAuth()
     const navigate=useNavigate()
     const [error, setError] = useState(null)
     const [files, setFiles] = useState([]);
+    const axiosPublic=useAxiosPublic()
 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
@@ -40,7 +42,11 @@ const Register = () => {
     
             await registerUser(email, password);
             await updateUserProfile(data.name, data.photoURL)
-    
+            const userInfo = {
+                name: data.name,
+                email: data.email
+            }
+             await axiosPublic.post(`/api/auth/register/${data.email}`, userInfo)
             toast.success("Register successful");
             navigate("/");
         } catch (error) {
@@ -105,12 +111,12 @@ const Register = () => {
 
 
                         <div className="form-control w-full mx-auto mt-2">
-                            <button type="submit" className="btn bg-primaryColor text-white w-full">Register</button>
+                            <button type="submit" className="btn  w-full">Register</button>
                         </div>
                         <p className="text-center font-semibold my-0.5 text-sm ">OR</p>
                     </form>
                     <div className="w-64 md:w-72 mx-auto mb-3">
-                        <button className="btn bg-primaryColor text-white w-full">Continue with Google</button>
+                        <button className="btn   w-full">Continue with Google</button>
                     </div>
                     <p className="text-center mb-4 ">Already have an account? <Link to="/login" className="text-[#EA1A66] font-bold underline">Login</Link></p>
 
