@@ -26,6 +26,7 @@ const Login = () => {
 
     try {
       await login(email, password);
+      
       toast.success("Login successful");
       setError(null); // Reset error state on success
     } catch (error) {

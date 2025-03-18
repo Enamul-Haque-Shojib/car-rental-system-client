@@ -8,7 +8,7 @@ export const FeaturedCar = () => {
             {/* bottom-to-top gradient Overlay */}
             <div className="absolute  bottom-0 left-0 h-[200px] w-full bg-gradient-to-t from-black/70 to-transparent"></div>
             {/* left-to-bottom-right gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-black/60 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-black/80 to-transparent"></div>
 
 
             {/* content over image  */}
@@ -26,7 +26,7 @@ export const FeaturedCar = () => {
             <div className="absolute left-6 bottom-8    rounded-xl bg-transparent text-white font-bold text-start">
                    <h2 className="font-bold text-2xl md:text-3xl">LUXURY AND LOOKS FOR LESS</h2>
                    <p className="font-semibold md:mt-0.5 md:text-lg">Book now and save up to 15% on luxury vehicles</p>
-                   <button className="border-2 mt-1.5 md:mt-2.5 px-3 py-1 rounded-full cursor-pointer border-primaryColor">Get offer</button>
+                   <button className="border-2 mt-1.5 md:mt-2.5 px-3 py-1 rounded-full cursor-pointer ">Get offer</button>
                 </div>
 
         </div>
