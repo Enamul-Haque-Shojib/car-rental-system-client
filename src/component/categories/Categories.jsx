@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Category from './Category';
+import { Link } from 'react-router';
 
 const categoryData = [
     {
@@ -71,9 +72,9 @@ const Categories = () => {
         ))}
       </div>
       <div className="flex justify-center mt-8">
-        <button className='btn border p-3 rounded-lg'>
+        <Link to="allCars" className='btn border p-3 rounded-lg'>
           View All
-        </button>
+        </Link>
       </div>
            </div>
         </div>

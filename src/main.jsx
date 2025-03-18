@@ -13,6 +13,7 @@ import 'swiper/css/navigation';
 import AuthProvider from './Provider/AuthProvider'
 import About from './page/about/About'
 import { Toaster } from 'react-hot-toast'
+import AllCars from './page/AllCars/AllCars'
 
 
 createRoot(document.getElementById('root')).render(
@@ -27,6 +28,7 @@ createRoot(document.getElementById('root')).render(
             <Route path='register' element={<Register />} />
             <Route path='login' element={<Login />} />
             <Route path='about' element={<About></About>} />
+            <Route path='allCars' element={<AllCars/>} />
 
           </Route>
         </Routes>
