@@ -25,15 +25,18 @@ const CarCard = ({ car }) => {
         image_url } = car
 
     return (
-        <div className="flex flex-col mx-10 sm:max-w-md sm:mx-auto md:max-w-6xl md:justify-center md:gap-8 md:px-8 md:flex-row ">
+        <div className="flex flex-col mx-10 sm:max-w-md sm:mx-auto md:max-w-6xl md:justify-center md:gap-8 lg:gap-16 md:px-8 md:flex-row ">
+            {/* car image */}
             <div className="md:w-52 lg:w-80">
                 <img src={image_url} className="w-full h-full " alt="" />
 
             </div>
 
+            {/* car details */}
+
             <TooltipProvider>
-                <div className="flex flex-col items-start mt-2  gap-2">
-                    <h3 className="font-bold text-xl ">{name}</h3>
+                <div className="flex flex-col items-start md:justify-center mt-2  gap-2">
+                    <h3 className="font-bold text-xl lg:text-2xl">{name}</h3>
 
                     <div className="flex gap-5 justify-center ">
                         <Tooltip>
@@ -98,6 +101,8 @@ const CarCard = ({ car }) => {
 
                 </div>
             </TooltipProvider>
+
+            {/* car price section */}
             <div className="my-3 md:my-0 items-end flex-col flex md:justify-center lg:ml-10">
                 <p className=""> From </p>
                 <p className="font-bold text-xl">${price_per_day} <span className="font-semibold">/day</span> </p>

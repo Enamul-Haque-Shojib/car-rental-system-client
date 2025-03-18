@@ -14,7 +14,7 @@ const AllCars = () => {
           
           "bags_capacity": 2,
           "price_per_day": 50,
-          "image_url": "https://res.cloudinary.com/do8woqwpf/image/upload/v1742278914/toyota-corolla_qsndyq.jpg"
+          "image_url": "https://res.cloudinary.com/do8woqwpf/image/upload/v1742293402/toyotaCorolla_kd6mu9.jpg"
         },
         {
           "id": 2,
@@ -27,7 +27,7 @@ const AllCars = () => {
           
           "bags_capacity": 3,
           "price_per_day": 55,
-          "image_url": "https://res.cloudinary.com/do8woqwpf/image/upload/v1742278781/car2_aqc5sk.webp"
+          "image_url": "https://res.cloudinary.com/do8woqwpf/image/upload/v1742292828/hondaCivic_b8nwcm.png"
         },
         {
           "id": 3,
@@ -66,7 +66,7 @@ const AllCars = () => {
           
           "bags_capacity": 4,
           "price_per_day": 80,
-          "image_url": "https://res.cloudinary.com/do8woqwpf/image/upload/v1742278820/JeepWrangler_etntwb.jpg"
+          "image_url": "https://res.cloudinary.com/do8woqwpf/image/upload/v1742292852/JeepWrangler_ewlojh.jpg"
         },
         {
           "id": 6,
@@ -79,15 +79,15 @@ const AllCars = () => {
         
           "bags_capacity": 3,
           "price_per_day": 150,
-          "image_url": "https://res.cloudinary.com/do8woqwpf/image/upload/v1742278871/Mercedes-Benz_hjzvbs.jpg"
+          "image_url": "https://res.cloudinary.com/do8woqwpf/image/upload/v1742292872/Mercedes-Benz_sgftnd.jpg"
         }
       ]
       
     return (
-        <div className="my-6 md:my-10 text-center">
+        <div className="my-6 md:my-10 mb-10 md:mb-20 text-center">
 
-            <h2 className="font-bold text-2xl font-charm text-[#009900]">Find Your Perfect Ride </h2>
-            <p className="px-8 mt-1 max-w-md mx-auto">Compare, explore, and discover the best cars to match your lifestyle and needs.</p>
+            <h2 className="font-bold text-2xl md:text-3xl font-charm text-[#009900]">Find Your Perfect Ride </h2>
+            <p className="px-8 mt-1 max-w-md mx-auto md:text-lg">Compare, explore, and discover the best cars to match your lifestyle and needs.</p>
 
             {/* cars container */}
 
