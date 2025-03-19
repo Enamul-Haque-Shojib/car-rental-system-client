@@ -30,7 +30,7 @@ const Slider = () => {
                   <p className="text-lg leading-relaxed mb-6">
                   Find the perfect ride for any journey – fast, affordable, and hassle-free. Book your car today and hit the road with confidence!
                   </p>
-                  <Link to='/find_tutors/All'>
+                  <Link to=''>
                   <button className="btn btn-primary px-8 py-3 text-lg rounded-full shadow-md hover:bg-blue-600 transition">
                     Get Started
                   </button>
@@ -55,7 +55,7 @@ const Slider = () => {
                   <p className="text-lg leading-relaxed mb-6">
                   Your journey starts here – rent a car in just a few clicks!
                   </p>
-                  <Link to='/find_tutors/All'>
+                  <Link to=''>
                   <button className="btn btn-primary px-8 py-3 text-lg rounded-full shadow-md hover:bg-blue-600 transition">
                     Learn More
                   </button>
