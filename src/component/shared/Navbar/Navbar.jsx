@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router';
 import "./Navbar.css"
 import useAuth from '@/hooks/useAuth';
 import toast from 'react-hot-toast';
+import { Menu, X } from 'lucide-react';
 const Navbar = () => {
      const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -93,7 +94,7 @@ const handlelogout=()=>{
               className="lg:hidden text-2xl focus:outline-none"
               onClick={handleNavField}
             >
-              {open ? <p>X</p> : <p>Y</p>}
+              {open ? <X></X> : <Menu></Menu>}
             </button>
           </div>
     
@@ -124,35 +125,32 @@ const handlelogout=()=>{
                 >
                   About
                 </NavLink>
-            
-                  <>
+            {
+              user &&  <>
                     
-                    <button
+              <button
+            onClick={handlelogout}
+                className="block w-full text-lg px-4 py-2 text-red-600 hover:bg-red-100"
+              >
+                Logout
+              </button>
+            </>
+            }
                   
-                      className="block w-full text-lg px-4 py-2 text-red-600 hover:bg-red-100"
-                    >
-                      Logout
-                    </button>
-                  </>
-            
-                  <>
-                    <NavLink
-                      to="/register"
-                      className="block text-lg hover:text-indigo-500"
-                      activeclassName="text-indigo-500"
-                      onClick={handleNavField}
-                    >
-                      Register
-                    </NavLink>
-                    <NavLink
-                      to="/login"
-                      className="block text-lg hover:text-indigo-500"
-                      activeclassName="text-indigo-500"
-                      onClick={handleNavField}
-                    >
-                      Login
-                    </NavLink>
-                  </>
+            {
+              user ? <></> : 
+              <>
+              <NavLink
+                to="/login"
+                className="block text-lg hover:text-indigo-500"
+                activeclassName="text-indigo-500"
+                onClick={handleNavField}
+              >
+                Login
+              </NavLink>
+            </>
+            }
+                  
          
               </div>
             </div>
