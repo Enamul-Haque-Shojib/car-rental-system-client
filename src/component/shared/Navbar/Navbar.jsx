@@ -7,7 +7,7 @@ const Navbar = () => {
      const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 const {user,logout}=useAuth()
-console.log(user)
+// console.log(user)
   const handleNavField = () => setOpen(!open);
 
  
