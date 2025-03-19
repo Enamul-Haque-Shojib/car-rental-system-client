@@ -80,7 +80,7 @@ const Slider = () => {
                   <p className="text-lg leading-relaxed mb-6">
                   Choose from a wide range of cars and book hassle-free today!
                   </p>
-                  <Link to='/find_tutors/All'>
+                  <Link to=''>
                   <button className="btn btn-primary px-8 py-3 text-lg rounded-full shadow-md hover:bg-blue-600 transition">
                     Join Now
                   </button>
