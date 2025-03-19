@@ -38,7 +38,7 @@ const CarCard = ({ car }) => {
                 <div className="flex flex-col items-start md:justify-center mt-2  gap-2">
                     <h3 className="font-bold text-xl lg:text-2xl">{name}</h3>
 
-                    <div className="flex gap-5 justify-center ">
+                    <div className="flex gap-3 justify-center ">
                         <Tooltip>
                             <TooltipTrigger>
                                 <div className="flex items-center gap-1"><MdGroup /> <span>{seats}</span></div>

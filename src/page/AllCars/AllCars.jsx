@@ -9,12 +9,21 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 
 const AllCars = () => {
 
     const [open, setOpen] = useState(false);
 
-    const [value, setValue] = useState(2); // Default starting value
+    const [value, setValue] = useState(2);
 
     // Available slider values
     const sliderSteps = [2, 4, 6, 8];
@@ -106,8 +115,66 @@ const AllCars = () => {
 
                 <h2 className="font-bold text-2xl md:text-3xl font-charm text-[#009900]">Find Your Perfect Ride </h2>
                 <p className="px-8 mt-1 max-w-md mx-auto md:text-lg">Compare, explore, and discover the best cars to match your lifestyle and needs.</p>
+                    {/* filter bar for large screen */}
+                <div className="md:flex justify-center hidden mt-4 gap-3 ">
+
+                    <Select >
+                        <SelectTrigger className="w-[140px] lg:w-[160px]">
+                            <SelectValue placeholder="Select Seats" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectGroup>
+                                <SelectLabel>Seats</SelectLabel>
+                                <SelectItem value="2">2+</SelectItem>
+                                <SelectItem value="4">4+</SelectItem>
+                                <SelectItem value="6">6+</SelectItem>
+                                <SelectItem value="8">8+</SelectItem>
+                            </SelectGroup>
+                        </SelectContent>
+                    </Select>
+                    <Select >
+                        <SelectTrigger className="w-[140px] lg:w-[160px]">
+                            <SelectValue placeholder="Transmission" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectGroup>
+                                <SelectLabel>Transmission</SelectLabel>
+                                <SelectItem value="Automatic">Automatic</SelectItem>
+                                <SelectItem value="Manual">Manual</SelectItem>
+                            </SelectGroup>
+                        </SelectContent>
+                    </Select>
+                    <Select >
+                        <SelectTrigger className="w-[140px] lg:w-[160px]">
+                            <SelectValue placeholder="Air Conditioning" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectGroup>
+                                <SelectLabel>Air Conditioning</SelectLabel>
+                                <SelectItem value="Available">Available</SelectItem>
+                                <SelectItem value="UnAvailable">UnAvailable</SelectItem>
+                            </SelectGroup>
+                        </SelectContent>
+                    </Select>
+                    <Select >
+                        <SelectTrigger className="w-[140px] lg:w-[160px]">
+                            <SelectValue placeholder="Sort By" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectGroup>
+                                <SelectLabel>Sort By</SelectLabel>
+                                <SelectItem value="lowerPrice">Low-to-High</SelectItem>
+                                <SelectItem value="higherPrice">High-to-Low</SelectItem>
+                        
+                            </SelectGroup>
+                        </SelectContent>
+                    </Select>
+
+                </div>
+
+
                 <DialogTrigger>
-                    <Button onClick={() => setOpen(true)} className="w-24 my-2 bg-primaryColor hover:bg-primaryColor/90 cursor-pointer text-black">
+                    <Button onClick={() => setOpen(true)} className="w-24 mt-3 bg-primaryColor hover:bg-primaryColor/90 cursor-pointer text-black md:hidden">
                         <HiOutlineAdjustmentsHorizontal /> Filter
                     </Button>
                 </DialogTrigger>
@@ -116,7 +183,7 @@ const AllCars = () => {
 
                 {/* cars container */}
 
-                <div className="mt-5 md:mt-10 space-y-3 md:space-y-9">
+                <div className="mt-5   md:space-y-4">
 
                     {
                         carsData.map(car => <CarCard key={car.id} car={car} />)
@@ -127,7 +194,7 @@ const AllCars = () => {
 
                 {/* sidebar in mobile device */}
 
-                <DialogContent className="fixed right-0   h-auto w-72 bg-white shadow-lg p-4 flex flex-col [&>button]:hidden">
+                <DialogContent className="fixed right-0   h-auto w-72 sm:w-96 bg-white shadow-lg p-4 flex flex-col [&>button]:hidden">
                     {/* Header with Close Icon */}
                     <div className="flex justify-between items-center border-b pb-1">
                         <h2 className="text-lg font-semibold">Filters</h2>
@@ -187,7 +254,7 @@ const AllCars = () => {
                                 <Label htmlFor="ac">Available</Label>
                             </div>
                         </div>
-                                {/* price sorting */}
+                        {/* price sorting */}
                         <div>
                             <Label className="font-bold mb-2">Sort By</Label>
                             <RadioGroup defaultValue="comfortable">
@@ -199,7 +266,7 @@ const AllCars = () => {
                                     <RadioGroupItem value="comfortable" id="r2" />
                                     <Label htmlFor="r2">High-to-Low</Label>
                                 </div>
-                              
+
                             </RadioGroup>
                         </div>
                     </div>

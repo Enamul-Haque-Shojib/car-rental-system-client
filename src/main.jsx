@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Route, Routes } from 'react-router'
+import { BrowserRouter, Route, Routes} from 'react-router'
 import './index.css'
 import MainLayout from './layout/MainLayout.jsx'
 import Home from './page/home/Home.jsx'
@@ -21,14 +21,14 @@ createRoot(document.getElementById('root')).render(
     <AuthProvider>
       {/* <RouterProvider router={router}></RouterProvider>
 
-     */} <BrowserRouter>
+     */} <BrowserRouter >
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Home />} />
             <Route path='register' element={<Register />} />
             <Route path='login' element={<Login />} />
             <Route path='about' element={<About></About>} />
-            <Route path='allCars' element={<AllCars/>} />
+            <Route path='allCars' element={<AllCars />} />
 
           </Route>
         </Routes>
