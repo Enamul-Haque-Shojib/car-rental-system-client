@@ -13,6 +13,7 @@ import 'swiper/css/navigation';
 import AuthProvider from './Provider/AuthProvider'
 import About from './page/about/About'
 import { Toaster } from 'react-hot-toast'
+import AddCar from './page/addCar/AddCar';
 
 
 createRoot(document.getElementById('root')).render(
@@ -27,13 +28,14 @@ createRoot(document.getElementById('root')).render(
             <Route path='register' element={<Register />} />
             <Route path='login' element={<Login />} />
             <Route path='about' element={<About></About>} />
+            <Route path='addCar' element={<AddCar />} />
 
           </Route>
         </Routes>
       </BrowserRouter>
 
 
-      <Toaster position='top-right' reverseOrder={false} />
+      <Toaster position='top-center' reverseOrder={false} />
     </AuthProvider>
 
   </StrictMode>,
