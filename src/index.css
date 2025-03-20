@@ -1,3 +1,11 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap");
+@import "tailwindcss";
+@plugin "daisyui";
+@theme {
+  --font-charm: "Charm", "sans-serif";
+  --color-primaryColor: #F5B754;
+}
 @import "tailwindcss";
 
 @plugin "tailwindcss-animate";
@@ -122,3 +130,4 @@
     @apply bg-background text-foreground;
   }
 }
+
