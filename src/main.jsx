@@ -19,7 +19,9 @@ import AllCars from './page/AllCars/AllCars'
 import AddCar from './page/addCar/AddCar';
 import DashboardLayout from './layout/DashboardLayout'
 import Dashboard from './page/dashboard/Dashboard'
-import store from './redux/store'
+import { store } from './redux/store'
+import { Provider } from 'react-redux'
+
 
 
 
