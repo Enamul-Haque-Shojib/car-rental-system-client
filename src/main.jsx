@@ -7,7 +7,7 @@ import Home from './page/home/Home.jsx'
 
 import 'swiper/css';
 import 'swiper/css/navigation';
-=======
+
 import AuthProvider from './Provider/AuthProvider'
 
 
