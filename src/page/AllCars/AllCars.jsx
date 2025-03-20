@@ -115,7 +115,7 @@ const AllCars = () => {
 
                 <h2 className="font-bold text-2xl md:text-3xl font-charm text-[#009900]">Find Your Perfect Ride </h2>
                 <p className="px-8 mt-1 max-w-md mx-auto md:text-lg">Compare, explore, and discover the best cars to match your lifestyle and needs.</p>
-                    {/* filter bar for large screen */}
+                {/* filter bar for large screen */}
                 <div className="md:flex justify-center hidden mt-4 gap-3 ">
 
                     <Select >
@@ -134,6 +134,21 @@ const AllCars = () => {
                     </Select>
                     <Select >
                         <SelectTrigger className="w-[140px] lg:w-[160px]">
+                            <SelectValue placeholder="Location" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectGroup>
+                                <SelectLabel>Location</SelectLabel>
+                                <SelectItem value="Dhaka">Dhaka</SelectItem>
+                                <SelectItem value="Chattogram">Chattogram</SelectItem>
+                                <SelectItem value="Khulna">Khulna</SelectItem>
+                                <SelectItem value="Rajshahi">Rajshahi</SelectItem>
+                                <SelectItem value="Rangpur">Rangpur</SelectItem>
+                            </SelectGroup>
+                        </SelectContent>
+                    </Select>
+                    <Select >
+                        <SelectTrigger className="w-[140px] lg:w-[160px]">
                             <SelectValue placeholder="Transmission" />
                         </SelectTrigger>
                         <SelectContent>
@@ -141,6 +156,7 @@ const AllCars = () => {
                                 <SelectLabel>Transmission</SelectLabel>
                                 <SelectItem value="Automatic">Automatic</SelectItem>
                                 <SelectItem value="Manual">Manual</SelectItem>
+                                <SelectItem value="Both">Both</SelectItem>
                             </SelectGroup>
                         </SelectContent>
                     </Select>
@@ -152,7 +168,7 @@ const AllCars = () => {
                             <SelectGroup>
                                 <SelectLabel>Air Conditioning</SelectLabel>
                                 <SelectItem value="Available">Available</SelectItem>
-                                <SelectItem value="UnAvailable">UnAvailable</SelectItem>
+                                <SelectItem value="UnAvailable">Unavailable</SelectItem>
                             </SelectGroup>
                         </SelectContent>
                     </Select>
@@ -165,7 +181,7 @@ const AllCars = () => {
                                 <SelectLabel>Sort By</SelectLabel>
                                 <SelectItem value="lowerPrice">Low-to-High</SelectItem>
                                 <SelectItem value="higherPrice">High-to-Low</SelectItem>
-                        
+
                             </SelectGroup>
                         </SelectContent>
                     </Select>
