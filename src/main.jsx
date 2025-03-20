@@ -19,11 +19,13 @@ import AllCars from './page/AllCars/AllCars'
 import AddCar from './page/addCar/AddCar';
 import DashboardLayout from './layout/DashboardLayout'
 import Dashboard from './page/dashboard/Dashboard'
+import store from './redux/store'
 
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <Provider store={store}>
     <AuthProvider>
       {/* <RouterProvider router={router}></RouterProvider>
 
@@ -49,6 +51,6 @@ createRoot(document.getElementById('root')).render(
 
       <Toaster position='top-center' reverseOrder={false} />
     </AuthProvider>
-
+    </Provider>
   </StrictMode>,
 )
