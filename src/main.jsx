@@ -17,6 +17,8 @@ import { Toaster } from 'react-hot-toast'
 import AllCars from './page/AllCars/AllCars'
 
 import AddCar from './page/addCar/AddCar';
+import DashboardLayout from './layout/DashboardLayout'
+import Dashboard from './page/dashboard/Dashboard'
 
 
 
@@ -37,7 +39,9 @@ createRoot(document.getElementById('root')).render(
 
             <Route path='addCar' element={<AddCar />} />
 
-
+          </Route>
+          <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route index element={<Dashboard />} />
           </Route>
         </Routes>
       </BrowserRouter>
