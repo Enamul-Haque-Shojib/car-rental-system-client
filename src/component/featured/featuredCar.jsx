@@ -12,7 +12,7 @@ export const FeaturedCar = () => {
 
 
             {/* content over image  */}
-            <div className="absolute inset-0 top-6 left-4 md:left-10 md:top-20 flex items-center bg-black/70 justify-center text-white  border-white border-2 w-36 md:w-40 h-24 md:h-28 -rotate-20">
+            <div className="absolute  top-6 left-4 md:left-10 md:top-20 flex items-center bg-black/70 justify-center text-white  border-white border-2 w-36 md:w-40 h-24 md:h-28 -rotate-20">
 
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 text-center w-16 h-6 rounded-xl bg-white text-black font-bold">
                     UP TO
@@ -28,7 +28,6 @@ export const FeaturedCar = () => {
                    <p className="font-semibold md:mt-0.5 md:text-lg">Book now and save up to 15% on luxury vehicles</p>
                    <button className="border-2 mt-1.5 md:mt-2.5 px-3 py-1 rounded-full cursor-pointer ">Get offer</button>
                 </div>
-
 
         </div>
     )
