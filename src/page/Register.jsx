@@ -45,11 +45,11 @@ const Register = () => {
     
             await registerUser(email, password);
             await updateUserProfile(data.name, data.photoURL)
-            // const userInfo = {
-            //     name: data.name,
-            //     email: data.email
-            // }
-            // //  await axiosPublic.post(`/api/auth/register/${data.email}`, userInfo)
+            const userInfo = {
+                name: data.name,
+                email: data.email
+            }
+             await axiosPublic.post(`/api/auth/register/${data.email}`, userInfo)
             toast.success("Register successful");
             navigate("/");
         } catch (error) {
