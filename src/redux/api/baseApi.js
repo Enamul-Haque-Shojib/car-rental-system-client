@@ -8,31 +8,46 @@ import {
 
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:5000',
+  baseUrl: 'http://localhost:5000/api',
   credentials: 'include',
-  prepareHeaders: (headers, { getState }) => {
-    const token = (getState()).authenticate.token;
+//   prepareHeaders: (headers, { getState }) => {
+//     const token = (getState()).authenticate.token;
 
-    if (token) {
-      headers.set('authorization', `${token}`);
-    }
+//     if (token) {
+//       headers.set('authorization', `${token}`);
+//     }
 
-    return headers;
-  },
+//     return headers;
+//   },
 });
 
 
 
 export const baseApi = createApi({
-  reducerPath: 'baseApi',
-  baseQuery: baseQuery,
-  tagTypes: ['admin', 'cars'],
-  endpoints: () => ({}),
-});
+    reducerPath: 'baseApi',
+    baseQuery: baseQuery,
+    tagTypes: ['cars'],
+    endpoints: (builder) => ({
+      getAllCars: builder.query({
+        query: () => '/cars',
+        providesTags: ['cars']
+      }),
+    }),
+  });
 
-// export const imageUploadBaseApi = createApi({
-//   reducerPath: 'imageUploadApi',
-//   baseQuery: fetchBaseQuery({ baseUrl: 'https://api.imgbb.com/1' }),
-//   endpoints: () => ({}),
-// });
 
+
+// export const baseApi = createApi({
+//     reducerPath: 'baseApi',
+//     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/api' }),
+//     tagTypes: ['cars'],
+//     endpoints: (builder) => ({
+//       getAllCars: builder.query({
+//         query: () => '/cars',
+//         providesTags: ['cars']
+//       }),
+//     }),
+//   });
+
+
+//   export const { useGetAllCarsQuery } = baseApi;

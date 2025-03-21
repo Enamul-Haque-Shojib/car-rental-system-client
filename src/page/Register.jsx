@@ -16,6 +16,9 @@ const Register = () => {
     const [files, setFiles] = useState([]);
     const axiosPublic=useAxiosPublic()
 
+  
+
+
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
     const handleSubmit = async (e) => {
