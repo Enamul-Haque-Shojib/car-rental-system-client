@@ -15,20 +15,29 @@ import {
 
 const CarCard = ({ car }) => {
     const {
-        name,
+        _id,
+        brand,
+        carModel,
+        year,
+        type,
+        fuelType,
         seats,
         transmission,
-        air_conditioning,
-        doors,
-        bags_capacity,
-        price_per_day,
-        image_url } = car
+        mileAge,
+        pricePerDay,
+        location,
+        availability,
+        features,
+        image,
+        description,
+        registrationNumber,
+    } = car
 
     return (
         <div className="flex flex-col mx-10 sm:max-w-md sm:mx-auto md:max-w-6xl md:justify-center md:gap-8 lg:gap-16 md:px-8 md:flex-row ">
             {/* car image */}
             <div className="md:w-52 lg:w-80">
-                <img src={image_url} className="w-full h-full " alt="" />
+                <img src={image} className="w-full h-full " alt="" />
 
             </div>
 
@@ -36,7 +45,7 @@ const CarCard = ({ car }) => {
 
             <TooltipProvider>
                 <div className="flex flex-col items-start md:justify-center mt-2  gap-2">
-                    <h3 className="font-bold text-xl lg:text-2xl">{name}</h3>
+                    <h3 className="font-bold text-xl lg:text-2xl">{brand}</h3>
 
                     <div className="flex gap-3 justify-center ">
                         <Tooltip>
@@ -50,19 +59,19 @@ const CarCard = ({ car }) => {
 
                         <Tooltip>
                             <TooltipTrigger>
-                                <div className="flex items-center gap-1"><GiCarDoor /> <span>{doors}</span></div>
+                                <div className="flex items-center gap-1"><GiCarDoor /> <span>4</span></div>
                             </TooltipTrigger>
                             <TooltipContent>
-                                {doors} Doors
+                                4 Doors
                             </TooltipContent>
                         </Tooltip>
 
                         <Tooltip>
                             <TooltipTrigger >
-                                <div className="flex items-center gap-1"><MdOutlineLuggage /> <span>{bags_capacity}</span></div>
+                                <div className="flex items-center gap-1"><MdOutlineLuggage /> <span>4</span></div>
                             </TooltipTrigger>
                             <TooltipContent className=" p-2">
-                                {bags_capacity} Large Bag
+                                4 Large Bag
                             </TooltipContent>
                         </Tooltip>
                         <Tooltip>
@@ -76,10 +85,10 @@ const CarCard = ({ car }) => {
 
                         <Tooltip>
                             <TooltipTrigger>
-                                <div className="flex items-center gap-1"><TbAirConditioning /> <span>{air_conditioning ? "Available" : "Unavailable"}</span></div>
+                                <div className="flex items-center gap-1"><TbAirConditioning /> <span>{features?.airConditioner ? "Available" : "Unavailable"}</span></div>
                             </TooltipTrigger>
                             <TooltipContent>
-                            Air Conditioning {air_conditioning ? "Available" : "Unavailable"}
+                            Air Conditioning {features?.airConditioner ? "Available" : "Unavailable"}
                             </TooltipContent>
                         </Tooltip>
 
@@ -105,7 +114,7 @@ const CarCard = ({ car }) => {
             {/* car price section */}
             <div className="my-3 md:my-0 items-end flex-col flex md:justify-center lg:ml-10">
                 <p className=""> From </p>
-                <p className="font-bold text-xl">${price_per_day} <span className="font-semibold">/day</span> </p>
+                <p className="font-bold text-xl">${pricePerDay} <span className="font-semibold">/day</span> </p>
                 <Button className="bg-primaryColor text-black hover:bg-primaryColor/90 cursor-pointer mt-2 w-full h-10">Select</Button>
             </div>
 
