@@ -73,13 +73,13 @@ const AddCar = () => {
   const onSubmit = async (data) => {
     data.email = user?.email;
     console.log(data);
-    let res={};
+ 
     try {
-      res = await addCar(data).unwrap();
+      const res = await addCar(data).unwrap();
     console.log(res);
     toast.success("Car added successfully");
     } catch (error) {
-      console.log(res)
+   
       console.error(error);
       toast.error('Failed to add car');
     }
