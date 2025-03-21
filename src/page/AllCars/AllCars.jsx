@@ -33,86 +33,8 @@ const AllCars = () => {
 
     const {data: carsData, isLoading, isError,error} = useGetAllCarsQuery();
 console.log(carsData?.data)
-    // const carsData = [
-    //     {
-    //         "id": 1,
-    //         "name": "Toyota Corolla",
-    //         "type": "Sedan",
-    //         "seats": 5,
-    //         "transmission": "Automatic",
-    //         "air_conditioning": true,
-    //         "doors": 4,
+   
 
-    //         "bags_capacity": 2,
-    //         "price_per_day": 50,
-    //         "image_url": "https://res.cloudinary.com/do8woqwpf/image/upload/v1742293402/toyotaCorolla_kd6mu9.jpg"
-    //     },
-    //     {
-    //         "id": 2,
-    //         "name": "Honda Civic",
-    //         "type": "Sedan",
-    //         "seats": 5,
-    //         "transmission": "Manual",
-    //         "air_conditioning": true,
-    //         "doors": 4,
-
-    //         "bags_capacity": 3,
-    //         "price_per_day": 55,
-    //         "image_url": "https://res.cloudinary.com/do8woqwpf/image/upload/v1742292828/hondaCivic_b8nwcm.png"
-    //     },
-    //     {
-    //         "id": 3,
-    //         "name": "Ford Mustang",
-    //         "type": "Sports",
-    //         "seats": 4,
-    //         "transmission": "Automatic",
-    //         "air_conditioning": true,
-    //         "doors": 2,
-
-    //         "bags_capacity": 1,
-    //         "price_per_day": 120,
-    //         "image_url": "https://res.cloudinary.com/do8woqwpf/image/upload/v1742278806/car4_f1slhy.png"
-    //     },
-    //     {
-    //         "id": 4,
-    //         "name": "Tesla Model 3",
-    //         "type": "Electric",
-    //         "seats": 5,
-    //         "transmission": "Automatic",
-    //         "air_conditioning": true,
-    //         "doors": 4,
-
-    //         "bags_capacity": 3,
-    //         "price_per_day": 90,
-    //         "image_url": "https://res.cloudinary.com/do8woqwpf/image/upload/v1742278829/Tesla-Model-3_hb1c14.jpg"
-    //     },
-    //     {
-    //         "id": 5,
-    //         "name": "Jeep Wrangler",
-    //         "type": "SUV",
-    //         "seats": 5,
-    //         "transmission": "Manual",
-    //         "air_conditioning": true,
-    //         "doors": 4,
-
-    //         "bags_capacity": 4,
-    //         "price_per_day": 80,
-    //         "image_url": "https://res.cloudinary.com/do8woqwpf/image/upload/v1742292852/JeepWrangler_ewlojh.jpg"
-    //     },
-    //     {
-    //         "id": 6,
-    //         "name": "Mercedes-Benz S-Class",
-    //         "type": "Luxury",
-    //         "seats": 5,
-    //         "transmission": "Automatic",
-    //         "air_conditioning": true,
-    //         "doors": 4,
-
-    //         "bags_capacity": 3,
-    //         "price_per_day": 150,
-    //         "image_url": "https://res.cloudinary.com/do8woqwpf/image/upload/v1742292872/Mercedes-Benz_sgftnd.jpg"
-    //     }
-    // ]
 if(isLoading){
     return <p>Loading...</p>
 }
