@@ -15,6 +15,7 @@ import About from './page/about/About'
 import { Toaster } from 'react-hot-toast'
 
 import AllCars from './page/AllCars/AllCars'
+import AdminChat from './page/chat/AdminChat'
 
 import AddCar from './page/addCar/AddCar';
 
@@ -34,6 +35,7 @@ createRoot(document.getElementById('root')).render(
             <Route path='about' element={<About></About>} />
 
             <Route path='allCars' element={<AllCars />} />
+            <Route path='adminChat' element={<AdminChat />} />
 
             <Route path='addCar' element={<AddCar />} />
 
