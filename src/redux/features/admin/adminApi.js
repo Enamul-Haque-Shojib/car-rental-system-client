@@ -14,9 +14,9 @@ const adminApi = baseApi.injectEndpoints({
         }),
         updateCar: builder.mutation({
             query: (args) => ({
-                url: `/cars/car-update/${args._id}`,
+                url: `/cars/car-update/${args.id}`,
                 method: 'PATCH',
-                body: args.carInfo
+                body: args.data
             }),
             invalidatesTags: ["cars"],
         }),

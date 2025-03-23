@@ -52,7 +52,7 @@ const AllCarsDashboard = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {carsData?.data?.map(({_id, registrationNumber, image,brand, carModel,year, type, fuelType, seats, transmission, mileAge, pricePerDay, location, availability, description, features}) => (
+            {carsData?.data?.map(({_id, registrationNumber, image,brand, carModel,year, type, fuelType, seats, transmission, mileAge, pricePerDay, location, availability, features}) => (
               <TableRow key={_id}>
                 <TableCell className="">
                 {/* <Avatar>
