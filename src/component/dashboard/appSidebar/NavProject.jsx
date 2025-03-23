@@ -22,6 +22,7 @@ import {
     SidebarMenuItem,
     useSidebar,
   } from "@/components/ui/sidebar"
+import { Link } from 'react-router';
 
 const NavProject = ({projects}) => {
     const { isMobile } = useSidebar()
@@ -32,12 +33,12 @@ const NavProject = ({projects}) => {
             {projects.map((item) => (
               <SidebarMenuItem key={item.name}>
                 <SidebarMenuButton asChild>
-                  <a href={item.url}>
+                  <Link to={item.url}>
                     <item.icon />
                     <span>{item.name}</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
-                <DropdownMenu>
+                {/* <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <SidebarMenuAction showOnHover>
                       <MoreHorizontal />
@@ -63,15 +64,16 @@ const NavProject = ({projects}) => {
                       <span>Delete Project</span>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
-                </DropdownMenu>
+                </DropdownMenu> */}
               </SidebarMenuItem>
-            ))}
-            <SidebarMenuItem>
+            ))
+            }
+            {/* <SidebarMenuItem>
               <SidebarMenuButton className="text-sidebar-foreground/70">
                 <MoreHorizontal className="text-sidebar-foreground/70" />
                 <span>More</span>
               </SidebarMenuButton>
-            </SidebarMenuItem>
+            </SidebarMenuItem> */}
           </SidebarMenu>
         </SidebarGroup>
       )

@@ -35,6 +35,7 @@ const carSchema = z.object({
 
 const AddCar = () => {
   const {user} = useAuth();
+  
   const {
     register,
     handleSubmit,
@@ -216,6 +217,7 @@ const AddCar = () => {
       </div>
       <label className="floating-label">
         <input type="file" accept="image/*" onChange={handleImageUpload} className="file-input" />
+        {errors.image && <p className="text-red-500">{errors.image.message}</p>}
         {previewUrl && <img src={previewUrl} alt="Preview" className="w-32 h-32 mt-2" />}
       </label>
       <label className="floating-label">

@@ -9,6 +9,7 @@ import {
   GalleryVerticalEnd,
   Map,
   PieChart,
+  Settings,
   Settings2,
   SquareTerminal,
 } from "lucide-react"
@@ -41,125 +42,65 @@ const data = {
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg",
   },
-  teams: [
-    {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
-    },
-    {
-      name: "Acme Corp.",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Evil Corp.",
-      logo: Command,
-      plan: "Free",
-    },
-  ],
+  
   navMain: [
     {
-      title: "Playground",
-      url: "#",
+      title: "Car Management",
+      url: "",
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
-          title: "History",
-          url: "#",
+          title: "Add Car",
+          url: "/dashboard/add_car",
         },
         {
-          title: "Starred",
-          url: "#",
+          title: "All Cars",
+          url: "/dashboard/all_cars",
         },
-        {
-          title: "Settings",
-          url: "#",
-        },
+       
       ],
     },
     {
-      title: "Models",
+      title: "Booking Management",
       url: "#",
       icon: Bot,
       items: [
         {
-          title: "Genesis",
-          url: "#",
+          title: "All Booked",
+          url: "/dashboard/all_booked",
         },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
+      
       ],
     },
     {
-      title: "Documentation",
+      title: "User Management",
       url: "#",
       icon: BookOpen,
       items: [
         {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
+          title: "All Users",
+          url: "/dashboard/all_users",
         },
       ],
     },
     {
-      title: "Settings",
+      title: "Profile Management",
       url: "#",
-      icon: Settings2,
+      icon: Settings,
       items: [
         {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
+          title: "Profile",
+          url: "/dashboard/profile",
         },
       ],
     },
   ],
   projects: [
     {
-      name: "Design Engineering",
-      url: "#",
+      name: "Dashboard",
+      url: "/dashboard",
       icon: Frame,
-    },
-    {
-      name: "Sales & Marketing",
-      url: "#",
-      icon: PieChart,
-    },
-    {
-      name: "Travel",
-      url: "#",
-      icon: Map,
     },
   ],
 }
@@ -191,8 +132,9 @@ const AppSidebar = ({ ...props }) => {
             </SidebarMenu>
           </SidebarHeader>
           <SidebarContent>
+             <NavProject projects={data.projects} />
             <NavMain items={data.navMain} />
-            <NavProject projects={data.projects} />
+           
           </SidebarContent>
           <SidebarFooter>
             <NavUser user={data.user} />

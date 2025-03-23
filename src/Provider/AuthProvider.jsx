@@ -66,11 +66,12 @@ const AuthProvider = ({children}) => {
         signInWithGoogle,
 
     }
+// console.log(user?.displayName,user?.photoURL)
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async(currentUser) => {
             setUser(currentUser);
             setLoading(false);
-console.log(currentUser.displayName,currentUser.photoURL)
+// console.log(currentUser?.displayName,currentUser?.photoURL)
             if (currentUser?.email && currentUser?.displayName && currentUser?.photoURL ) {
                 const userData = { email: currentUser.email, name: currentUser.displayName, photoUrl: currentUser.photoURL };
 
@@ -84,7 +85,7 @@ console.log(currentUser.displayName,currentUser.photoURL)
             }
         })
         return () => unsubscribe()
-    }, [axiosPublic])
+    }, [axiosPublic, user?.photoURL])
     return (
         <AuthContext.Provider value={authInfo}>
         {children}
