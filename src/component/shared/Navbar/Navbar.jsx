@@ -45,6 +45,20 @@ const handlelogout=()=>{
               >
                 About
               </NavLink>
+              <NavLink
+                to="/addCar"
+                className="transition duration-300 hover:text-yellow-300"
+                activeclassName="text-yellow-300"
+              >
+                Add Car
+              </NavLink>
+              <NavLink
+                to="/dashboard"
+                className="transition duration-300 hover:text-yellow-300"
+                activeclassName="text-yellow-300"
+              >
+                Dashboard
+              </NavLink>
         
                 
           {user? <>

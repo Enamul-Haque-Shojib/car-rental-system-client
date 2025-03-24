@@ -11,15 +11,22 @@ const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(true)
     const axiosPublic=useAxiosPublic()
 
-    const registerUser = (email, password) => {
-        setLoading(true)
-        return createUserWithEmailAndPassword(auth, email, password)
-    }
-    const login = (email, password) => {
-        setLoading(true)
-        return signInWithEmailAndPassword(auth, email, password)
-
-    }
+    const registerUser = async (email, password) => {
+        setLoading(true);
+        try {
+            return await createUserWithEmailAndPassword(auth, email, password);
+        } finally {
+            setLoading(false);
+        }
+    };
+    const login = async (email, password) => {
+        setLoading(true);
+        try {
+            return await signInWithEmailAndPassword(auth, email, password);
+        } finally {
+            setLoading(false);
+        }
+    };
     const updateUserProfile = (name, photo) => {
         setLoading(true)
         return updateProfile(auth.currentUser, {
@@ -27,15 +34,26 @@ const AuthProvider = ({children}) => {
         })
 
     }
-    const signInWithGoogle = () => {
-        setLoading(true)
-        return signInWithPopup(auth, googleProvider)
-    }
-    const logout = () => {
-
-        setLoading(true)
-        signOut(auth)
-    }
+    const signInWithGoogle = async () => {
+        setLoading(true);
+        try {
+            return await signInWithPopup(auth, googleProvider);
+        } finally {
+            setLoading(false);
+        }
+    };
+    const logout = async () => {
+        setLoading(true);
+        try {
+            await signOut(auth);
+            await axiosPublic.post("/api/auth/logout", {}, { withCredentials: true });
+            setUser(null);
+        } catch (error) {
+            console.error("Logout Error:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const authInfo = {
         registerUser,
@@ -48,25 +66,26 @@ const AuthProvider = ({children}) => {
         signInWithGoogle,
 
     }
+// console.log(user?.displayName,user?.photoURL)
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async(currentUser) => {
-            setUser(currentUser)
-            setLoading(false)
-            if(currentUser?.email){
-                const user={email:currentUser.email}
-                
-                 await axiosPublic.post('/api/auth/login',user,{withCredentials:true})
-                  .then(res=>console.log('login',res.data))
-                  setLoading(false)
-              }else{
-                axiosPublic.post(`/api/auth/logout`,{},{withCredentials:true})
-                .then(res=>console.log('logout:',res.data))
-             
-            setLoading(false)}
-            setLoading(false)
+            setUser(currentUser);
+            setLoading(false);
+// console.log(currentUser?.displayName,currentUser?.photoURL)
+            if (currentUser?.email && currentUser?.displayName && currentUser?.photoURL ) {
+                const userData = { email: currentUser.email, name: currentUser.displayName, photoUrl: currentUser.photoURL };
+
+                await axiosPublic.post("/api/auth/login", userData, { withCredentials: true })
+                    .then(res => console.log("Login success:", res.data))
+                    .catch(error => console.error("Login error:", error));
+            } else {
+                await axiosPublic.post("/api/auth/logout", {}, { withCredentials: true })
+                    .then(res => console.log("Logout:", res.data))
+                    .catch(error => console.error("Logout error:", error));
+            }
         })
         return () => unsubscribe()
-    }, [auth,axiosPublic])
+    }, [axiosPublic, user?.photoURL])
     return (
         <AuthContext.Provider value={authInfo}>
         {children}

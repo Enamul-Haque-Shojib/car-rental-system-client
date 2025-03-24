@@ -16,6 +16,9 @@ const Register = () => {
     const [files, setFiles] = useState([]);
     const axiosPublic=useAxiosPublic()
 
+  
+
+
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
     const handleSubmit = async (e) => {
@@ -44,9 +47,10 @@ const Register = () => {
             await updateUserProfile(data.name, data.photoURL)
             const userInfo = {
                 name: data.name,
-                email: data.email
+                email: data.email,
+                photoURL: data.photoURL
             }
-             await axiosPublic.post(`/api/auth/register/${data.email}`, userInfo)
+             await axiosPublic.post(`/api/auth/login`, userInfo,{ withCredentials: true })
             toast.success("Register successful");
             navigate("/");
         } catch (error) {
@@ -54,6 +58,15 @@ const Register = () => {
         }
     };
    
+    const handlegoogle =async()=>{
+        try {
+            await signInWithGoogle()
+            toast.success("login successful");
+            navigate("/");
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
    
     return (
@@ -116,7 +129,7 @@ const Register = () => {
                         <p className="text-center font-semibold my-0.5 text-sm ">OR</p>
                     </form>
                     <div className="w-64 md:w-72 mx-auto mb-3">
-                        <button className="btn   w-full">Continue with Google</button>
+                        <button onClick={handlegoogle} className="btn   w-full">Continue with Google</button>
                     </div>
                     <p className="text-center mb-4 ">Already have an account? <Link to="/login" className="text-[#EA1A66] font-bold underline">Login</Link></p>
 
