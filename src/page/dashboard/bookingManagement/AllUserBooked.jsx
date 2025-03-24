@@ -10,18 +10,23 @@ import toast from 'react-hot-toast';
 const AllUserBooked = () => {
   const {user} = useAuth()
      const {data: bookingsData, isLoading} = useGetAllOwnerBookQuery(user?._id);
+
   const[approvedBook] = useApprovedBookMutation(undefined)
 
      const handleApprovedBook = async(id, carId)=>{
-
-      try {
-        const res = await approvedBook({id, car_id:{carId:carId._id}}).unwrap();
-        console.log(res);
-        toast.success(res.message)
-      } catch (error) {
-        console.log(error)
-        toast.error(error)
-      }
+        if(carId){
+          try {
+            const res = await approvedBook({id, car_id:{carId:carId._id}}).unwrap();
+            console.log(res);
+            toast.success(res.message)
+          } catch (error) {
+            console.log(error)
+            toast.error(error)
+          }
+        }else{
+          toast.error('Car has been deleted')
+        }
+      
     }
         if (isLoading) {
             return <p>Loading...</p>
