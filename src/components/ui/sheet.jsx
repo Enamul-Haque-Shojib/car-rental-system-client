@@ -33,21 +33,13 @@ function SheetOverlay({
   ...props
 }) {
   return (
-<<<<<<< HEAD
-    <SheetPrimitive.Overlay
-=======
     (<SheetPrimitive.Overlay
->>>>>>> development
       data-slot="sheet-overlay"
       className={cn(
         "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50",
         className
       )}
-<<<<<<< HEAD
-      {...props} />
-=======
       {...props} />)
->>>>>>> development
   );
 }
 
@@ -58,11 +50,7 @@ function SheetContent({
   ...props
 }) {
   return (
-<<<<<<< HEAD
-    <SheetPortal>
-=======
     (<SheetPortal>
->>>>>>> development
       <SheetOverlay />
       <SheetPrimitive.Content
         data-slot="sheet-content"
@@ -86,11 +74,7 @@ function SheetContent({
           <span className="sr-only">Close</span>
         </SheetPrimitive.Close>
       </SheetPrimitive.Content>
-<<<<<<< HEAD
-    </SheetPortal>
-=======
     </SheetPortal>)
->>>>>>> development
   );
 }
 
@@ -99,17 +83,10 @@ function SheetHeader({
   ...props
 }) {
   return (
-<<<<<<< HEAD
-    <div
-      data-slot="sheet-header"
-      className={cn("flex flex-col gap-1.5 p-4", className)}
-      {...props} />
-=======
     (<div
       data-slot="sheet-header"
       className={cn("flex flex-col gap-1.5 p-4", className)}
       {...props} />)
->>>>>>> development
   );
 }
 
@@ -118,17 +95,10 @@ function SheetFooter({
   ...props
 }) {
   return (
-<<<<<<< HEAD
-    <div
-      data-slot="sheet-footer"
-      className={cn("mt-auto flex flex-col gap-2 p-4", className)}
-      {...props} />
-=======
     (<div
       data-slot="sheet-footer"
       className={cn("mt-auto flex flex-col gap-2 p-4", className)}
       {...props} />)
->>>>>>> development
   );
 }
 
@@ -137,17 +107,10 @@ function SheetTitle({
   ...props
 }) {
   return (
-<<<<<<< HEAD
-    <SheetPrimitive.Title
-      data-slot="sheet-title"
-      className={cn("text-foreground font-semibold", className)}
-      {...props} />
-=======
     (<SheetPrimitive.Title
       data-slot="sheet-title"
       className={cn("text-foreground font-semibold", className)}
       {...props} />)
->>>>>>> development
   );
 }
 
@@ -156,17 +119,10 @@ function SheetDescription({
   ...props
 }) {
   return (
-<<<<<<< HEAD
-    <SheetPrimitive.Description
-      data-slot="sheet-description"
-      className={cn("text-muted-foreground text-sm", className)}
-      {...props} />
-=======
     (<SheetPrimitive.Description
       data-slot="sheet-description"
       className={cn("text-muted-foreground text-sm", className)}
       {...props} />)
->>>>>>> development
   );
 }
 
