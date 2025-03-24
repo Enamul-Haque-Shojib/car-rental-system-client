@@ -38,6 +38,13 @@ const handlelogout=()=>{
                 Home
               </NavLink>
               <NavLink
+                to="/allCars"
+                className="transition duration-300 hover:text-yellow-300"
+                activeclassName="text-yellow-300"
+              >
+                All Car
+              </NavLink>
+              <NavLink
                 to="/about"
                 className="transition duration-300 hover:text-yellow-300"
                 activeclassName="text-yellow-300"
