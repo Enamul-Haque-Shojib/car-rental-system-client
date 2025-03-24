@@ -21,7 +21,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from 'react-hook-form';
-import { useAddCarMutation, useUpdateCarMutation } from '@/redux/features/admin/adminApi';
+import { useUpdateCarMutation } from '@/redux/features/admin/adminApi';
 import toast from 'react-hot-toast';
 import useAuth from '@/hooks/useAuth';
 import uploadImage from '@/hooks/uploadImage';
@@ -133,13 +133,13 @@ const UpdateCarDashboard = () => {
             carImgUrl = await uploadImage(imageFile);;
         }
     
-        data.email = user?.email;
+        data.userId = user?._id;
         data.image = carImgUrl;
         data.year = parseInt(data.year);
         data.mileAge = parseInt(data.mileAge);
         data.seats = parseInt(data.seats);
         data.pricePerDay = parseInt(data.pricePerDay);
-    console.log('--------->>>>>>>>>',data);
+ 
     
         try {
             const res = await updateCar({ id, data }).unwrap();
