@@ -31,7 +31,9 @@ const AllCars = () => {
     // Available slider values
     const sliderSteps = [2, 4, 6, 8];
 
-    const {data: carsData, isLoading, isError,error} = useGetAllCarsQuery();
+
+    const {data: carsData, isLoading} = useGetAllCarsQuery();
+console.log(carsData?.data)
 
    
 
