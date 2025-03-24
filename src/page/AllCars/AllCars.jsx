@@ -32,12 +32,15 @@ const AllCars = () => {
     const sliderSteps = [2, 4, 6, 8];
 
     const {data: carsData, isLoading, isError,error} = useGetAllCarsQuery();
-console.log(carsData?.data)
+
    
 
 if(isLoading){
     return <p>Loading...</p>
 }
+
+
+
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <div className="my-6 md:my-10 mb-10 md:mb-20 text-center">
@@ -131,7 +134,7 @@ if(isLoading){
                 <div className="mt-5   md:space-y-4">
 
                     {
-                        carsData?.data?.map(car => <CarCard key={car.id} car={car} />)
+                        carsData?.data?.map(car => <CarCard key={car._id} car={car} />)
                     }
                 </div>
 

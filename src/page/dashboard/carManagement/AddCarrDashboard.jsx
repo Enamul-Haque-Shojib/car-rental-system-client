@@ -92,7 +92,7 @@ const onSubmit= async (data) => {
     const imageFile = data.image?.[0];
     const carImgUrl = await uploadImage(imageFile);
 
-    data.email = user?.email;
+    data.userId = user?._id;
     data.image = carImgUrl;
     data.year = parseInt(data.year);
     data.mileAge = parseInt(data.mileAge);

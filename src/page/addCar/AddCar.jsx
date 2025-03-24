@@ -72,7 +72,7 @@ const AddCar = () => {
   const [addCar] = useAddCarMutation();
 
   const onSubmit = async (data) => {
-    data.email = user?.email;
+    data.userId = user?._id;
     console.log(data);
  
     try {
