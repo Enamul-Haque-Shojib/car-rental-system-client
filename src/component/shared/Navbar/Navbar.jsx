@@ -8,7 +8,7 @@ const Navbar = () => {
      const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 const {user,logout}=useAuth()
-console.log(user)
+
   const handleNavField = () => setOpen(!open);
 
  
@@ -39,13 +39,21 @@ const handlelogout=()=>{
                 Home
               </NavLink>
               <NavLink
+                to="/allCars"
+                className="transition duration-300 hover:text-yellow-300"
+                activeclassName="text-yellow-300"
+              >
+                All Car
+              </NavLink>
+              <NavLink
                 to="/about"
                 className="transition duration-300 hover:text-yellow-300"
                 activeclassName="text-yellow-300"
               >
                 About
               </NavLink>
-              <NavLink
+              {user && <>
+                <NavLink
                 to="/addCar"
                 className="transition duration-300 hover:text-yellow-300"
                 activeclassName="text-yellow-300"
@@ -59,6 +67,9 @@ const handlelogout=()=>{
               >
                 Dashboard
               </NavLink>
+
+              </>}
+              
         
                 
           {user? <>
@@ -75,7 +86,7 @@ const handlelogout=()=>{
                      <div className="absolute right-0 mt-2 bg-white text-black rounded shadow-lg w-48">
                        <div className="px-4 py-2">
                          
-                         <p className="text-sm text-gray-500">{user?.displayName}</p>
+                         <p className="text-sm text-gray-500">{user?.name}</p>
                        </div>
                        <hr />
                      

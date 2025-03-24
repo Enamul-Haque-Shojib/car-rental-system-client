@@ -10,7 +10,7 @@ import uploadImage from "@/hooks/uploadImage";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 
 const Register = () => {
-    const{ registerUser, signInWithGoogle, updateUserProfile}=useAuth()
+    const{ registerUser, signInWithGoogle, updateUserProfile, setUser}=useAuth()
     const navigate=useNavigate()
     const [error, setError] = useState(null)
     const [files, setFiles] = useState([]);
@@ -50,7 +50,8 @@ const Register = () => {
                 email: data.email,
                 photoURL: data.photoURL
             }
-             await axiosPublic.post(`/api/auth/login`, userInfo,{ withCredentials: true })
+             const res = await axiosPublic.post(`/api/auth/login`, userInfo,{ withCredentials: true })
+             setUser(res?.data?.data)
             toast.success("Register successful");
             navigate("/");
         } catch (error) {

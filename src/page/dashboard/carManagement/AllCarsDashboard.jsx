@@ -15,7 +15,7 @@ import {
     AvatarImage,
   } from "@/components/ui/avatar"
 
-import { useGetAllCarsQuery } from '@/redux/features/car/carApi';
+
 
 import { Edit, Eye, Trash } from 'lucide-react';
 import { Link } from 'react-router';
@@ -23,11 +23,31 @@ import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import CarDetailsModal from '@/component/dashboard/modal/CarDetailsModal';
+import { useDeleteCarMutation } from '@/redux/features/admin/adminApi';
+import toast from 'react-hot-toast';
+import { useGetAllCarsQuery } from '@/redux/features/car/carApi';
    
  
 const AllCarsDashboard = () => {
     const {data: carsData, isLoading} = useGetAllCarsQuery();
-    console.log(carsData);
+    const [deleteCar] = useDeleteCarMutation()
+
+
+    
+    const handleCarDelete =async(id)=>{
+      try {
+        const res = await deleteCar(id)
+        console.log(res)
+        toast.success(res?.data?.message)
+      } catch (error) {
+        toast.error('could not delete')
+        console.log(error)        
+      }
+      
+  }
+
+
+
     if (isLoading) {
         return <p>Loading...</p>
     }
@@ -87,7 +107,7 @@ const AllCarsDashboard = () => {
                 </Dialog>
                     
                     <Link to={`/dashboard/edit_car/${_id}`}><button className='cursor-pointer'><Edit></Edit></button></Link>
-                    <button className='cursor-pointer'><Trash></Trash></button>
+                    <button className='cursor-pointer' onClick={()=>{handleCarDelete(_id)}}><Trash></Trash></button>
                 </TableCell>
               </TableRow>
             ))}

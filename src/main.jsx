@@ -24,10 +24,13 @@ import { store } from './redux/store'
 import { Provider } from 'react-redux'
 import AddCarrDashboard from './page/dashboard/carManagement/AddCarrDashboard'
 import AllCarsDashboard from './page/dashboard/carManagement/AllCarsDashboard'
-import AllBookedDashboard from './page/dashboard/bookingManagement/allBookedDashboard'
+
 import AllUserDashboard from './page/dashboard/userManagement/AllUserDashboard'
 import Profile from './page/dashboard/profileManagement/Profile'
 import UpdateCarDashboard from './page/dashboard/carManagement/updateCarDashboard'
+import DetailsCar from './page/AllCars/detailsCar'
+import AllMyBooked from './page/dashboard/bookingManagement/AllMyBooked'
+import AllUserBooked from './page/dashboard/bookingManagement/AllUserBooked'
 
 
 
@@ -45,17 +48,17 @@ createRoot(document.getElementById('root')).render(
             <Route path='register' element={<Register />} />
             <Route path='login' element={<Login />} />
             <Route path='about' element={<About></About>} />
-
             <Route path='allCars' element={<AllCars />} />
-
             <Route path='addCar' element={<AddCar />} />
+            <Route path='detailsCar/:id' element={<DetailsCar></DetailsCar>} />
 
           </Route>
           <Route path="/dashboard" element={<DashboardLayout />}>
           <Route path='add_car' element={<AddCarrDashboard></AddCarrDashboard>} />
           <Route path='edit_car/:id' element={<UpdateCarDashboard></UpdateCarDashboard>} />
           <Route path='all_cars' element={<AllCarsDashboard></AllCarsDashboard>} />
-          <Route path='all_booked' element={<AllBookedDashboard></AllBookedDashboard>} />
+          <Route path='all_my_booked' element={<AllMyBooked></AllMyBooked>} />
+          <Route path='all_user_booked' element={<AllUserBooked></AllUserBooked>} />
           <Route path='all_users' element={<AllUserDashboard></AllUserDashboard>} />
           <Route path='profile' element={<Profile></Profile>} />
           <Route index element={<Dashboard />} />

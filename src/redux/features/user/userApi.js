@@ -7,41 +7,49 @@ const userApi = baseApi.injectEndpoints({
         registerUser: builder.mutation({
             
             query: (args) => ({
-                url: `users/register/${args.email}`,
+                url: `auth/register/${args.email}`,
                 method: 'POST',
                 body: args.userInfo
             }),
-            invalidatesTags: ["Users"],
+            invalidatesTags: ["users"],
+        }),
+        updateUser: builder.mutation({
+            query: (args) => ({
+                url: `auth/update-user/${args.id}`,
+                method: 'PATCH',
+                body: args.data
+            }),
+            invalidatesTags: ["users"],
         }),
         loginUser: builder.mutation({
             
             query: (args) => ({
-                url: `users/login`,
+                url: `auth/login`,
                 method: 'POST',
                 body: args.userInfo
             }),
-            invalidatesTags: ["Users"],
+            invalidatesTags: ["users"],
         }),
       
      
-        getOneUser: builder.mutation({
-            query: (email) => ({
-                url: `/users/one-user/${email}`,
+        getOneUser: builder.query({
+            query: (id) => ({
+                url: `/auth/one-user/${id}`,
               
                 method: 'GET'
             }),
-        invalidatesTags:['Users']
+        invalidatesTags:['users']
         }),
         getAllUsers: builder.query({
             query: () => ({
-                url: `/users`,
+                url: `/auth`,
               
                 method: 'GET'
             }),
-            providesTags: ['Users'],
+            providesTags: ['users'],
             
         }),
     })
 })
 
-export const {useRegisterUserMutation, useGetOneUserQuery, useGetAllUsersQuery} = userApi;
+export const {useRegisterUserMutation, useGetOneUserQuery, useGetAllUsersQuery, useUpdateUserMutation} = userApi;

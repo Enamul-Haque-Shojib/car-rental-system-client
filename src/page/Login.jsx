@@ -12,8 +12,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import useAuth from "@/hooks/useAuth";
+import { useNavigate } from "react-router";
 
 const Login = () => {
+
+  const navigate=useNavigate();
   const { login } = useAuth();
   const [error, setError] = useState(null);
 
@@ -26,7 +29,7 @@ const Login = () => {
 
     try {
       await login(email, password);
-      
+      navigate("/");
       toast.success("Login successful");
       setError(null); // Reset error state on success
     } catch (error) {

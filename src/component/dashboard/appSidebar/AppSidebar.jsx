@@ -67,8 +67,12 @@ const data = {
       icon: Bot,
       items: [
         {
-          title: "All Booked",
-          url: "/dashboard/all_booked",
+          title: "All My Booked",
+          url: "/dashboard/all_my_booked",
+        },
+        {
+          title: "All User Booked",
+          url: "/dashboard/all_user_booked",
         },
       
       ],

@@ -12,6 +12,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { Link } from "react-router";
 
 const CarCard = ({ car }) => {
     const {
@@ -115,7 +116,7 @@ const CarCard = ({ car }) => {
             <div className="my-3 md:my-0 items-end flex-col flex md:justify-center lg:ml-10">
                 <p className=""> From </p>
                 <p className="font-bold text-xl">${pricePerDay} <span className="font-semibold">/day</span> </p>
-                <Button className="bg-primaryColor text-black hover:bg-primaryColor/90 cursor-pointer mt-2 w-full h-10">Select</Button>
+                <Link to={`/detailsCar/${_id}`}><Button className="bg-primaryColor text-black hover:bg-primaryColor/90 cursor-pointer mt-2 w-full h-10">Details</Button></Link>
             </div>
 
         </div>
