@@ -15,31 +15,31 @@ const feedbackData = [
     },
     {
         id:'2',
-        feedbackUserPhoto:'https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg',
+        feedbackUserPhoto:'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg',
         name: 'David Smith',
         lifeStyle:'Frequent Traveler',
-        feedBack:'I recently used this car rental service for a week-long trip, and I must say it exceeded my expectations. The pricing was reasonable, the vehicle selection was impressive, and the rental process was straightforward. The return process was equally smooth, with no unnecessary delays. I appreciate the transparency in billing with no hidden charges'
+        feedBack:'I recently used this car rental service for a week-long trip, and I must say it exceeded my expectations. The pricing was reasonable, the vehicle selection was impressive'
     },
     {
         id:'3',
-        feedbackUserPhoto:'https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg',
+        feedbackUserPhoto:'https://media.istockphoto.com/id/1389348844/photo/studio-shot-of-a-beautiful-young-woman-smiling-while-standing-against-a-grey-background.jpg?s=612x612&w=0&k=20&c=anRTfD_CkOxRdyFtvsiPopOluzKbhBNEQdh4okZImQc=',
         name: 'Sophia Martinez',
         lifeStyle:'Business Consultant',
-        feedBack:'I booked a luxury car for a business meeting, and the experience was phenomenal. The vehicle was clean, well-maintained, and delivered on time. The online reservation system was easy to use, and I appreciated the real-time tracking feature for my rental. The company’s commitment to customer satisfaction is commendable!'
+        feedBack:'I booked a luxury car for a business meeting, and the experience was phenomenal. The vehicle was clean, well-maintained, and delivered on time.'
     },
     {
         id:'4',
-        feedbackUserPhoto:'https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg',
+        feedbackUserPhoto:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAe9NZZk7nUE_anJir2Scf7tsqMHRdEpCbJg&s',
         name: 'Robert Williams',
         lifeStyle:'Adventure Enthusiast',
-        feedBack:'I rented an SUV for an off-road adventure, and I was truly impressed by the quality of the vehicle. It was in top condition, equipped with all necessary safety features, and performed exceptionally well on rough terrains. The rental service was reliable, and I had a great experience from start to finish!'
+        feedBack:'I rented an SUV for an off-road adventure, and I was truly impressed by the quality of the vehicle. It was in top condition, equipped with all necessary safety features'
     },
     {
         id:'5',
-        feedbackUserPhoto:'https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg',
+        feedbackUserPhoto:'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?cs=srgb&dl=pexels-olly-774909.jpg&fm=jpg',
         name: 'Emma Johnson',
         lifeStyle:'Family Traveler',
-        feedBack:'My family and I rented a minivan for a road trip, and it was an excellent decision. The car was spacious, comfortable, and had all the necessary amenities for a long journey. Booking and pickup were seamless, and customer support was helpful when we needed assistance. Definitely using this service again!'
+        feedBack:'My family and I rented a minivan for a road trip, and it was an excellent decision. The car was spacious, comfortable, and had all the necessary amenities for a long journey.'
     },
 ]
 
