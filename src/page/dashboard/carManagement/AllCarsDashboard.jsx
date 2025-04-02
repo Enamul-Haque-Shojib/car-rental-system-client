@@ -15,8 +15,6 @@ import {
     AvatarImage,
   } from "@/components/ui/avatar"
 
-
-
 import { Edit, Eye, Trash } from 'lucide-react';
 import { Link } from 'react-router';
 import { AspectRatio } from "@/components/ui/aspect-ratio"
