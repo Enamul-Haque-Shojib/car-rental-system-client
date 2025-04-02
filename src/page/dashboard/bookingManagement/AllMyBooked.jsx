@@ -7,8 +7,15 @@ import React from 'react';
 import toast from 'react-hot-toast';
 
 const AllMyBooked = () => {
-  const {user} = useAuth()
-    const {data: bookingsData, isLoading} = useGetAllUserBookQuery(user?._id);
+  const {user} = useAuth();
+    // const {data: bookingsData, isLoading} = useGetAllUserBookQuery(user?._id);
+
+    const { data: bookingsData, isLoading } = useGetAllUserBookQuery(user?._id, {
+          skip: !user?._id, 
+        });
+
+
+
     const [canceledBook] = useCanceledBookMutation(undefined);
 
     const handleCancelBook = async(id)=>{
@@ -88,7 +95,7 @@ const AllMyBooked = () => {
                   <TableFooter>
                     <TableRow>
                       <TableCell colSpan={3}>Total</TableCell>
-                      <TableCell className="text-right">$2,500.00</TableCell>
+                      <TableCell className="text-right">0</TableCell>
                     </TableRow>
                   </TableFooter>
                 </Table>
