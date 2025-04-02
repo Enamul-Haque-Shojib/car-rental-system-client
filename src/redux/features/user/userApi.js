@@ -5,7 +5,6 @@ import { baseApi } from "@/redux/api/baseApi";
 const userApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         registerUser: builder.mutation({
-            
             query: (args) => ({
                 url: `auth/register/${args.email}`,
                 method: 'POST',
@@ -38,7 +37,7 @@ const userApi = baseApi.injectEndpoints({
               
                 method: 'GET'
             }),
-        invalidatesTags:['users']
+            providesTags: ['users']
         }),
         getAllUsers: builder.query({
             query: () => ({
