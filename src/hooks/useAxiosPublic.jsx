@@ -1,11 +1,8 @@
 import axios from "axios";
 
 const axiosPublic=axios.create({
-<<<<<<< HEAD
-    baseURL:'https://server-seven-chi-78.vercel.app',
-=======
-    baseURL:'http://localhost:5000',
->>>>>>> development
+    // baseURL:'http://localhost:5000',
+    baseURL:'https://car-rental-system-server-gray.vercel.app',
     
 })
 const useAxiosPublic = () => {

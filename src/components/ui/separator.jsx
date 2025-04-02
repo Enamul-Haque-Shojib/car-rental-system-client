@@ -12,11 +12,7 @@ function Separator({
   ...props
 }) {
   return (
-<<<<<<< HEAD
-    <SeparatorPrimitive.Root
-=======
     (<SeparatorPrimitive.Root
->>>>>>> development
       data-slot="separator-root"
       decorative={decorative}
       orientation={orientation}
@@ -24,11 +20,7 @@ function Separator({
         "bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px",
         className
       )}
-<<<<<<< HEAD
-      {...props} />
-=======
       {...props} />)
->>>>>>> development
   );
 }
 

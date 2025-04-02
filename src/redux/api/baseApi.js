@@ -8,7 +8,8 @@ import {
 
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: 'http://localhost:5000/api',
+  baseUrl: 'https://car-rental-system-server-gray.vercel.app/api',
+  // baseUrl: 'http://localhost:5000/api',
   credentials: 'include',
 //   prepareHeaders: (headers, { getState }) => {
 //     const token = (getState()).authenticate.token;
@@ -31,18 +32,3 @@ export const baseApi = createApi({
   });
 
 
-
-// export const baseApi = createApi({
-//     reducerPath: 'baseApi',
-//     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:5000/api' }),
-//     tagTypes: ['cars'],
-//     endpoints: (builder) => ({
-//       getAllCars: builder.query({
-//         query: () => '/cars',
-//         providesTags: ['cars']
-//       }),
-//     }),
-//   });
-
-
-//   export const { useGetAllCarsQuery } = baseApi;

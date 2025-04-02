@@ -105,11 +105,7 @@ function SidebarProvider({
   }), [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar])
 
   return (
-<<<<<<< HEAD
-    <SidebarContext.Provider value={contextValue}>
-=======
     (<SidebarContext.Provider value={contextValue}>
->>>>>>> development
       <TooltipProvider delayDuration={0}>
         <div
           data-slot="sidebar-wrapper"
@@ -128,11 +124,7 @@ function SidebarProvider({
           {children}
         </div>
       </TooltipProvider>
-<<<<<<< HEAD
-    </SidebarContext.Provider>
-=======
     </SidebarContext.Provider>)
->>>>>>> development
   );
 }
 
@@ -148,11 +140,7 @@ function Sidebar({
 
   if (collapsible === "none") {
     return (
-<<<<<<< HEAD
-      <div
-=======
       (<div
->>>>>>> development
         data-slot="sidebar"
         className={cn(
           "bg-sidebar text-sidebar-foreground flex h-full w-(--sidebar-width) flex-col",
@@ -160,21 +148,13 @@ function Sidebar({
         )}
         {...props}>
         {children}
-<<<<<<< HEAD
-      </div>
-=======
       </div>)
->>>>>>> development
     );
   }
 
   if (isMobile) {
     return (
-<<<<<<< HEAD
-      <Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
-=======
       (<Sheet open={openMobile} onOpenChange={setOpenMobile} {...props}>
->>>>>>> development
         <SheetContent
           data-sidebar="sidebar"
           data-slot="sidebar"
@@ -192,20 +172,12 @@ function Sidebar({
           </SheetHeader>
           <div className="flex h-full w-full flex-col">{children}</div>
         </SheetContent>
-<<<<<<< HEAD
-      </Sheet>
-=======
       </Sheet>)
->>>>>>> development
     );
   }
 
   return (
-<<<<<<< HEAD
-    <div
-=======
     (<div
->>>>>>> development
       className="group peer text-sidebar-foreground hidden md:block"
       data-state={state}
       data-collapsible={state === "collapsed" ? collapsible : ""}
@@ -244,11 +216,7 @@ function Sidebar({
           {children}
         </div>
       </div>
-<<<<<<< HEAD
-    </div>
-=======
     </div>)
->>>>>>> development
   );
 }
 
@@ -260,11 +228,7 @@ function SidebarTrigger({
   const { toggleSidebar } = useSidebar()
 
   return (
-<<<<<<< HEAD
-    <Button
-=======
     (<Button
->>>>>>> development
       data-sidebar="trigger"
       data-slot="sidebar-trigger"
       variant="ghost"
@@ -277,11 +241,7 @@ function SidebarTrigger({
       {...props}>
       <PanelLeftIcon />
       <span className="sr-only">Toggle Sidebar</span>
-<<<<<<< HEAD
-    </Button>
-=======
     </Button>)
->>>>>>> development
   );
 }
 
@@ -292,11 +252,7 @@ function SidebarRail({
   const { toggleSidebar } = useSidebar()
 
   return (
-<<<<<<< HEAD
-    <button
-=======
     (<button
->>>>>>> development
       data-sidebar="rail"
       data-slot="sidebar-rail"
       aria-label="Toggle Sidebar"
@@ -312,11 +268,7 @@ function SidebarRail({
         "[[data-side=right][data-collapsible=offcanvas]_&]:-left-2",
         className
       )}
-<<<<<<< HEAD
-      {...props} />
-=======
       {...props} />)
->>>>>>> development
   );
 }
 
@@ -325,22 +277,14 @@ function SidebarInset({
   ...props
 }) {
   return (
-<<<<<<< HEAD
-    <main
-=======
     (<main
->>>>>>> development
       data-slot="sidebar-inset"
       className={cn(
         "bg-background relative flex w-full flex-1 flex-col",
         "md:peer-data-[variant=inset]:m-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow-sm md:peer-data-[variant=inset]:peer-data-[state=collapsed]:ml-2",
         className
       )}
-<<<<<<< HEAD
-      {...props} />
-=======
       {...props} />)
->>>>>>> development
   );
 }
 
@@ -349,19 +293,11 @@ function SidebarInput({
   ...props
 }) {
   return (
-<<<<<<< HEAD
-    <Input
-      data-slot="sidebar-input"
-      data-sidebar="input"
-      className={cn("bg-background h-8 w-full shadow-none", className)}
-      {...props} />
-=======
     (<Input
       data-slot="sidebar-input"
       data-sidebar="input"
       className={cn("bg-background h-8 w-full shadow-none", className)}
       {...props} />)
->>>>>>> development
   );
 }
 
@@ -370,19 +306,11 @@ function SidebarHeader({
   ...props
 }) {
   return (
-<<<<<<< HEAD
-    <div
-      data-slot="sidebar-header"
-      data-sidebar="header"
-      className={cn("flex flex-col gap-2 p-2", className)}
-      {...props} />
-=======
     (<div
       data-slot="sidebar-header"
       data-sidebar="header"
       className={cn("flex flex-col gap-2 p-2", className)}
       {...props} />)
->>>>>>> development
   );
 }
 
@@ -391,19 +319,11 @@ function SidebarFooter({
   ...props
 }) {
   return (
-<<<<<<< HEAD
-    <div
-      data-slot="sidebar-footer"
-      data-sidebar="footer"
-      className={cn("flex flex-col gap-2 p-2", className)}
-      {...props} />
-=======
     (<div
       data-slot="sidebar-footer"
       data-sidebar="footer"
       className={cn("flex flex-col gap-2 p-2", className)}
       {...props} />)
->>>>>>> development
   );
 }
 
@@ -412,19 +332,11 @@ function SidebarSeparator({
   ...props
 }) {
   return (
-<<<<<<< HEAD
-    <Separator
-      data-slot="sidebar-separator"
-      data-sidebar="separator"
-      className={cn("bg-sidebar-border mx-2 w-auto", className)}
-      {...props} />
-=======
     (<Separator
       data-slot="sidebar-separator"
       data-sidebar="separator"
       className={cn("bg-sidebar-border mx-2 w-auto", className)}
       {...props} />)
->>>>>>> development
   );
 }
 
@@ -433,22 +345,14 @@ function SidebarContent({
   ...props
 }) {
   return (
-<<<<<<< HEAD
-    <div
-=======
     (<div
->>>>>>> development
       data-slot="sidebar-content"
       data-sidebar="content"
       className={cn(
         "flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden",
         className
       )}
-<<<<<<< HEAD
-      {...props} />
-=======
       {...props} />)
->>>>>>> development
   );
 }
 
@@ -457,19 +361,11 @@ function SidebarGroup({
   ...props
 }) {
   return (
-<<<<<<< HEAD
-    <div
-      data-slot="sidebar-group"
-      data-sidebar="group"
-      className={cn("relative flex w-full min-w-0 flex-col p-2", className)}
-      {...props} />
-=======
     (<div
       data-slot="sidebar-group"
       data-sidebar="group"
       className={cn("relative flex w-full min-w-0 flex-col p-2", className)}
       {...props} />)
->>>>>>> development
   );
 }
 
@@ -481,11 +377,7 @@ function SidebarGroupLabel({
   const Comp = asChild ? Slot : "div"
 
   return (
-<<<<<<< HEAD
-    <Comp
-=======
     (<Comp
->>>>>>> development
       data-slot="sidebar-group-label"
       data-sidebar="group-label"
       className={cn(
@@ -493,11 +385,7 @@ function SidebarGroupLabel({
         "group-data-[collapsible=icon]:-mt-8 group-data-[collapsible=icon]:opacity-0",
         className
       )}
-<<<<<<< HEAD
-      {...props} />
-=======
       {...props} />)
->>>>>>> development
   );
 }
 
@@ -509,11 +397,7 @@ function SidebarGroupAction({
   const Comp = asChild ? Slot : "button"
 
   return (
-<<<<<<< HEAD
-    <Comp
-=======
     (<Comp
->>>>>>> development
       data-slot="sidebar-group-action"
       data-sidebar="group-action"
       className={cn(
@@ -523,11 +407,7 @@ function SidebarGroupAction({
         "group-data-[collapsible=icon]:hidden",
         className
       )}
-<<<<<<< HEAD
-      {...props} />
-=======
       {...props} />)
->>>>>>> development
   );
 }
 
@@ -536,19 +416,11 @@ function SidebarGroupContent({
   ...props
 }) {
   return (
-<<<<<<< HEAD
-    <div
-      data-slot="sidebar-group-content"
-      data-sidebar="group-content"
-      className={cn("w-full text-sm", className)}
-      {...props} />
-=======
     (<div
       data-slot="sidebar-group-content"
       data-sidebar="group-content"
       className={cn("w-full text-sm", className)}
       {...props} />)
->>>>>>> development
   );
 }
 
@@ -557,19 +429,11 @@ function SidebarMenu({
   ...props
 }) {
   return (
-<<<<<<< HEAD
-    <ul
-      data-slot="sidebar-menu"
-      data-sidebar="menu"
-      className={cn("flex w-full min-w-0 flex-col gap-1", className)}
-      {...props} />
-=======
     (<ul
       data-slot="sidebar-menu"
       data-sidebar="menu"
       className={cn("flex w-full min-w-0 flex-col gap-1", className)}
       {...props} />)
->>>>>>> development
   );
 }
 
@@ -578,19 +442,11 @@ function SidebarMenuItem({
   ...props
 }) {
   return (
-<<<<<<< HEAD
-    <li
-      data-slot="sidebar-menu-item"
-      data-sidebar="menu-item"
-      className={cn("group/menu-item relative", className)}
-      {...props} />
-=======
     (<li
       data-slot="sidebar-menu-item"
       data-sidebar="menu-item"
       className={cn("group/menu-item relative", className)}
       {...props} />)
->>>>>>> development
   );
 }
 
@@ -649,22 +505,14 @@ function SidebarMenuButton({
   }
 
   return (
-<<<<<<< HEAD
-    <Tooltip>
-=======
     (<Tooltip>
->>>>>>> development
       <TooltipTrigger asChild>{button}</TooltipTrigger>
       <TooltipContent
         side="right"
         align="center"
         hidden={state !== "collapsed" || isMobile}
         {...tooltip} />
-<<<<<<< HEAD
-    </Tooltip>
-=======
     </Tooltip>)
->>>>>>> development
   );
 }
 
@@ -677,11 +525,7 @@ function SidebarMenuAction({
   const Comp = asChild ? Slot : "button"
 
   return (
-<<<<<<< HEAD
-    <Comp
-=======
     (<Comp
->>>>>>> development
       data-slot="sidebar-menu-action"
       data-sidebar="menu-action"
       className={cn(
@@ -696,11 +540,7 @@ function SidebarMenuAction({
           "peer-data-[active=true]/menu-button:text-sidebar-accent-foreground group-focus-within/menu-item:opacity-100 group-hover/menu-item:opacity-100 data-[state=open]:opacity-100 md:opacity-0",
         className
       )}
-<<<<<<< HEAD
-      {...props} />
-=======
       {...props} />)
->>>>>>> development
   );
 }
 
@@ -709,11 +549,7 @@ function SidebarMenuBadge({
   ...props
 }) {
   return (
-<<<<<<< HEAD
-    <div
-=======
     (<div
->>>>>>> development
       data-slot="sidebar-menu-badge"
       data-sidebar="menu-badge"
       className={cn(
@@ -725,11 +561,7 @@ function SidebarMenuBadge({
         "group-data-[collapsible=icon]:hidden",
         className
       )}
-<<<<<<< HEAD
-      {...props} />
-=======
       {...props} />)
->>>>>>> development
   );
 }
 
@@ -744,11 +576,7 @@ function SidebarMenuSkeleton({
   }, [])
 
   return (
-<<<<<<< HEAD
-    <div
-=======
     (<div
->>>>>>> development
       data-slot="sidebar-menu-skeleton"
       data-sidebar="menu-skeleton"
       className={cn("flex h-8 items-center gap-2 rounded-md px-2", className)}
@@ -764,11 +592,7 @@ function SidebarMenuSkeleton({
             "--skeleton-width": width
           }
         } />
-<<<<<<< HEAD
-    </div>
-=======
     </div>)
->>>>>>> development
   );
 }
 
@@ -777,11 +601,7 @@ function SidebarMenuSub({
   ...props
 }) {
   return (
-<<<<<<< HEAD
-    <ul
-=======
     (<ul
->>>>>>> development
       data-slot="sidebar-menu-sub"
       data-sidebar="menu-sub"
       className={cn(
@@ -789,11 +609,7 @@ function SidebarMenuSub({
         "group-data-[collapsible=icon]:hidden",
         className
       )}
-<<<<<<< HEAD
-      {...props} />
-=======
       {...props} />)
->>>>>>> development
   );
 }
 
@@ -802,19 +618,11 @@ function SidebarMenuSubItem({
   ...props
 }) {
   return (
-<<<<<<< HEAD
-    <li
-      data-slot="sidebar-menu-sub-item"
-      data-sidebar="menu-sub-item"
-      className={cn("group/menu-sub-item relative", className)}
-      {...props} />
-=======
     (<li
       data-slot="sidebar-menu-sub-item"
       data-sidebar="menu-sub-item"
       className={cn("group/menu-sub-item relative", className)}
       {...props} />)
->>>>>>> development
   );
 }
 
@@ -828,11 +636,7 @@ function SidebarMenuSubButton({
   const Comp = asChild ? Slot : "a"
 
   return (
-<<<<<<< HEAD
-    <Comp
-=======
     (<Comp
->>>>>>> development
       data-slot="sidebar-menu-sub-button"
       data-sidebar="menu-sub-button"
       data-size={size}
@@ -845,11 +649,7 @@ function SidebarMenuSubButton({
         "group-data-[collapsible=icon]:hidden",
         className
       )}
-<<<<<<< HEAD
-      {...props} />
-=======
       {...props} />)
->>>>>>> development
   );
 }
 

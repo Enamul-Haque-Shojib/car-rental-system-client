@@ -5,17 +5,10 @@ function Skeleton({
   ...props
 }) {
   return (
-<<<<<<< HEAD
-    <div
-      data-slot="skeleton"
-      className={cn("bg-accent animate-pulse rounded-md", className)}
-      {...props} />
-=======
     (<div
       data-slot="skeleton"
       className={cn("bg-accent animate-pulse rounded-md", className)}
       {...props} />)
->>>>>>> development
   );
 }
 
