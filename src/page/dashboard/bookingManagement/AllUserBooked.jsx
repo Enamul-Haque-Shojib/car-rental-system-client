@@ -8,13 +8,20 @@ import toast from 'react-hot-toast';
 
 
 const AllUserBooked = () => {
-  const {user} = useAuth()
-     const {data: bookingsData, isLoading} = useGetAllOwnerBookQuery(user?._id);
+  const {user} = useAuth();
 
+  
+  
+    //  const {data: bookingsData, isLoading} = useGetAllOwnerBookQuery(user?._id);
+    const { data: bookingsData, isLoading } = useGetAllOwnerBookQuery(user?._id, {
+      skip: !user?._id, 
+    });
+
+console.log(bookingsData)
   const[approvedBook] = useApprovedBookMutation(undefined)
 
      const handleApprovedBook = async(id, carId)=>{
-        if(carId){
+       
           try {
             const res = await approvedBook({id, car_id:{carId:carId._id}}).unwrap();
             console.log(res);
@@ -23,9 +30,7 @@ const AllUserBooked = () => {
             console.log(error)
             toast.error(error)
           }
-        }else{
-          toast.error('Car has been deleted')
-        }
+       
       
     }
         if (isLoading) {
@@ -94,7 +99,7 @@ const AllUserBooked = () => {
       <TableFooter>
         <TableRow>
           <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className="text-right">$2,500.00</TableCell>
+          <TableCell className="text-right">0</TableCell>
         </TableRow>
       </TableFooter>
     </Table>

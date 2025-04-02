@@ -115,7 +115,7 @@ const AllCarsDashboard = () => {
           <TableFooter>
             <TableRow>
               <TableCell colSpan={3}>Total</TableCell>
-              <TableCell className="text-right">$2,500.00</TableCell>
+              <TableCell className="text-right">0</TableCell>
             </TableRow>
           </TableFooter>
         </Table>

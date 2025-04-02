@@ -56,18 +56,7 @@ const AuthProvider = ({children}) => {
         }
     };
 
-    const authInfo = {
-        registerUser,
-        login,
-        updateUserProfile,
-        logout,
-        user,
-        setUser,
-        loading,
-        setLoading,
-        signInWithGoogle,
-
-    }
+ 
 // console.log(user?.displayName,user?.photoURL)
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async(currentUser) => {
@@ -90,6 +79,20 @@ const AuthProvider = ({children}) => {
         })
         return () => unsubscribe()
     }, [axiosPublic, user?.photoURL])
+
+
+    const authInfo = {
+        registerUser,
+        login,
+        updateUserProfile,
+        logout,
+        user,
+        setUser,
+        loading,
+        setLoading,
+        signInWithGoogle,
+
+    }
     return (
         <AuthContext.Provider value={authInfo}>
         {children}
