@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import useAuth from '@/hooks/useAuth';
 import toast from 'react-hot-toast';
+import { Loader } from 'lucide-react';
 
 
 const AllUserBooked = () => {
@@ -33,9 +34,13 @@ console.log(bookingsData)
        
       
     }
-        if (isLoading) {
-            return <p>Loading...</p>
-        }
+    if (isLoading) {
+      return (
+        <div className="flex justify-center items-center h-96">
+          <Loader className="animate-spin text-gray-400 w-10 h-10" />
+        </div>
+      );
+    }
     return (
         <div className=''>
         <h1 className='text-2xl text-center font-bold'>All User Bookings</h1>

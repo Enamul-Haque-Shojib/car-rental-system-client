@@ -31,6 +31,8 @@ import UpdateCarDashboard from './page/dashboard/carManagement/updateCarDashboar
 import DetailsCar from './page/AllCars/detailsCar'
 import AllMyBooked from './page/dashboard/bookingManagement/AllMyBooked'
 import AllUserBooked from './page/dashboard/bookingManagement/AllUserBooked'
+import AllReviewDashboard from './page/dashboard/carManagement/AllReviewDashboard'
+import ManageAllCars from './page/AllCars/ManageAllCars'
 
 
 
@@ -48,7 +50,7 @@ createRoot(document.getElementById('root')).render(
             <Route path='register' element={<Register />} />
             <Route path='login' element={<Login />} />
             <Route path='about' element={<About></About>} />
-            <Route path='allCars' element={<AllCars />} />
+            <Route path='allCars/:slug' element={<ManageAllCars />} />
             <Route path='addCar' element={<AddCar />} />
             <Route path='detailsCar/:id' element={<DetailsCar></DetailsCar>} />
 
@@ -56,6 +58,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/dashboard" element={<DashboardLayout />}>
           <Route path='add_car' element={<AddCarrDashboard></AddCarrDashboard>} />
           <Route path='edit_car/:id' element={<UpdateCarDashboard></UpdateCarDashboard>} />
+          <Route path='review_car/:id' element={<AllReviewDashboard></AllReviewDashboard>} />
           <Route path='all_cars' element={<AllCarsDashboard></AllCarsDashboard>} />
           <Route path='all_my_booked' element={<AllMyBooked></AllMyBooked>} />
           <Route path='all_user_booked' element={<AllUserBooked></AllUserBooked>} />

@@ -1,6 +1,12 @@
+import useAuth from '@/hooks/useAuth';
 
 import { Button } from '@/components/ui/button';
-
+import {
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -16,11 +22,12 @@ import { Textarea } from '@/components/ui/textarea';
 
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Loader, Star } from 'lucide-react'; // Icon for stars
-import useAuth from '@/hooks/useAuth';
-import { useAddReviewMutation } from '@/redux/features/reviews/reviewApi';
+import { Star } from 'lucide-react';
 import toast from 'react-hot-toast';
-const ReviewForm = ({carId}) => {
+import { useAddReviewMutation } from '@/redux/features/reviews/reviewApi';
+
+const AddReviewModal = ({carId}) => {
+
     const { user } = useAuth();
    
     const [addReview, {isLoading}] = useAddReviewMutation(undefined)
@@ -39,12 +46,12 @@ const ReviewForm = ({carId}) => {
     };
   
     const onSubmit = async (data) => {
- console.log(data);
+
   
       try {
         data.userId= user?._id;
   
-        const res = await addReview({id: carId, data})
+        const res = await addReview({id: carId?._id, data})
         console.log(res);
         form.reset();
         toast.success(res?.data?.message)
@@ -54,20 +61,13 @@ const ReviewForm = ({carId}) => {
         toast.error('Review could not be added')
       }
     };
-
-
-    // if (isLoading) {
-    //     return (
-    //       <div className="flex justify-center items-center h-96">
-    //         <Loader className="animate-spin text-gray-400 w-10 h-10" />
-    //       </div>
-    //     );
-    //   }
-
-
     return (
-        <div>
-            <div className="group w-full h-full transition-transform transform hover:scale-101 shadow-lg hover:shadow-xl bg-gradient-to-br rounded-xl overflow-hidden p-6">
+        <DialogContent className="sm:max-w-[425px]">
+      <DialogHeader>
+        <DialogTitle>{carId.registrationNumber}</DialogTitle>
+        <DialogDescription>Review the Car.</DialogDescription>
+      </DialogHeader>
+      <div className="">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="">
             {/* Feedback Field */}
@@ -80,7 +80,7 @@ const ReviewForm = ({carId}) => {
                   <FormLabel>Feedback</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Tell us about the Car"
+                      placeholder="Tell us about the car"
                       className="resize-none"
                       {...field}
                     />
@@ -92,19 +92,17 @@ const ReviewForm = ({carId}) => {
             />
 
             {/* Star Rating */}
-            <div className="flex flex-col space-y-2 my-4">
+            <div className="flex items-center space-x-2 my-4">
               <FormLabel className="mr-4">Rating</FormLabel>
-              <div className='flex'>
               {Array.from({ length: 5 }, (_, index) => (
                 <Star
                   key={index}
-                  className={`lg:w-8 w-6 lg:h-8 h:6 cursor-pointer ${
+                  className={`w-8 h-8 cursor-pointer ${
                     selectedRating > index ? 'text-yellow-500' : 'text-gray-300'
                   }`}
                   onClick={() => handleStarClick(index + 1)}
                 />
               ))}
-              </div>
               {selectedRating === 0 && (
                 <p className="text-red-500 text-sm">Rating is required.</p>
               )}
@@ -122,8 +120,8 @@ const ReviewForm = ({carId}) => {
           </form>
         </Form>
       </div>
-        </div>
+    </DialogContent>
     );
 };
 
-export default ReviewForm;
+export default AddReviewModal;

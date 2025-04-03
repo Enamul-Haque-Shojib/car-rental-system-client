@@ -7,7 +7,7 @@ import { Loader } from 'lucide-react';
 
 const CarReviews = ({carId}) => {
 
-    const {user} = useAuth()
+   
       const { data: reviewsData, isLoading } = useGetOneReviewQuery(carId, {
           skip: !carId, 
         });

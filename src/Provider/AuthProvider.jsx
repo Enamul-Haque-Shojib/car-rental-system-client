@@ -8,6 +8,8 @@ const googleProvider = new GoogleAuthProvider()
 
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
+    const [cars, setCars] = useState([]);
+
     console.log('---->>>>>',user)
     const [loading, setLoading] = useState(true)
     const axiosPublic=useAxiosPublic()
@@ -91,7 +93,8 @@ const AuthProvider = ({children}) => {
         loading,
         setLoading,
         signInWithGoogle,
-
+        cars,
+        setCars
     }
     return (
         <AuthContext.Provider value={authInfo}>

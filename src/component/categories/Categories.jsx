@@ -1,58 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import Category from './Category';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import { CategoriesFilter } from '@/constant';
 
-const categoryData = [
-    {
-        id:'1',
-        image:'https://www.goodwood.com/globalassets/.road--racing/road/news/2020/6-june/list-dan-trent-luxury-cars-2020/bmw-i7-2600.jpg?rxy=0.5,0.5',
-        title: ' Luxury Cars ',
-        
-    },
-    {
-        id:'1',
-        image:'https://d2kde5ohu8qb21.cloudfront.net/files/663eb473e3a23a00087b8980/bg-hyundai-elantra-thumbnail.jpg?w=838&width=838&format=webp',
-        title: 'Sedans',
-        
-    },
-    {
-        id:'2',
-        image:'https://media.drive.com.au/obj/tx_q:70,rs:auto:448:252:1/caradvice/private/82b78bbbab7e7f067d4c449e34f3a7b4',
-        title: 'Compact Cars',
-        
-    },
-    {
-        id:'3',
-        image:'https://www.usnews.com/object/image/00000191-ebcb-dc00-a7ff-ffdb1d470001/01-usnpx-2025hyundaivenue-angularfront-jms.jpg?update-time=1726237842515&size=responsive640',
-        title: 'Brand Car',
-        
-    },
-    {
-        id:'4',
-        image:'https://upload.wikimedia.org/wikipedia/commons/f/f0/2018_Ford_F-150_XLT_Crew_Cab%2C_front_11.10.19.jpg',
-        title: 'Pickup Trucks',
-        
-    },
-  
-   
-]
 
 
 
 const Categories = () => {
     const [categories, setCategories] = useState([]);
 
-    
+    const navigate = useNavigate();
         useEffect(() => {
     
         
-            setCategories(categoryData);
+            setCategories(CategoriesFilter);
         
     
         },[])
 
-        const handleHomeCategories=(category)=>{
-            console.log(category);
+        const handleHomeCategories=(slug)=>{
+          navigate(`allCars/${slug}`)
+            
+            
         }
     return (
         <div>
@@ -65,14 +34,14 @@ const Categories = () => {
           <div
             key={index}
             className="cursor-pointer hover:shadow-lg transition-shadow duration-300"
-            onClick={() => handleHomeCategories(category.title)}
+            onClick={() => handleHomeCategories(category.slug)}
           >
             <Category category={category} />
           </div>
         ))}
       </div>
       <div className="flex justify-center mt-8">
-        <Link to="allCars" className='btn border p-3 rounded-lg'>
+        <Link to="allCars/all" className='btn border p-3 rounded-lg'>
           View All
         </Link>
       </div>

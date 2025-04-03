@@ -72,9 +72,9 @@ const [updateUser, {isLoading}] = useUpdateUserMutation(undefined);
           }
       };
     
-      if(isLoading){
-        return <p>Loading.....</p>
-      }
+      // if(isLoading){
+      //   return <p>Loading.....</p>
+      // }
     return (
         <DialogContent className="w-full max-w-md rounded-lg bg-white shadow-lg p-6">
         <DialogHeader>

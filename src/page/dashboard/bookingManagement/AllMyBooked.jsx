@@ -1,8 +1,11 @@
+import AddReviewModal from '@/component/dashboard/modal/AddReviewModal';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import useAuth from '@/hooks/useAuth';
 import { useCanceledBookMutation, useGetAllUserBookQuery } from '@/redux/features/booking/bookingApi';
+import { Loader, Star } from 'lucide-react';
 import React from 'react';
 import toast from 'react-hot-toast';
 
@@ -29,7 +32,11 @@ const AllMyBooked = () => {
       }
     }
     if (isLoading) {
-        return <p>Loading...</p>
+      return (
+        <div className="flex justify-center items-center h-96">
+          <Loader className="animate-spin text-gray-400 w-10 h-10" />
+        </div>
+      );
     }
     return (
           <div className=''>
@@ -85,7 +92,15 @@ const AllMyBooked = () => {
                         <TableCell className="">{dropOffDate}</TableCell>
                         <TableCell className="">${totalCost}</TableCell>
                         <TableCell className="">{status}</TableCell>
+                        
                          <TableCell className="flex justify-around items-center ">
+                         <Dialog>
+                          <DialogTrigger asChild>
+                              {/* <Button variant="outline">Edit Profile</Button> */}
+                              <button className='cursor-pointer'><Star></Star></button>
+                          </DialogTrigger>
+                              <AddReviewModal carId={carId}></AddReviewModal>
+                          </Dialog>
                             <button className='cursor-pointer bg-red-600 p-2 rounded-lg' onClick={()=>{handleCancelBook(_id)}}>Cancel</button>
                           </TableCell>
                         
