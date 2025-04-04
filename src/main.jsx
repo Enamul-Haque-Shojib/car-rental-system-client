@@ -33,6 +33,8 @@ import AllMyBooked from './page/dashboard/bookingManagement/AllMyBooked'
 import AllUserBooked from './page/dashboard/bookingManagement/AllUserBooked'
 import AllReviewDashboard from './page/dashboard/carManagement/AllReviewDashboard'
 import ManageAllCars from './page/AllCars/ManageAllCars'
+import AllMyPayment from './page/dashboard/paymentManagement/AllMyPayment'
+import AllUserPayment from './page/dashboard/paymentManagement/AllUserPayment'
 
 
 
@@ -62,6 +64,8 @@ createRoot(document.getElementById('root')).render(
           <Route path='all_cars' element={<AllCarsDashboard></AllCarsDashboard>} />
           <Route path='all_my_booked' element={<AllMyBooked></AllMyBooked>} />
           <Route path='all_user_booked' element={<AllUserBooked></AllUserBooked>} />
+          <Route path='all_my_payment' element={<AllMyPayment></AllMyPayment>} />
+          <Route path='all_user_payment' element={<AllUserPayment></AllUserPayment>} />
           <Route path='all_users' element={<AllUserDashboard></AllUserDashboard>} />
           <Route path='profile' element={<Profile></Profile>} />
           <Route index element={<Dashboard />} />

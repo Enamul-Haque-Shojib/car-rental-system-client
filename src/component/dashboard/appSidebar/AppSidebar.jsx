@@ -78,6 +78,22 @@ const data = {
       ],
     },
     {
+      title: "Payment Management",
+      url: "#",
+      icon: Bot,
+      items: [
+        {
+          title: "All My Payment",
+          url: "/dashboard/all_my_payment",
+        },
+        {
+          title: "All User Payment",
+          url: "/dashboard/all_user_payment",
+        },
+      
+      ],
+    },
+    {
       title: "User Management",
       url: "#",
       icon: BookOpen,

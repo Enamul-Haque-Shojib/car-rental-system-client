@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { Separator } from '@/components/ui/separator';
 import { useGetOneCarQuery } from '@/redux/features/car/carApi';
-import { UserRound } from 'lucide-react';
+import { Loader, UserRound } from 'lucide-react';
 
 import React from 'react';
 
@@ -40,9 +40,13 @@ const DetailsCar = () => {
     //     description
     //   } = data
 
-      if(isLoading){
-        return <p></p>
-      }
+    if (isLoading) {
+      return (
+        <div className="flex justify-center items-center h-96">
+          <Loader className="animate-spin text-gray-400 w-10 h-10" />
+        </div>
+      );
+    }
     
     return (
 
