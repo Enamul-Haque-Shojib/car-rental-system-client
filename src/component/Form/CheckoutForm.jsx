@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import {CardElement, useElements, useStripe} from '@stripe/react-stripe-js';
 import './CheckoutForm.css';
-import { useCreatePaymentMutation } from '@/redux/features/booking/bookingApi';
+import { useCreatePaymentMutation, useDeleteBookMutation } from '@/redux/features/booking/bookingApi';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
 import useAuth from '@/hooks/useAuth';
@@ -22,6 +22,7 @@ const CheckoutForm = ({myBookingData}) => {
     const {_id, ownerId, userId, carId, pickUpLocation, dropOffLocation, pickUpDate, dropOffDate, totalCost, status} = myBookingData;
   
     const [addPayment, {isLoading}] = useAddPaymentMutation(undefined);
+    const [deleteBook] = useDeleteBookMutation(undefined);
     
     useEffect(() => {
         const fetchPayment = async()=>{
@@ -91,12 +92,13 @@ const CheckoutForm = ({myBookingData}) => {
           const res = await addPayment({
             ...myBookingData,
             transactionId: paymentIntent?.id,
-          })
+          }).unwrap();
           console.log(res)
+          await deleteBook(_id).unwrap();
       
           toast.success('Payment Successful!')
           
-          // navigate('/dashboard/all_my_booked')
+          navigate('/dashboard/all_my_payment')
         } catch (error) {
           console.log(error)
         } finally {
@@ -104,6 +106,7 @@ const CheckoutForm = ({myBookingData}) => {
           
         }
       }
+      
     };
   
     return (
