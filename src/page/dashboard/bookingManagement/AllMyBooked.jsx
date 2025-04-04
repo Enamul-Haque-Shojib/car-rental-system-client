@@ -1,4 +1,5 @@
 import AddReviewModal from '@/component/dashboard/modal/AddReviewModal';
+import PayModal from '@/component/dashboard/modal/PayModal';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
@@ -60,7 +61,7 @@ const AllMyBooked = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {bookingsData?.data?.map(({_id, ownerId, carId, pickUpLocation,dropOffLocation, pickUpDate, dropOffDate, totalCost, status}) => (
+                    {bookingsData?.data?.map(({_id, ownerId, userId, carId, pickUpLocation,dropOffLocation, pickUpDate, dropOffDate, totalCost, status}) => (
                       <TableRow key={_id}>
                         <TableCell className="">
                        
@@ -102,6 +103,13 @@ const AllMyBooked = () => {
                               <AddReviewModal carId={carId}></AddReviewModal>
                           </Dialog>
                             <button className='cursor-pointer bg-red-600 p-2 rounded-lg' onClick={()=>{handleCancelBook(_id)}}>Cancel</button>
+                            <Dialog>
+                          <DialogTrigger asChild>
+                              {/* <Button variant="outline">Edit Profile</Button> */}
+                              <button className='cursor-pointer bg-green-500 p-2 rounded-lg'>Pay</button>
+                          </DialogTrigger>
+                              <PayModal myBookingData={{_id, ownerId, userId, carId, pickUpLocation, dropOffLocation, pickUpDate, dropOffDate, totalCost, status}}></PayModal>
+                          </Dialog>
                           </TableCell>
                         
                       </TableRow>
