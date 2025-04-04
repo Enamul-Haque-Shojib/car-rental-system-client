@@ -1,8 +1,12 @@
+import AddReviewModal from '@/component/dashboard/modal/AddReviewModal';
+import PayModal from '@/component/dashboard/modal/PayModal';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import useAuth from '@/hooks/useAuth';
 import { useCanceledBookMutation, useGetAllUserBookQuery } from '@/redux/features/booking/bookingApi';
+import { Loader, Star } from 'lucide-react';
 import React from 'react';
 import toast from 'react-hot-toast';
 
@@ -29,7 +33,11 @@ const AllMyBooked = () => {
       }
     }
     if (isLoading) {
-        return <p>Loading...</p>
+      return (
+        <div className="flex justify-center items-center h-96">
+          <Loader className="animate-spin text-gray-400 w-10 h-10" />
+        </div>
+      );
     }
     return (
           <div className=''>
@@ -53,7 +61,7 @@ const AllMyBooked = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {bookingsData?.data?.map(({_id, ownerId, carId, pickUpLocation,dropOffLocation, pickUpDate, dropOffDate, totalCost, status}) => (
+                    {bookingsData?.data?.map(({_id, ownerId, userId, carId, pickUpLocation,dropOffLocation, pickUpDate, dropOffDate, totalCost, status}) => (
                       <TableRow key={_id}>
                         <TableCell className="">
                        
@@ -85,8 +93,23 @@ const AllMyBooked = () => {
                         <TableCell className="">{dropOffDate}</TableCell>
                         <TableCell className="">${totalCost}</TableCell>
                         <TableCell className="">{status}</TableCell>
+                        
                          <TableCell className="flex justify-around items-center ">
+                         <Dialog>
+                          <DialogTrigger asChild>
+                              {/* <Button variant="outline">Edit Profile</Button> */}
+                              <button className='cursor-pointer'><Star></Star></button>
+                          </DialogTrigger>
+                              <AddReviewModal carId={carId}></AddReviewModal>
+                          </Dialog>
                             <button className='cursor-pointer bg-red-600 p-2 rounded-lg' onClick={()=>{handleCancelBook(_id)}}>Cancel</button>
+                            <Dialog>
+                          <DialogTrigger asChild>
+                              {/* <Button variant="outline">Edit Profile</Button> */}
+                              <button className='cursor-pointer bg-green-500 p-2 rounded-lg'>Pay</button>
+                          </DialogTrigger>
+                              <PayModal myBookingData={{_id, ownerId, userId, carId, pickUpLocation, dropOffLocation, pickUpDate, dropOffDate, totalCost, status}}></PayModal>
+                          </Dialog>
                           </TableCell>
                         
                       </TableRow>

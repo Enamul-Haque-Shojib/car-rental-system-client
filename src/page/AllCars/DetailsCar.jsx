@@ -1,3 +1,5 @@
+import CarReviews from '@/component/carReviews/CarReviews';
+import ReviewForm from '@/component/carReviews/reviewForm';
 import BookModal from '@/component/dashboard/modal/BookModal';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -43,7 +45,9 @@ const DetailsCar = () => {
       }
     
     return (
-        <div className="container mx-auto px-4 my-12">
+
+       <div>
+         <div className="container mx-auto px-4 my-12">
       <Card className="flex flex-col lg:flex-row shadow-lg hover:shadow-xl transition-all overflow-hidden rounded-lg">
         <div className="lg:w-1/2 p-5 flex flex-col items-center">
           <AspectRatio ratio={16 / 9} className="bg-muted border rounded-lg overflow-hidden">
@@ -118,6 +122,13 @@ const DetailsCar = () => {
 
 
     </div>
+    <div className='container mx-auto px-4 my-12'>
+      <CarReviews carId={id}></CarReviews>
+    </div>
+    <div className='container mx-auto px-4 my-12'>
+      <ReviewForm carId={id}></ReviewForm>
+    </div>
+       </div>
   
     );
 };

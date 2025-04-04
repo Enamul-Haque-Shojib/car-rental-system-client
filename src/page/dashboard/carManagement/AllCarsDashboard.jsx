@@ -15,9 +15,7 @@ import {
     AvatarImage,
   } from "@/components/ui/avatar"
 
-
-
-import { Edit, Eye, Trash } from 'lucide-react';
+import { Edit, Eye, Star, Trash } from 'lucide-react';
 import { Link } from 'react-router';
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
@@ -30,6 +28,7 @@ import { useGetAllCarsQuery } from '@/redux/features/car/carApi';
  
 const AllCarsDashboard = () => {
     const {data: carsData, isLoading} = useGetAllCarsQuery();
+  
     const [deleteCar] = useDeleteCarMutation()
 
 
@@ -72,7 +71,7 @@ const AllCarsDashboard = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {carsData?.data?.map(({_id, registrationNumber, image,brand, carModel,year, type, fuelType, seats, transmission, mileAge, pricePerDay, location, availability, features}) => (
+            {carsData?.data?.result?.map(({_id, registrationNumber, image,brand, carModel,year, type, fuelType, seats, transmission, mileAge, pricePerDay, location, availability, features}) => (
               <TableRow key={_id}>
                 <TableCell className="">
                 {/* <Avatar>
@@ -98,6 +97,7 @@ const AllCarsDashboard = () => {
                 <TableCell className="">{location}</TableCell>
                 <TableCell className="">{availability ? 'Available' : 'Booked'}</TableCell>
                 <TableCell className="flex justify-around items-center ">
+                <Link to={`/dashboard/review_car/${_id}`}><button className='cursor-pointer'><Star></Star></button></Link>
                 <Dialog>
                     <DialogTrigger asChild>
                         {/* <Button variant="outline">Edit Profile</Button> */}

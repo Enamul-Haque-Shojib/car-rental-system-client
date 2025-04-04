@@ -52,7 +52,10 @@ const formSchema = z.object({
                 sunroof: z.boolean()
               }), 
 
-  })
+  });
+  const formatSlug = (text) => {
+    return text.toLowerCase().replace(/\s+/g, "_") + "s"; // Simple pluralization
+  };
 const UpdateCarDashboard = () => {
     const {id} = useParams();
 
@@ -135,11 +138,12 @@ const UpdateCarDashboard = () => {
     
         data.userId = user?._id;
         data.image = carImgUrl;
-        data.year = parseInt(data.year);
-        data.mileAge = parseInt(data.mileAge);
-        data.seats = parseInt(data.seats);
-        data.pricePerDay = parseInt(data.pricePerDay);
- 
+        data.slugType = formatSlug(data.type)
+        // data.year = parseInt(data.year);
+        // data.mileAge = parseInt(data.mileAge);
+        // data.seats = parseInt(data.seats);
+        // data.pricePerDay = parseInt(data.pricePerDay);
+ console.log(data);
     
         try {
             const res = await updateCar({ id, data }).unwrap();

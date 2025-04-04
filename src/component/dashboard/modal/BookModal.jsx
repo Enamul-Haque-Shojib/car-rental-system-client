@@ -81,7 +81,7 @@ const BookModal = ({carData}) => {
         data.ownerId=carData?.userId?._id;
             data.carId=carData?._id;
             data.userId=user?._id;
-            data.totalCost = countDaysBetween(data.pickUpDate, data.dropOffDate) * carData?.pricePerDay
+            data.totalCost = countDaysBetween(data.pickUpDate, data.dropOffDate) * parseFloat(carData?.pricePerDay)
 
         try {
             const res = await addBook(data).unwrap();

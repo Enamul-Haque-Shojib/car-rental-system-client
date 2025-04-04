@@ -33,6 +33,9 @@ const carSchema = z.object({
   description: z.string().min(10, "Description must be at least 10 characters"),
 });
 
+const formatSlug = (text) => {
+  return text.toLowerCase().replace(/\s+/g, "_") + "s"; // Simple pluralization
+};
 const AddCar = () => {
   const {user} = useAuth();
   
@@ -73,7 +76,7 @@ const AddCar = () => {
 
   const onSubmit = async (data) => {
     data.userId = user?._id;
-    console.log(data);
+    data.slugType = data.slugType = formatSlug(data.type)
  
     try {
       const res = await addCar(data).unwrap();

@@ -39,11 +39,11 @@ const handlelogout=()=>{
                 Home
               </NavLink>
               <NavLink
-                to="/allCars"
+                to="/allCars/all"
                 className="transition duration-300 hover:text-yellow-300"
                 activeclassName="text-yellow-300"
               >
-                All Car
+                All Cars
               </NavLink>
               <NavLink
                 to="/about"
@@ -141,6 +141,14 @@ const handlelogout=()=>{
                   onClick={handleNavField}
                 >
                   Home
+                </NavLink>
+                <NavLink
+                  to="/allCars/all"
+                  className="block text-lg hover:text-indigo-500"
+                  activeclassName="text-indigo-500"
+                  onClick={handleNavField}
+                >
+                  All Cars
                 </NavLink>
                 <NavLink
                   to="/about"

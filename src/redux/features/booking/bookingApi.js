@@ -57,9 +57,17 @@ const bookingApi = baseApi.injectEndpoints({
             }),
             providesTags:['cars', 'bookings']
         }),
+        createPayment: builder.mutation({
+            query: (data) => ({
+                url: '/bookings/create-payment',
+                method: 'POST',
+                body: data
+            }),
+            invalidatesTags: ['bookings'],
+        }),
       
     })
 })
 
-export const {useAddBookMutation, useUpdateBookMutation, useApprovedBookMutation, useDeleteBookMutation, useGetAllOwnerBookQuery, useGetAllUserBookQuery, useCanceledBookMutation} = bookingApi;
+export const {useAddBookMutation, useUpdateBookMutation, useApprovedBookMutation, useDeleteBookMutation, useGetAllOwnerBookQuery, useGetAllUserBookQuery, useCanceledBookMutation, useCreatePaymentMutation} = bookingApi;
 
