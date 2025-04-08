@@ -56,6 +56,7 @@ createRoot(document.getElementById('root')).render(
             <Route path='allCars/:slug' element={<ManageAllCars />} />
             <Route path='addCar' element={<AddCar />} />
             <Route path='detailsCar/:id' element={<DetailsCar></DetailsCar>} />
+            <Route path='adminChat' element={<AdminChat />} />
 
           </Route>
           <Route path="/dashboard" element={<DashboardLayout />}>

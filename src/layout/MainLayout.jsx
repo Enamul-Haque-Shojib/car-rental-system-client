@@ -12,8 +12,7 @@ const MainLayout = () => {
             <Navbar></Navbar>
             <main className="min-h-screen">
                 <Outlet></Outlet>
-            </main>
-             {/* chatting window */}
+                {/* chatting window */}
              {chatOpen && <CustomerChat userId="user123" />}
             {/* chat icon */}
             <button
@@ -22,6 +21,8 @@ const MainLayout = () => {
             >
                 💬
             </button>
+            </main>
+             
 
             <Footer></Footer>
         </div>
