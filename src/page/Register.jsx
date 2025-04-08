@@ -10,11 +10,14 @@ import uploadImage from "@/hooks/uploadImage";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
 
 const Register = () => {
-    const{ registerUser, signInWithGoogle, updateUserProfile}=useAuth()
+    const{ registerUser, signInWithGoogle, updateUserProfile, setUser}=useAuth()
     const navigate=useNavigate()
     const [error, setError] = useState(null)
     const [files, setFiles] = useState([]);
     const axiosPublic=useAxiosPublic()
+
+  
+
 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
@@ -44,9 +47,11 @@ const Register = () => {
             await updateUserProfile(data.name, data.photoURL)
             const userInfo = {
                 name: data.name,
-                email: data.email
+                email: data.email,
+                photoURL: data.photoURL
             }
-             await axiosPublic.post(`/api/auth/register/${data.email}`, userInfo)
+             const res = await axiosPublic.post(`/api/auth/login`, userInfo,{ withCredentials: true })
+             setUser(res?.data?.data)
             toast.success("Register successful");
             navigate("/");
         } catch (error) {

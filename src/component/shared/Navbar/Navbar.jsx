@@ -3,11 +3,12 @@ import { Link, NavLink } from 'react-router';
 import "./Navbar.css"
 import useAuth from '@/hooks/useAuth';
 import toast from 'react-hot-toast';
+import { Menu, X } from 'lucide-react';
 const Navbar = () => {
      const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 const {user,logout}=useAuth()
-console.log(user)
+
   const handleNavField = () => setOpen(!open);
 
  
@@ -38,19 +39,37 @@ const handlelogout=()=>{
                 Home
               </NavLink>
               <NavLink
+                to="/allCars/all"
+                className="transition duration-300 hover:text-yellow-300"
+                activeclassName="text-yellow-300"
+              >
+                All Cars
+              </NavLink>
+              <NavLink
                 to="/about"
                 className="transition duration-300 hover:text-yellow-300"
                 activeclassName="text-yellow-300"
               >
                 About
               </NavLink>
-              <NavLink
+              {user && <>
+                <NavLink
                 to="/addCar"
                 className="transition duration-300 hover:text-yellow-300"
                 activeclassName="text-yellow-300"
               >
                 Add Car
               </NavLink>
+              <NavLink
+                to="/dashboard"
+                className="transition duration-300 hover:text-yellow-300"
+                activeclassName="text-yellow-300"
+              >
+                Dashboard
+              </NavLink>
+
+              </>}
+              
         
                 
           {user? <>
@@ -67,7 +86,7 @@ const handlelogout=()=>{
                      <div className="absolute right-0 mt-2 bg-white text-black rounded shadow-lg w-48">
                        <div className="px-4 py-2">
                          
-                         <p className="text-sm text-gray-500">{user?.displayName}</p>
+                         <p className="text-sm text-gray-500">{user?.name}</p>
                        </div>
                        <hr />
                      
@@ -100,7 +119,7 @@ const handlelogout=()=>{
               className="lg:hidden text-2xl focus:outline-none"
               onClick={handleNavField}
             >
-              {open ? <p>X</p> : <p>Y</p>}
+              {open ? <X></X> : <Menu></Menu>}
             </button>
           </div>
     
@@ -124,6 +143,14 @@ const handlelogout=()=>{
                   Home
                 </NavLink>
                 <NavLink
+                  to="/allCars/all"
+                  className="block text-lg hover:text-indigo-500"
+                  activeclassName="text-indigo-500"
+                  onClick={handleNavField}
+                >
+                  All Cars
+                </NavLink>
+                <NavLink
                   to="/about"
                   className="block text-lg hover:text-indigo-500"
                   activeclassName="text-indigo-500"
@@ -131,35 +158,32 @@ const handlelogout=()=>{
                 >
                   About
                 </NavLink>
-            
-                  <>
+            {
+              user &&  <>
                     
-                    <button
+              <button
+            onClick={handlelogout}
+                className="block w-full text-lg px-4 py-2 text-red-600 hover:bg-red-100"
+              >
+                Logout
+              </button>
+            </>
+            }
                   
-                      className="block w-full text-lg px-4 py-2 text-red-600 hover:bg-red-100"
-                    >
-                      Logout
-                    </button>
-                  </>
-            
-                  <>
-                    <NavLink
-                      to="/register"
-                      className="block text-lg hover:text-indigo-500"
-                      activeclassName="text-indigo-500"
-                      onClick={handleNavField}
-                    >
-                      Register
-                    </NavLink>
-                    <NavLink
-                      to="/login"
-                      className="block text-lg hover:text-indigo-500"
-                      activeclassName="text-indigo-500"
-                      onClick={handleNavField}
-                    >
-                      Login
-                    </NavLink>
-                  </>
+            {
+              user ? <></> : 
+              <>
+              <NavLink
+                to="/login"
+                className="block text-lg hover:text-indigo-500"
+                activeclassName="text-indigo-500"
+                onClick={handleNavField}
+              >
+                Login
+              </NavLink>
+            </>
+            }
+                  
          
               </div>
             </div>

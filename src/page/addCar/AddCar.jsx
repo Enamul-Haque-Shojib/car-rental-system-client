@@ -3,6 +3,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import uploadImage from "@/hooks/uploadImage";
+import { useAddCarMutation } from "@/redux/features/admin/adminApi";
+import useAuth from "@/hooks/useAuth";
+import toast from "react-hot-toast";
 
 const carSchema = z.object({
   brand: z.string().min(2, "Brand is required"),
@@ -14,7 +17,7 @@ const carSchema = z.object({
   fuelType: z.string(),
   seats: z.number().min(2).max(8, "Seats must be between 2 and 8"),
   transmission: z.string(),
-  mileage: z.number().min(2, "Mileage is required"),
+  mileAge: z.number().min(2, "Mileage is required"),
   pricePerDay: z.number().min(10, "Price must be at least $10"),
   location: z.string().min(2, "Location is required"),
   availability: z.boolean(),
@@ -26,11 +29,16 @@ const carSchema = z.object({
     sunroof: z.boolean().optional(),
     fourWheelDrive: z.boolean().optional(),
   }),
-  images: z.string().url("Invalid URL"),
+  image: z.string().url("Invalid URL"),
   description: z.string().min(10, "Description must be at least 10 characters"),
 });
 
+const formatSlug = (text) => {
+  return text.toLowerCase().replace(/\s+/g, "_") + "s"; // Simple pluralization
+};
 const AddCar = () => {
+  const {user} = useAuth();
+  
   const {
     register,
     handleSubmit,
@@ -48,7 +56,7 @@ const AddCar = () => {
       fuelType: "Petrol",
       seats: 5,
       transmission: "Automatic",
-      mileage: 5,
+      mileAge: 5,
       pricePerDay: 50,
       location: "",
       availability: true,
@@ -57,15 +65,28 @@ const AddCar = () => {
         gps: false,
         bluetooth: false,
         rearCamera: false,
+        fourWheelDrive: false
       },
-      images: [],
+      image: '',
       description: "",
     },
   });
 
+  const [addCar] = useAddCarMutation();
 
   const onSubmit = async (data) => {
-    
+    data.userId = user?._id;
+    data.slugType = data.slugType = formatSlug(data.type)
+ 
+    try {
+      const res = await addCar(data).unwrap();
+    console.log(res);
+    toast.success("Car added successfully");
+    } catch (error) {
+   
+      console.error(error);
+      toast.error('Failed to add car');
+    }
     
 
   }
@@ -76,7 +97,7 @@ const AddCar = () => {
     if (file) {
       const imageUrl = await uploadImage(file);
       if (imageUrl) {
-        setValue("images", imageUrl);
+        setValue("image", imageUrl);
         setPreviewUrl(imageUrl);
       }
     }
@@ -97,19 +118,19 @@ const AddCar = () => {
         {errors.brand && <p className="text-red-500">{errors.brand.message}</p>}
       </label>
       <label className="floating-label">
-        <span>car Model</span>
+        <span>Car Model</span>
 
         <input {...register("carModel")} placeholder="car Model" className="input input-md" />
         {errors.carModel && <p className="text-red-500">{errors.carModel.message}</p>}
       </label>
       <label className="floating-label">
-        <span>registration Number</span>
+        <span>Registration Number(Unique)</span>
 
         <input {...register("registrationNumber")} placeholder="registration Number" className="input input-md" />
         {errors.registrationNumber && <p className="text-red-500">{errors.registrationNumber.message}</p>}
       </label>
       <label className="floating-label">
-        <span>Moder Year</span>
+        <span>Model Year</span>
 
         <input type="number" {...register("year", { valueAsNumber: true })} placeholder="Year" className="input input-md" />
         {errors.year && <p className="text-red-500">{errors.year.message}</p>}
@@ -152,7 +173,7 @@ const AddCar = () => {
       </label>
       <label className="floating-label">
         <span>Mileage</span>
-        <input type="number" {...register("mileage", { valueAsNumber: true })} placeholder="Mileage (e.g., 12 km/l)" className="input input-md" />
+        <input type="number" {...register("mileAge", { valueAsNumber: true })} placeholder="Mileage (e.g., 12 km/l)" className="input input-md" />
       </label>
       <label className="floating-label">
         <span>Price Per Day</span>
@@ -192,9 +213,14 @@ const AddCar = () => {
           <input type="checkbox" {...register("features.sunroof")} className="mr-2" />
           Sunroof
         </label>
+        <label className="flex items-center">
+          <input type="checkbox" {...register("features.fourWheelDrive")} className="mr-2" />
+          Four Wheel Drive
+        </label>
       </div>
       <label className="floating-label">
         <input type="file" accept="image/*" onChange={handleImageUpload} className="file-input" />
+        {errors.image && <p className="text-red-500">{errors.image.message}</p>}
         {previewUrl && <img src={previewUrl} alt="Preview" className="w-32 h-32 mt-2" />}
       </label>
       <label className="floating-label">
