@@ -28,7 +28,7 @@ const CustomerChat = ({ userId }) => {
   };
 
   return (
-    <div className="fixed bottom-20 right-5 w-80 bg-white border shadow-lg rounded-lg p-4">
+    <div className="fixed bottom-20 right-5 w-80 bg-white border shadow-lg rounded-lg p-4 z-1">
       <div className="h-64 overflow-y-auto">
         {messages.map((msg, index) => (
           <p
