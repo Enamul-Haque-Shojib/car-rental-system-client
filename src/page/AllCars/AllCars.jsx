@@ -7,15 +7,6 @@ import { useGetAllSearchQueryCarsMutation } from '@/redux/features/car/carApi';
 import CarCard from './CarCard';
 import { Loader } from 'lucide-react';
 import useAuth from '@/hooks/useAuth';
-import {
-    Pagination,
-    PaginationContent,
-    PaginationEllipsis,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-} from "@/components/ui/pagination"
 
 
 const AllCars = () => {
@@ -85,24 +76,6 @@ const AllCars = () => {
                     <p className="text-center text-gray-500 dark:text-gray-400 col-span-full">No products found</p>
                 )}
             </div>
-
-            {/* paginations */}
-            <Pagination>
-                <PaginationContent>
-                    <PaginationItem>
-                        <PaginationPrevious href="#" />
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationLink href="#">1</PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationEllipsis />
-                    </PaginationItem>
-                    <PaginationItem>
-                        <PaginationNext href="#" />
-                    </PaginationItem>
-                </PaginationContent>
-            </Pagination>
 
         </div>
     );
