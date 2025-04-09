@@ -35,7 +35,7 @@ const AllCars = () => {
 
     return (
         <div className="container mx-auto px-4">
-            <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white text-center mb-8">All Cars</h1>
+            <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white text-center mb-8 mt-5 lg:mt-0">All Cars</h1>
             <div className="bg-white dark:bg-gray-900 rounded-lg">
                 <Form {...form}>
                     <form
