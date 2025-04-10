@@ -1,6 +1,6 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router"
+import { Link, useLocation } from "react-router"
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -15,9 +15,11 @@ import useAuth from "@/hooks/useAuth";
 import { useNavigate } from "react-router";
 
 const Login = () => {
-
-  const navigate=useNavigate();
-  const { login } = useAuth();
+  const location = useLocation()
+  const navigate = useNavigate()
+  const forms = location?.state?.from.pathname || '/'
+  
+  const { login ,signInWithGoogle,} = useAuth();
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -29,7 +31,7 @@ const Login = () => {
 
     try {
       await login(email, password);
-      navigate("/");
+      navigate(forms, { replace: true })
       toast.success("Login successful");
       setError(null); // Reset error state on success
     } catch (error) {
@@ -37,6 +39,16 @@ const Login = () => {
       setError(error.message);
     }
   };
+  const handlegoogle =async()=>{
+    try {
+        await signInWithGoogle()
+        toast.success("login successful");
+        navigate(forms, { replace: true })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 
   return (
     <div className="flex min-h-screen w-full items-center justify-center p-6 md:p-10">
@@ -64,12 +76,12 @@ const Login = () => {
                 <div className="grid gap-3">
                   <div className="flex items-center">
                     <Label htmlFor="password">Password</Label>
-                    <a
-                      href="#"
+                    <Link
+                      to={"/forget"}
                       className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                    >
-                      Forgot your password?
-                    </a>
+                    > Forgot your password? 
+                      
+                    </Link>
                   </div>
                   <Input
                     id="password"
@@ -83,9 +95,10 @@ const Login = () => {
                   <Button type="submit" className="w-full">
                     Login
                   </Button>
-                  <Button variant="outline" className="w-full">
+                  <button onClick={handlegoogle}>  <Button variant="outline" className="w-full">
                     Login with Google
-                  </Button>
+                  </Button></button>
+                 
                 </div>
               </div>
               <div className="mt-4 text-center text-sm">
