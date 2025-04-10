@@ -6,11 +6,21 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+ 
+
 
 node_modules
 dist
 dist-ssr
 *.local
+components.json
+eslint.config.js
+jsconfig.json
+package-lock.json
+package.json
+pnpm-lock.yaml
+vite.config.js
+
 
 # Editor directories and files
 .vscode/*
@@ -22,3 +32,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.vercel

@@ -1,8 +1,30 @@
 
+import { FeaturedCar } from "@/component/featured/featuredCar";
+import Categories from "../../component/categories/Categories";
+import Feedback from "../../component/feedback/Feedback";
+import Slider from "../../component/slider/Slider";
+import StatsCar from "../../component/stats/StatsCar";
+import TopThreeCars from "@/component/topThreeCars/TopThreeCars";
+
+
+
+
 const Home = () => {
+
+
+
     return (
         <div>
-            <h1 className="text-2xl text-red-500">home page </h1>
+
+            <Slider></Slider>
+            <StatsCar></StatsCar>
+            <Categories></Categories>
+            <FeaturedCar/>
+            <TopThreeCars></TopThreeCars>
+            <Feedback></Feedback>
+            
+
+           
         </div>
     );
 };

@@ -1,36 +1,73 @@
 
-import Lottie from 'lottie-react';
-import lottieAnimation from "../assets/lottieAnimation/registerLottie.json"
 import { useState } from "react";
 import { Link } from "react-router";
 import { FilePond } from 'react-filepond';
 import 'filepond/dist/filepond.min.css';
+import useAuth from '@/hooks/useAuth';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router';
+import uploadImage from "@/hooks/uploadImage";
+import useAxiosPublic from "@/hooks/useAxiosPublic";
 
 const Register = () => {
+    const{ registerUser, signInWithGoogle, updateUserProfile, setUser}=useAuth()
+    const navigate=useNavigate()
     const [error, setError] = useState(null)
     const [files, setFiles] = useState([]);
+    const axiosPublic=useAxiosPublic()
+
+  
+
 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const form = e.target
-        const formData = new FormData(form)
+        const form = e.target;
+        const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
-        data.file=files[0].file
-        const { email, password, photo, name } = data
-
-       
-
-        if (!passwordRegex.test(password)) {
-
-            return setError("Password must have at least one uppercase letter, one lowercase letter, and be at least 6 characters long.")
+    
+        if (files.length === 0) {
+            return setError("Please upload an image.");
         }
-
-            //   rest of the code will be here
-
-    }
+    
+        data.file = files[0].file;
+    
+        try {
+            const imgUrl = await uploadImage(data.file); 
+            data.photoURL = imgUrl; 
+           
+            const { email, password } = data;
+    
+            if (!passwordRegex.test(password)) {
+                return setError("Password must have at least one uppercase letter, one lowercase letter, and be at least 6 characters long.");
+            }
+    
+            await registerUser(email, password);
+            await updateUserProfile(data.name, data.photoURL)
+            const userInfo = {
+                name: data.name,
+                email: data.email,
+                photoURL: data.photoURL
+            }
+             const res = await axiosPublic.post(`/api/auth/login`, userInfo,{ withCredentials: true })
+             setUser(res?.data?.data)
+            toast.success("Register successful");
+            navigate("/");
+        } catch (error) {
+            toast.error(error.message);
+        }
+    };
    
+    const handlegoogle =async()=>{
+        try {
+            await signInWithGoogle()
+            toast.success("login successful");
+            navigate("/");
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
    
     return (
@@ -41,7 +78,8 @@ const Register = () => {
 
                 {/* register lottieAnimation */}
                 <div className='hidden md:block min-w-80 max-w-md'>
-                    <Lottie animationData={lottieAnimation} loop={false} />
+                    {/* <Lottie animationData={lottieAnimation} loop={false} /> */}
+                    <img className='object-cover rounded-2xl' src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y2FyfGVufDB8fDB8fHww" alt="image" />
                 </div>
 
 
@@ -87,12 +125,12 @@ const Register = () => {
 
 
                         <div className="form-control w-full mx-auto mt-2">
-                            <button type="submit" className="btn bg-primaryColor text-white w-full">Register</button>
+                            <button type="submit" className="btn  w-full">Register</button>
                         </div>
                         <p className="text-center font-semibold my-0.5 text-sm ">OR</p>
                     </form>
                     <div className="w-64 md:w-72 mx-auto mb-3">
-                        <button className="btn bg-primaryColor text-white w-full">Continue with Google</button>
+                        <button onClick={handlegoogle} className="btn   w-full">Continue with Google</button>
                     </div>
                     <p className="text-center mb-4 ">Already have an account? <Link to="/login" className="text-[#EA1A66] font-bold underline">Login</Link></p>
 
