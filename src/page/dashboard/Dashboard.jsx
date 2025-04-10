@@ -5,7 +5,8 @@ import OwnerDashboard from './OwnerDashboard';
 import UserDashboard from './UserDashboard';
 
 const Dashboard = () => {
-  const {user, role} = useAuth();
+  // const {user, role} = useAuth();
+  const role = 'admin'
 
     return (
         <div>

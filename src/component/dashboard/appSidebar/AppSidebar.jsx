@@ -158,10 +158,7 @@ const data = {
           title: "All My Booked",
           url: "/dashboard/all_my_booked",
         },
-        {
-          title: "All User Booked",
-          url: "/dashboard/all_user_booked",
-        },
+       
       
       ],
     },
@@ -174,10 +171,7 @@ const data = {
           title: "All My Payment",
           url: "/dashboard/all_my_payment",
         },
-        {
-          title: "All User Payment",
-          url: "/dashboard/all_user_payment",
-        },
+      
       
       ],
     },
@@ -203,6 +197,7 @@ const data = {
 }
 const AppSidebar = ({ ...props }) => {
   const {user, role} = useAuth();
+
   
     return (
         <Sidebar collapsible="icon" {...props}>

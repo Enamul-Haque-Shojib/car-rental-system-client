@@ -3,6 +3,7 @@ import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/c
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import uploadImage from '@/hooks/uploadImage';
+import useAuth from '@/hooks/useAuth';
 import { useGetOneUserQuery, useUpdateUserMutation } from '@/redux/features/user/userApi';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useEffect } from 'react';
@@ -18,7 +19,7 @@ const formSchema = z.object({
      
   })
 const UpdateProfileModal = ({user}) => {
-  
+  const {updateUserProfile} = useAuth();
   const [imagePreview, setImagePreview] = useState(null);
   // const {data: userData ,isLoading} = useGetOneUserQuery(id); 
 const [updateUser, {isLoading}] = useUpdateUserMutation(undefined);
@@ -59,13 +60,17 @@ const [updateUser, {isLoading}] = useUpdateUserMutation(undefined);
           }
       
             data.photoURL = userImg;
+
+            console.log(data.name, userImg)
       
           try {
-              const res = await updateUser({ id: user?._id, data }).unwrap();
-              console.log(res)
+              await updateUserProfile(data.name, userImg);
+        
+              await updateUser({ id: user?._id, data }).unwrap();
+        
               form.reset();
             
-              toast.success(res.message);
+              // toast.success(res.message);
           } catch (error) {
               toast.error('Could not be updated the profile')
               console.error('Error submitting form:', error);
