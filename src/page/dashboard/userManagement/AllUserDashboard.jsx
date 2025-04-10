@@ -1,6 +1,7 @@
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useGetAllUsersQuery } from '@/redux/features/user/userApi';
+import { User } from 'lucide-react';
 import React from 'react';
 
 const AllUserDashboard = () => {
@@ -21,7 +22,7 @@ const AllUserDashboard = () => {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {usersData?.data?.map(({_id, photoURL, name, email, role}) => (
+                    {usersData?.data?.result?.map(({_id, photoURL, name, email, role}) => (
                       <TableRow key={_id}>
                         <TableCell className="">
                         {/* <Avatar>
@@ -30,7 +31,7 @@ const AllUserDashboard = () => {
             </Avatar> */}
             <AspectRatio ratio={16 / 9} className="bg-muted">
               <img
-                src={photoURL}
+                src={photoURL || 'https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg'}
                 alt="Photo by Drew Beamer"
                 fill
                 className="h-full w-full rounded-md object-cover"

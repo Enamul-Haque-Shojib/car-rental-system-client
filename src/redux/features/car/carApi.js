@@ -24,6 +24,13 @@ const carApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["cars"],
         }),
+        getAllRelatedQueryCars: builder.mutation({
+            query: (slug) => ({
+                url: slug=`/cars/query?slugType=${slug}`, 
+                method: 'POST',
+            }),
+            invalidatesTags: ["cars"],
+        }),
     
         getOneCar: builder.query({
             query: (id) => ({
@@ -36,4 +43,4 @@ const carApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useGetAllCarsQuery, useGetOneCarQuery, useGetAllSearchQueryCarsMutation, useGetAllFilterQueryCarsMutation } = carApi;
+export const { useGetAllCarsQuery, useGetOneCarQuery, useGetAllSearchQueryCarsMutation, useGetAllFilterQueryCarsMutation, useGetAllRelatedQueryCarsMutation } = carApi;

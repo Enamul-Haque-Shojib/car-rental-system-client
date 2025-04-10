@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import {CardElement, useElements, useStripe} from '@stripe/react-stripe-js';
 import './CheckoutForm.css';
-import { useCreatePaymentMutation, useDeleteBookMutation } from '@/redux/features/booking/bookingApi';
+import { useCompletedBookMutation, useCreatePaymentMutation } from '@/redux/features/booking/bookingApi';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router';
 import useAuth from '@/hooks/useAuth';
@@ -22,7 +22,7 @@ const CheckoutForm = ({myBookingData}) => {
     const {_id, ownerId, userId, carId, pickUpLocation, dropOffLocation, pickUpDate, dropOffDate, totalCost, status} = myBookingData;
   
     const [addPayment, {isLoading}] = useAddPaymentMutation(undefined);
-    const [deleteBook] = useDeleteBookMutation(undefined);
+    const [completedBook] = useCompletedBookMutation(undefined);
     
     useEffect(() => {
         const fetchPayment = async()=>{
@@ -39,14 +39,9 @@ const CheckoutForm = ({myBookingData}) => {
       event.preventDefault();
   
       if (!stripe || !elements) {
-        // Stripe.js has not loaded yet. Make sure to disable
-        // form submission until Stripe.js has loaded.
         return;
       }
   
-      // Get a reference to a mounted CardElement. Elements knows how
-      // to find your CardElement because there can only ever be one of
-      // each type of element.
       const card = elements.getElement(CardElement);
   
       if (card == null) {
@@ -89,12 +84,13 @@ const CheckoutForm = ({myBookingData}) => {
       if (paymentIntent.status === 'succeeded') {
         try {
           // Save data in db
+          await completedBook(_id).unwrap();
           const res = await addPayment({
             ...myBookingData,
             transactionId: paymentIntent?.id,
           }).unwrap();
           console.log(res)
-          await deleteBook(_id).unwrap();
+          
       
           toast.success('Payment Successful!')
           

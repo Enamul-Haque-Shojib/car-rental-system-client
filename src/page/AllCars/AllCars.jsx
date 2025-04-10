@@ -72,7 +72,7 @@ const [getAllSearchQueryCars,{isLoading}] = useGetAllSearchQueryCarsMutation();
                 {cars?.length > 0 ? (
                     cars?.map((car) => <CarCard key={car._id} car={car} />)
                 ) : (
-                    <p className="text-center text-gray-500 dark:text-gray-400 col-span-full">No products found</p>
+                    <p className="text-center text-gray-500 dark:text-gray-400 col-span-full">No cars found</p>
                 )}
             </div>
         </div>

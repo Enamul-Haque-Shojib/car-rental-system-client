@@ -1,6 +1,7 @@
 import CarReviews from '@/component/carReviews/CarReviews';
 import ReviewForm from '@/component/carReviews/reviewForm';
 import BookModal from '@/component/dashboard/modal/BookModal';
+import RelatedCar from '@/component/relatedCar/RelatedCar';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
@@ -75,7 +76,7 @@ const DetailsCar = () => {
         </div>
         <div className="p-6 lg:w-1/2 flex flex-col justify-between">
    
-            <CardTitle className="text-3xl font-bold text-gray-900 dark:text-white flex justify-between items-center">{oneCarData?.data?.registrationNumber} <p><span className="font-semibold"></span><span className={!oneCarData?.data?.availability ?'text-red-600' : 'text-green-600'}>{oneCarData?.data?.availability ? 'Available' : 'Booked'}</span></p></CardTitle>
+            <CardTitle className="text-3xl font-bold text-gray-900 dark:text-white flex justify-between items-center">{oneCarData?.data?.registrationNumber} <p><span className="font-semibold"></span><span className={!oneCarData?.data?.status==='not_rent' ? 'text-red-600' : 'text-green-600'}>{oneCarData?.data?.status==='not_rent' ? 'Available' : 'Booked'}</span></p></CardTitle>
             <CardDescription className=" text-gray-600 dark:text-gray-400">{oneCarData?.data?.description}</CardDescription>
             <Separator></Separator>
           <CardContent className="text-gray-800 dark:text-gray-300">
@@ -112,7 +113,7 @@ const DetailsCar = () => {
             {/* {user && user?._id !== userId?._id && ( */}
               <Dialog>
             <DialogTrigger asChild>
-            <Button disabled={oneCarData?.data?.availability=== false} variant="default" size="lg" 
+            <Button disabled={oneCarData?.data?.status=== 'rent'} variant="default" size="lg" 
                className="px-6 py-2 text-lg">
                 Book Now
               </Button>
@@ -127,11 +128,15 @@ const DetailsCar = () => {
 
     </div>
     <div className='container mx-auto px-4 my-12'>
+      <RelatedCar slugType={oneCarData?.data?.slugType}></RelatedCar>
+    </div>
+    <div className='container mx-auto px-4 my-12'>
       <CarReviews carId={id}></CarReviews>
     </div>
     <div className='container mx-auto px-4 my-12'>
       <ReviewForm carId={id}></ReviewForm>
     </div>
+    
        </div>
   
     );

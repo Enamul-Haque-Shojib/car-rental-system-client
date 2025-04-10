@@ -34,6 +34,7 @@ import NavUser from "./NavUser";
 import { ChevronsUpDown, Plus } from "lucide-react"
 import { Link } from "react-router";
 import NavProject from "./NavProject";
+import useAuth from "@/hooks/useAuth";
 
 // This is sample data.
 const data = {
@@ -43,7 +44,49 @@ const data = {
     avatar: "/avatars/shadcn.jpg",
   },
   
-  navMain: [
+  navAdmin: [
+    {
+      title: "Car Management",
+      url: "",
+      icon: SquareTerminal,
+      isActive: true,
+      items: [
+        {
+          title: "Add Car",
+          url: "/dashboard/add_car",
+        },
+        {
+          title: "All Cars",
+          url: "/dashboard/all_cars",
+        },
+       
+      ],
+    },
+  
+    {
+      title: "User Management",
+      url: "#",
+      icon: BookOpen,
+      items: [
+        {
+          title: "All Users",
+          url: "/dashboard/all_users",
+        },
+      ],
+    },
+    {
+      title: "Profile Management",
+      url: "#",
+      icon: Settings,
+      items: [
+        {
+          title: "Profile",
+          url: "/dashboard/profile",
+        },
+      ],
+    },
+  ],
+  navOwner: [
     {
       title: "Car Management",
       url: "",
@@ -94,14 +137,48 @@ const data = {
       ],
     },
     {
-      title: "User Management",
+      title: "Profile Management",
       url: "#",
-      icon: BookOpen,
+      icon: Settings,
       items: [
         {
-          title: "All Users",
-          url: "/dashboard/all_users",
+          title: "Profile",
+          url: "/dashboard/profile",
         },
+      ],
+    },
+  ],
+  navUser: [
+    {
+      title: "Booking Management",
+      url: "#",
+      icon: Bot,
+      items: [
+        {
+          title: "All My Booked",
+          url: "/dashboard/all_my_booked",
+        },
+        {
+          title: "All User Booked",
+          url: "/dashboard/all_user_booked",
+        },
+      
+      ],
+    },
+    {
+      title: "Payment Management",
+      url: "#",
+      icon: Bot,
+      items: [
+        {
+          title: "All My Payment",
+          url: "/dashboard/all_my_payment",
+        },
+        {
+          title: "All User Payment",
+          url: "/dashboard/all_user_payment",
+        },
+      
       ],
     },
     {
@@ -125,6 +202,8 @@ const data = {
   ],
 }
 const AppSidebar = ({ ...props }) => {
+  const {user, role} = useAuth();
+  
     return (
         <Sidebar collapsible="icon" {...props}>
           <SidebarHeader>
@@ -153,11 +232,20 @@ const AppSidebar = ({ ...props }) => {
           </SidebarHeader>
           <SidebarContent>
              <NavProject projects={data.projects} />
-            <NavMain items={data.navMain} />
+             {
+              role==='admin' && <NavMain items={data.navAdmin} />
+             }
+             {
+              role==='owner' && <NavMain items={data.navOwner} />
+             }
+             {
+              role==='user' && <NavMain items={data.navUser} />
+             }
+            
            
           </SidebarContent>
           <SidebarFooter>
-            <NavUser user={data.user} />
+            <NavUser />
           </SidebarFooter>
           <SidebarRail />
         </Sidebar>
