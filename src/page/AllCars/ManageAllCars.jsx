@@ -1,6 +1,6 @@
 
 import useAuth from '@/hooks/useAuth';
-import { useGetAllCarsQuery, useGetAllFilterQueryCarsMutation } from '@/redux/features/car/carApi';
+import { useGetAllCarsQuery, useGetAllFilterQueryCarsMutation, useGetAllPageQueryCarsMutation } from '@/redux/features/car/carApi';
 import React, { useEffect } from 'react';
 import AllCars from './AllCars';
 import { Loader } from 'lucide-react';
@@ -26,6 +26,8 @@ const ManageAllCars = () => {
   const navigate = useNavigate();
   // const { data: carsData, isLoading } = useGetAllCarsQuery();
   const [getAllFilterQueryCars, { isLoading }] = useGetAllFilterQueryCarsMutation(undefined)
+  const [getAllPageQueryCars] = useGetAllPageQueryCarsMutation(undefined)
+
 
   const pages = [...Array(paginationData?.totalPage).keys()];
 
@@ -33,12 +35,15 @@ const ManageAllCars = () => {
   useEffect(() => {
     const getData = async () => {
       const res = await getAllFilterQueryCars(slug).unwrap();
+
       setCars(res?.data?.result)
       setPaginationData(res?.data?.meta)
     }
 
     getData();
   }, [getAllFilterQueryCars, setCars, slug]);
+
+
 
   const handleCategories = async (slug) => {
     const res = await getAllFilterQueryCars(slug).unwrap();
@@ -53,7 +58,19 @@ const ManageAllCars = () => {
       </div>
     );
   }
-  // console.log(currentPage);
+
+  const handlePageQuery = async (page) => {
+    try {
+      const res = await getAllPageQueryCars(page).unwrap();
+      setCars(res?.data?.result)
+      setCurrentPage(page)
+
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
 
   return (
     <div className='container mx-auto px-4 my-12'>
@@ -64,21 +81,21 @@ const ManageAllCars = () => {
       {/* paginations */}
       <Pagination className="mt-6">
         <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious disabled={currentPage === 1} className={`${currentPage === 1 ? "text-gray-500 hover:text-gray-500" : ""}  `} />
+          <PaginationItem >
+            <PaginationPrevious onClick={() => handlePageQuery(currentPage-1)} disabled={currentPage === 1} className={`${currentPage === 1 ? "text-gray-500 hover:text-gray-500" : "cursor-pointer"}  `}/>
           </PaginationItem>
 
 
           {
             pages.map(page => (
-              <PaginationItem onClick={() => setCurrentPage(page+1)} className="cursor-pointer">
-                <PaginationLink >{page+1}</PaginationLink>
+              <PaginationItem onClick={() => handlePageQuery(page + 1)} className={`cursor-pointer ${currentPage === page+1 && "bg-gray-300" }`}>
+                <PaginationLink >{page + 1}</PaginationLink>
               </PaginationItem>
 
             ))
           }
           <PaginationItem>
-            <PaginationNext disabled={ `${currentPage === pages.length}`} className={`${currentPage === pages.length ? "text-gray-500" : ""} `} />
+            <PaginationNext onClick={() => handlePageQuery(currentPage+1)} disabled={`${currentPage === pages.length}`} className={` ${currentPage === pages.length ? "text-gray-500 hover:text-gray-500 " : "cursor-pointer"} `} />
           </PaginationItem>
         </PaginationContent>
       </Pagination>
