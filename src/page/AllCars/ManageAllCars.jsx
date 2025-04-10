@@ -78,7 +78,7 @@ const ManageAllCars = () => {
         <AllCategories handleCategories={handleCategories}></AllCategories>
         <AllCars></AllCars>
       </div>
-      {/* paginations */}
+      {/* added paginations feature */}
       <Pagination className="mt-6">
         <PaginationContent>
           <PaginationItem >
