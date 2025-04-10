@@ -34,6 +34,8 @@ import AllMyBooked from './page/dashboard/bookingManagement/AllMyBooked'
 import AllUserBooked from './page/dashboard/bookingManagement/AllUserBooked'
 import AllReviewDashboard from './page/dashboard/carManagement/AllReviewDashboard'
 import ManageAllCars from './page/AllCars/ManageAllCars'
+import AllMyPayment from './page/dashboard/paymentManagement/AllMyPayment'
+import AllUserPayment from './page/dashboard/paymentManagement/AllUserPayment'
 
 
 
@@ -52,9 +54,9 @@ createRoot(document.getElementById('root')).render(
             <Route path='login' element={<Login />} />
             <Route path='about' element={<About></About>} />
             <Route path='allCars/:slug' element={<ManageAllCars />} />
-            <Route path='adminChat' element={<AdminChat />} />
             <Route path='addCar' element={<AddCar />} />
             <Route path='detailsCar/:id' element={<DetailsCar></DetailsCar>} />
+            <Route path='adminChat' element={<AdminChat />} />
 
           </Route>
           <Route path="/dashboard" element={<DashboardLayout />}>
@@ -64,6 +66,8 @@ createRoot(document.getElementById('root')).render(
           <Route path='all_cars' element={<AllCarsDashboard></AllCarsDashboard>} />
           <Route path='all_my_booked' element={<AllMyBooked></AllMyBooked>} />
           <Route path='all_user_booked' element={<AllUserBooked></AllUserBooked>} />
+          <Route path='all_my_payment' element={<AllMyPayment></AllMyPayment>} />
+          <Route path='all_user_payment' element={<AllUserPayment></AllUserPayment>} />
           <Route path='all_users' element={<AllUserDashboard></AllUserDashboard>} />
           <Route path='profile' element={<Profile></Profile>} />
           <Route index element={<Dashboard />} />
