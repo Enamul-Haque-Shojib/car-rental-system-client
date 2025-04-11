@@ -18,9 +18,9 @@ const CustomerChat = ({ userId }) => {
   const sendMessage = () => {
     if (message.trim()) {
       push(ref(db, "messages"), {
-        userId: userId,
-        text: message,
-        sender: "user",
+        senderId:userId,
+        receiverId:"admin",
+        text:message,
         timestamp: Date.now(),
       });
       setMessage("");
@@ -30,11 +30,11 @@ const CustomerChat = ({ userId }) => {
   return (
     <div className="fixed bottom-20 right-5 w-80 bg-white border shadow-lg rounded-lg p-4 z-1">
       <div className="h-64 overflow-y-auto">
-        {messages.map((msg, index) => (
+        {messages.filter(msg => (msg.senderId === userId && msg.receiverId === 'admin') || (msg.senderId === 'admin' && msg.receiverId === userId)).map((msg, index) => (
           <p
             key={index}
             className={`p-2 my-1 ${
-              msg.sender === "admin" ? "bg-blue-100 text-right" : "bg-gray-100"
+              msg?.senderId === "admin" ? "bg-gray-100 " : "bg-blue-100 text-right"
             } rounded`}
           >
             {msg.text}
