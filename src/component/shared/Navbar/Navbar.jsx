@@ -53,13 +53,13 @@ const handlelogout=()=>{
                 About
               </NavLink>
               {user && <>
-                <NavLink
+                {/* <NavLink
                 to="/addCar"
                 className="transition duration-300 hover:text-yellow-300"
                 activeclassName="text-yellow-300"
               >
                 Add Car
-              </NavLink>
+              </NavLink> */}
               <NavLink
                 to="/dashboard"
                 className="transition duration-300 hover:text-yellow-300"
@@ -76,8 +76,10 @@ const handlelogout=()=>{
                  
                  <div className="relative">
                    <img
-                     src={user?.photoURL||"https://via.placeholder.com/40"}
+                     referrerPolicy='no-referrer'
+                     src={user?.photoURL} 
                      alt="User"
+                    
                      onClick={toggleDropdown}
                      className="w-10 h-10 rounded-full border-2 border-white cursor-pointer"
                    />

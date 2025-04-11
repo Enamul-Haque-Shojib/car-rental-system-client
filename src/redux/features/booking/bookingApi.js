@@ -35,6 +35,13 @@ const bookingApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["cars", 'bookings'],
         }),
+        completedBook: builder.mutation({
+            query: (id) => ({
+                url: `/bookings/book-completed/${id}`,
+                method: 'PATCH',
+            }),
+            invalidatesTags: ["cars", 'bookings'],
+        }),
       
         deleteBook: builder.mutation({
             query: (id) => ({
@@ -69,5 +76,5 @@ const bookingApi = baseApi.injectEndpoints({
     })
 })
 
-export const {useAddBookMutation, useUpdateBookMutation, useApprovedBookMutation, useDeleteBookMutation, useGetAllOwnerBookQuery, useGetAllUserBookQuery, useCanceledBookMutation, useCreatePaymentMutation} = bookingApi;
+export const {useAddBookMutation, useUpdateBookMutation, useApprovedBookMutation, useDeleteBookMutation, useGetAllOwnerBookQuery, useGetAllUserBookQuery, useCanceledBookMutation, useCreatePaymentMutation, useCompletedBookMutation} = bookingApi;
 

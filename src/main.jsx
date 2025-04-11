@@ -36,6 +36,9 @@ import AllReviewDashboard from './page/dashboard/carManagement/AllReviewDashboar
 import ManageAllCars from './page/AllCars/ManageAllCars'
 import AllMyPayment from './page/dashboard/paymentManagement/AllMyPayment'
 import AllUserPayment from './page/dashboard/paymentManagement/AllUserPayment'
+import PrivateRoute from './router/privateRoute'
+import ErrorPage from './component/shared/ErrorPage'
+import ForgetPassword from './component/Form/ForgetPassword'
 
 
 
@@ -48,16 +51,20 @@ createRoot(document.getElementById('root')).render(
 
      */} <BrowserRouter >
         <Routes>
-          <Route path="/" element={<MainLayout />}>
+          <Route path="/" element={<MainLayout />} >
             <Route index element={<Home />} />
             <Route path='register' element={<Register />} />
             <Route path='login' element={<Login />} />
             <Route path='about' element={<About></About>} />
             <Route path='allCars/:slug' element={<ManageAllCars />} />
-            <Route path='addCar' element={<AddCar />} />
+           
             <Route path='detailsCar/:id' element={<DetailsCar></DetailsCar>} />
             <Route path='adminChat' element={<AdminChat />} />
+            
+            <Route path='addCar' element={<AddCar />} />
+            <Route path='forget' element={<ForgetPassword />} />
 
+              
           </Route>
           <Route path="/dashboard" element={<DashboardLayout />}>
           <Route path='add_car' element={<AddCarrDashboard></AddCarrDashboard>} />

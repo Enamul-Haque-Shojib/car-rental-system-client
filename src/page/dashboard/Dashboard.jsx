@@ -1,17 +1,25 @@
+import useAuth from '@/hooks/useAuth';
 import React from 'react';
+import AdminDashboard from './AdminDashboard';
+import OwnerDashboard from './OwnerDashboard';
+import UserDashboard from './UserDashboard';
 
 const Dashboard = () => {
+  // const {user, role} = useAuth();
+  const role = 'admin'
+
     return (
         <div>
-          <h1>Dashboard</h1>
-            <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-        <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-          <div className="aspect-video rounded-xl bg-muted/50" />
-          <div className="aspect-video rounded-xl bg-muted/50" />
-          <div className="aspect-video rounded-xl bg-muted/50" />
-        </div>
-        <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
-      </div>
+
+      {
+        role === 'admin' && <AdminDashboard></AdminDashboard>
+      }
+      {
+        role === 'owner' && <OwnerDashboard></OwnerDashboard>
+      }
+      {
+        role === 'user' && <UserDashboard></UserDashboard>
+      }
         </div>
     );
 };

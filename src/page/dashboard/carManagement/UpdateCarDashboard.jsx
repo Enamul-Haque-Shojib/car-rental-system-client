@@ -109,7 +109,7 @@ const UpdateCarDashboard = () => {
                 pricePerDay: String(oneCarData.data.pricePerDay || ''),
                 location: oneCarData.data.location || '',
                 description: oneCarData.data.description || '',
-                availability: oneCarData.data.availability || false,
+                status: oneCarData.data.status || '',
                 features: {
                     airConditioner: oneCarData.data.features?.airConditioner || false,
                     gps: oneCarData.data.features?.gps || false,
@@ -139,6 +139,11 @@ const UpdateCarDashboard = () => {
         data.userId = user?._id;
         data.image = carImgUrl;
         data.slugType = formatSlug(data.type)
+        if(data.availability==true){
+            data.status='not_rent'
+        }else{
+            data.status='disable'
+        }
         // data.year = parseInt(data.year);
         // data.mileAge = parseInt(data.mileAge);
         // data.seats = parseInt(data.seats);

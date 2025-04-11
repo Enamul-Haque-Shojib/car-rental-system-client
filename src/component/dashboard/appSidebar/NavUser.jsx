@@ -32,7 +32,7 @@ import toast from 'react-hot-toast';
 
 const NavUser = () => {
   const {user, logout} = useAuth()
-  console.log('nnnnnnnn',user)
+  
     const { isMobile } = useSidebar()
 
     const handlelogout=()=>{

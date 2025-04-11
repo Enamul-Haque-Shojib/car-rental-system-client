@@ -58,7 +58,7 @@ const AllUserPayment = () => {
           <TableHead>Pick Date</TableHead>
           <TableHead>Drop Date</TableHead>
           <TableHead className="">Total Cost</TableHead>
-          <TableHead className="">Status</TableHead>
+       
           <TableHead className="">Transaction Id</TableHead>
           <TableHead className="">Action</TableHead>
         </TableRow>
@@ -95,7 +95,7 @@ const AllUserPayment = () => {
             <TableCell className="">{pickUpDate}</TableCell>
             <TableCell className="">{dropOffDate}</TableCell>
             <TableCell className="">${totalCost}</TableCell>
-            <TableCell className="">{status}</TableCell>
+     
             <TableCell className="">{transactionId}</TableCell>
             <TableCell className="flex justify-around items-center ">
                 {/* <button className='cursor-pointer bg-green-600 p-2 rounded-lg' onClick={()=>{handleApprovedBook(_id,carId)}}>Approved</button> */}
