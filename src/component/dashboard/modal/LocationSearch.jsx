@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const LocationSearch = () => {
+const LocationSearch = ({placeholder}) => {
     const [query, setQuery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const [selected, setSelected] = useState(false);
@@ -33,16 +33,16 @@ const LocationSearch = () => {
 
         const delayDebounce = setTimeout(() => {
             fetchSuggestions();
-        }, 500); 
+        }, 400); 
         return () => clearTimeout(delayDebounce);
     }, [query]);
 
     return (
-        <div className="w-full max-w-md mx-auto mt-10">
+        <div className="w-full max-w-md mx-auto ">
             <input
                 type="text"
                 className="w-full border p-2 rounded"
-                placeholder="Enter pickup location"
+                placeholder={placeholder}
                 value={query}
                 onChange={(e) => {
                     setQuery(e.target.value)
