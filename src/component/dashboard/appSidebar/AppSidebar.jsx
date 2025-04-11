@@ -8,6 +8,7 @@ import {
   Frame,
   GalleryVerticalEnd,
   Map,
+  MessageCircleMore,
   PieChart,
   Settings,
   Settings2,
@@ -109,17 +110,17 @@ const data = {
         },
       ],
     },
-    // {
-    //   title: "Chatting",
-    //   url: "#",
-    //   icon: Settings,
-    //   items: [
-    //     {
-    //       title: "Chat",
-    //       url: "/dashboard/adminchat",
-    //     },
-    //   ],
-    // },
+    {
+      title: "Chatting",
+      url: "#",
+      icon: MessageCircleMore,
+      items: [
+        {
+          title: "Chat",
+          url: "/dashboard/adminchat",
+        },
+      ],
+    },
   ],
   navOwner: [
     {

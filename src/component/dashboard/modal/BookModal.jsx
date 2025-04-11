@@ -34,13 +34,13 @@ import {
     PopoverContent,
     PopoverTrigger,
 } from "@/components/ui/popover"
-import LocationSearch from './LocationSearch';
+// import LocationSearch from './LocationSearch';
 
 
 
 const formSchema = z.object({
-    pickUpLocation: z.string().min(2),
-    dropOffLocation: z.string().min(2),
+    pickUpLocation: z.string(),
+    dropOffLocation: z.string(),
     // pickUpDate: z.date(),
     // dropOffDate: z.date()
     pickUpDate: z.string().min(1),  // Store as string
@@ -111,7 +111,7 @@ const BookModal = ({ carData }) => {
                                 <FormItem>
                                     <FormLabel>pickUpLocation</FormLabel>
                                     <FormControl>
-                                        <LocationSearch placeholder="Enter pickup location" />
+                                        {/* <LocationSearch placeholder="Enter pickup location" /> */}
                                     </FormControl>
 
                                     <FormMessage />
@@ -121,7 +121,7 @@ const BookModal = ({ carData }) => {
                                 <FormItem>
                                     <FormLabel>dropOffLocation</FormLabel>
                                     <FormControl>
-                                        <LocationSearch placeholder="Enter dropOff location"  />
+                                        {/* <LocationSearch placeholder="Enter dropOff location"  /> */}
                                     </FormControl>
 
                                     <FormMessage />
