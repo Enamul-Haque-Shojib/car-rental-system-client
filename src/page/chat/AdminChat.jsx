@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import {db,ref,push,onValue} from "@/firebase/firebase.config";
 
+
 const AdminChat = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -18,9 +19,9 @@ const AdminChat = () => {
   const sendMessage = () => {
     if (message.trim() && selectedUser) {
       push(ref(db, "messages"), {
-        userId: selectedUser,
+        receiverId: selectedUser,
         text: message,
-        sender: "admin",
+        senderId: "admin",
         timestamp: Date.now(),
       });
       setMessage("");
@@ -33,25 +34,29 @@ const AdminChat = () => {
       <div className="flex">
         <div className="w-1/3 border-r p-2">
           <h3 className="font-semibold">Users</h3>
-          {[...new Set(messages.map((msg) => msg.userId))].map((user) => (
-            <button
-              key={user}
-              onClick={() => setSelectedUser(user)}
-              className="block p-2 border mt-1 w-full text-left"
-            >
-              {user}
-            </button>
-          ))}
+          {[...new Set(messages.filter(msg => msg.senderId !== "admin").map((msg) => msg.senderId ))].map((user) => {
+            // console.log(user);
+           return (
+            
+              <button
+                key={user}
+                onClick={() => setSelectedUser(user)}
+                className="block p-2 border mt-1 w-full text-left"
+              >
+                {user}
+              </button>
+            )
+          })}
         </div>
         <div className="w-2/3 p-2">
           <div className="h-64 overflow-y-auto border p-2">
-            {messages
-              .filter((msg) => msg.userId === selectedUser)
+            {selectedUser && messages
+              .filter((msg) => (msg.senderId === selectedUser && msg.receiverId === 'admin') || (msg.senderId === 'admin' && msg.receiverId === selectedUser))
               .map((msg, index) => (
                 <p
                   key={index}
                   className={`p-2 my-1 ${
-                    msg.sender === "admin"
+                    msg.senderId === "admin"
                       ? "bg-blue-100 text-right"
                       : "bg-gray-100"
                   } rounded`}

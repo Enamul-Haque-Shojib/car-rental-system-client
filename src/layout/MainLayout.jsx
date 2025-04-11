@@ -12,9 +12,11 @@ const MainLayout = () => {
             <Navbar></Navbar>
             <main className="min-h-screen">
                 <Outlet></Outlet>
-                
-             {/* {chatOpen && <CustomerChat userId="user123" />}
-            
+
+                {/* chatting window */}
+             {chatOpen && <CustomerChat  />}
+            {/* chat icon */}
+ 
             <button
                 className="fixed bottom-8 right-6 z-10 bg-blue-500 text-white p-3 rounded-full shadow-lg"
                 onClick={() => setChatOpen(!chatOpen)}

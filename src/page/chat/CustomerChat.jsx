@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
-import {db,ref,push,onValue} from "@/firebase/firebase.config";
+import { db, ref, push, onValue } from "@/firebase/firebase.config";
+import useAuth from "@/hooks/useAuth";
 
-const CustomerChat = ({ userId }) => {
+
+const CustomerChat = () => {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const { user } = useAuth()
+  const userId = user ? `user${user._id.slice(-6)}` : 'GuestUser'
 
   useEffect(() => {
     const messagesRef = ref(db, "messages");
@@ -18,9 +22,9 @@ const CustomerChat = ({ userId }) => {
   const sendMessage = () => {
     if (message.trim()) {
       push(ref(db, "messages"), {
-        userId: userId,
+        senderId: userId,
+        receiverId: "admin",
         text: message,
-        sender: "user",
         timestamp: Date.now(),
       });
       setMessage("");
@@ -30,12 +34,11 @@ const CustomerChat = ({ userId }) => {
   return (
     <div className="fixed bottom-20 right-5 w-80 bg-white border shadow-lg rounded-lg p-4 z-1">
       <div className="h-64 overflow-y-auto">
-        {messages.map((msg, index) => (
+        {messages.filter(msg => (msg.senderId === userId && msg.receiverId === 'admin') || (msg.senderId === 'admin' && msg.receiverId === userId)).map((msg, index) => (
           <p
             key={index}
-            className={`p-2 my-1 ${
-              msg.sender === "admin" ? "bg-blue-100 text-right" : "bg-gray-100"
-            } rounded`}
+            className={`p-2 my-1 ${msg?.senderId === "admin" ? "bg-gray-100 " : "bg-blue-100 text-right"
+              } rounded`}
           >
             {msg.text}
           </p>
