@@ -37,7 +37,7 @@ const CustomerChat = () => {
         {messages.filter(msg => (msg.senderId === userId && msg.receiverId === 'admin') || (msg.senderId === 'admin' && msg.receiverId === userId)).map((msg, index) => (
           <p
             key={index}
-            className={`p-2 my-1 ${msg?.senderId === "admin" ? "bg-gray-100 " : "bg-blue-100 text-right"
+            className={`p-2 my-1 ${msg?.senderId === "admin" ? "bg-gray-100 text-right" : "bg-blue-100 "
               } rounded`}
           >
             {msg.text}
