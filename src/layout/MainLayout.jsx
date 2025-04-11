@@ -13,7 +13,7 @@ const MainLayout = () => {
             <main className="min-h-screen">
                 <Outlet></Outlet>
                 {/* chatting window */}
-             {chatOpen && <CustomerChat userId="user62" />}
+             {chatOpen && <CustomerChat  />}
             {/* chat icon */}
             <button
                 className="fixed bottom-8 right-6 z-10 bg-blue-500 text-white p-3 rounded-full shadow-lg"
