@@ -34,6 +34,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import LocationSearch from './LocationSearch';
 
 
 
@@ -112,6 +113,7 @@ const BookModal = ({carData}) => {
                                 <FormControl>
                                     <Input placeholder="Enter brand name" required {...field} />
                                 </FormControl>
+                                
                                 <FormMessage />
                             </FormItem>
                         )} />
@@ -121,6 +123,7 @@ const BookModal = ({carData}) => {
                                 <FormControl>
                                     <Input placeholder="Enter model name" required {...field} />
                                 </FormControl>
+                                <LocationSearch/>
                                 <FormMessage />
                             </FormItem>
                         )} />
