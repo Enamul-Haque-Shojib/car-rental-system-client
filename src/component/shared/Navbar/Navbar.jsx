@@ -89,6 +89,7 @@ const handlelogout=()=>{
                        <div className="px-4 py-2">
                          
                          <p className="text-sm text-gray-500">{user?.name}</p>
+                         <p className="text-sm text-gray-500">{user?.role}</p>
                        </div>
                        <hr />
                      

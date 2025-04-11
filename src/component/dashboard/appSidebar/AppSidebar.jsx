@@ -62,6 +62,30 @@ const data = {
        
       ],
     },
+    {
+      title: "Booking Management",
+      url: "#",
+      icon: Bot,
+      items: [
+        {
+          title: "All User Booked",
+          url: "/dashboard/all_user_booked",
+        },
+      
+      ],
+    },
+    {
+      title: "Payment Management",
+      url: "#",
+      icon: Bot,
+      items: [
+        {
+          title: "All User Payment",
+          url: "/dashboard/all_user_payment",
+        },
+      
+      ],
+    },
   
     {
       title: "User Management",
@@ -85,6 +109,17 @@ const data = {
         },
       ],
     },
+    // {
+    //   title: "Chatting",
+    //   url: "#",
+    //   icon: Settings,
+    //   items: [
+    //     {
+    //       title: "Chat",
+    //       url: "/dashboard/adminchat",
+    //     },
+    //   ],
+    // },
   ],
   navOwner: [
     {
