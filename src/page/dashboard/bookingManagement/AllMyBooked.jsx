@@ -97,16 +97,23 @@ const AllMyBooked = () => {
                          <TableCell className="flex justify-around items-center ">
                          <Dialog>
                           <DialogTrigger asChild>
-                              {/* <Button variant="outline">Edit Profile</Button> */}
-                              <button className='cursor-pointer'><Star></Star></button>
+                             {
+                              status==='Completed' && <button className='cursor-pointer'><Star></Star></button>
+                             }
+                              
                           </DialogTrigger>
                               <AddReviewModal carId={carId}></AddReviewModal>
                           </Dialog>
-                            <button className='cursor-pointer bg-red-600 p-2 rounded-lg' onClick={()=>{handleCancelBook(_id)}}>Cancel</button>
+                          {
+                            status==='Pending' && <button className='cursor-pointer bg-red-600 p-2 rounded-lg' onClick={()=>{handleCancelBook(_id)}}>Cancel</button>
+                          }
+                            
                             <Dialog>
                           <DialogTrigger asChild>
-                              {/* <Button variant="outline">Edit Profile</Button> */}
-                              <button className='cursor-pointer bg-green-500 p-2 rounded-lg'>Pay</button>
+                              {
+                                status==='Approved' && <button className='cursor-pointer bg-green-500 p-2 rounded-lg'>Pay</button>
+                              }
+                              
                           </DialogTrigger>
                               <PayModal myBookingData={{_id, ownerId, userId, carId, pickUpLocation, dropOffLocation, pickUpDate, dropOffDate, totalCost, status}}></PayModal>
                           </Dialog>

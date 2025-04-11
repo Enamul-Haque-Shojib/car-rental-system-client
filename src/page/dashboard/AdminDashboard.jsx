@@ -1,7 +1,8 @@
 import { Avatar } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
 import useAuth from '@/hooks/useAuth';
-import { useGetPieChartBookingsQuery, useGetPieChartCarsQuery, useGetPieChartUsersQuery } from '@/redux/features/statistics/statisticsApi';
+import { useGetPieChartCarsQuery, useGetPieChartUsersQuery } from '@/redux/features/statistics/statisticsApi';
+import { Loader } from 'lucide-react';
 import React from 'react';
 import Chart from "react-apexcharts";
 
@@ -26,8 +27,12 @@ const AdminDashboard = () => {
     
           const pieChartUsersSeries = [usersData?.data?.admin, usersData?.data?.owner, usersData?.data?.user];
     
-          if(isLoading){
-            <p>Loading....</p>
+          if (isLoading) {
+            return (
+              <div className="flex justify-center items-center h-96">
+                <Loader className="animate-spin text-gray-400 w-10 h-10" />
+              </div>
+            );
           }
         return (
             <div className="p-6 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
@@ -45,19 +50,32 @@ const AdminDashboard = () => {
             </Card>
             
             
-            <Card className="col-span-2">
+            {
+              carsData?.data ? <>
+              
+              <Card className="col-span-1">
+      <CardContent>
+        <Chart options={pieChartUsersOptions} series={pieChartUsersSeries} type="pie" height={250} />
+      </CardContent>
+    </Card>
+
+    <Card className="col-span-2">
               <CardContent>
                 <Chart options={pieChartCarsOptions} series={pieChartCarSeries} type="pie" height={250} />
               </CardContent>
-            </Card>
-    
-            <Card className="col-span-1">
-              <CardContent>
-                <Chart options={pieChartUsersOptions} series={pieChartUsersSeries} type="pie" height={250} />
-              </CardContent>
-            </Card>
-    
+            </Card> 
+              
+              </> :
+             <div className="flex justify-center items-center h-96 col-span-1">
+             <Loader className="animate-spin text-gray-400 w-10 h-10" />
+           </div>
+            }
             
+    
+  
+           
+    
+         
              <div className="border col-span-1 md:col-span-2 lg:col-span-3 flex justify-around p-4">
               <div className="text-center">
                 <h4 className="text-xl font-bold">{usersData?.data?.admin}</h4>
@@ -70,6 +88,23 @@ const AdminDashboard = () => {
               <div className="text-center">
                 <h4 className="text-xl font-bold">{usersData?.data?.user}</h4>
                 <p className="text-gray-500">User</p>
+              </div>
+             
+            </div>
+
+            <h1>Cars</h1>
+             <div className="border col-span-1 md:col-span-2 lg:col-span-3 flex justify-around p-4">
+              <div className="text-center">
+                <h4 className="text-xl font-bold">{carsData?.data?.not_rent}</h4>
+                <p className="text-gray-500">Available</p>
+              </div>
+              <div className="text-center">
+                <h4 className="text-xl font-bold">{carsData?.data?.rent}</h4>
+                <p className="text-gray-500">Booked</p>
+              </div>
+              <div className="text-center">
+                <h4 className="text-xl font-bold">{carsData?.data?.disable}</h4>
+                <p className="text-gray-500">Disabled</p>
               </div>
              
             </div>

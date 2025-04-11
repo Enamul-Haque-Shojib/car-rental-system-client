@@ -70,7 +70,7 @@ const [updateUser, {isLoading}] = useUpdateUserMutation(undefined);
         
               form.reset();
             
-              // toast.success(res.message);
+              toast.success('Profile update successfully');
           } catch (error) {
               toast.error('Could not be updated the profile')
               console.error('Error submitting form:', error);

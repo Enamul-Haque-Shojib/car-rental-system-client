@@ -2,11 +2,14 @@ import { Avatar } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
 import useAuth from '@/hooks/useAuth';
 import { useGetPieChartBookingsQuery, useGetPieChartCarsQuery } from '@/redux/features/statistics/statisticsApi';
+import { Loader } from 'lucide-react';
 import React from 'react';
 import Chart from "react-apexcharts";
 
 const OwnerDashboard = () => {
     const {user} = useAuth();
+
+    console.log('hellooooooooooooooooooooooo')
 
 const {data: carsData, isLoading} = useGetPieChartCarsQuery(user?._id,{
     skip: !user?._id, 
@@ -29,8 +32,13 @@ const {data: bookingsData} = useGetPieChartBookingsQuery(user?._id,{
       const pieChartBookingsSeries = [bookingsData?.data?.Pending, bookingsData?.data?.Approved, bookingsData?.data?.Canceled, bookingsData?.data?.Completed];
 
       if(isLoading){
-        <p>Loading....</p>
+        return(
+        <div className="flex justify-center items-center h-96">
+        <Loader className="animate-spin text-gray-400 w-10 h-10" />
+      </div>)
       }
+
+
     return (
         <div className="p-6 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
     
@@ -47,7 +55,9 @@ const {data: bookingsData} = useGetPieChartBookingsQuery(user?._id,{
         </Card>
         
         
-        <Card className="col-span-2">
+        {
+          (carsData?.data ) && (bookingsData?.data)? <>
+          <Card className="col-span-2">
           <CardContent>
             <Chart options={pieChartCarsOptions} series={pieChartCarSeries} type="pie" height={250} />
           </CardContent>
@@ -58,8 +68,31 @@ const {data: bookingsData} = useGetPieChartBookingsQuery(user?._id,{
             <Chart options={pieChartBookingsOptions} series={pieChartBookingsSeries} type="pie" height={250} />
           </CardContent>
         </Card>
+          </>:
+   <div className="flex justify-center items-center h-96 col-span-1">
+   <Loader className="animate-spin text-gray-400 w-10 h-10" />
+ </div>
+
+        }
+        
 
         
+         <div className="border col-span-1 md:col-span-2 lg:col-span-3 flex justify-around p-4">
+          <div className="text-center">
+            <h4 className="text-xl font-bold">{carsData?.data?.not_rent}</h4>
+            <p className="text-gray-500">Available</p>
+          </div>
+          <div className="text-center">
+            <h4 className="text-xl font-bold">{carsData?.data?.rent}</h4>
+            <p className="text-gray-500">Booked</p>
+          </div>
+          <div className="text-center">
+            <h4 className="text-xl font-bold">{carsData?.data?.disable}</h4>
+            <p className="text-gray-500">Disabled</p>
+          </div>
+          
+        </div>
+
          <div className="border col-span-1 md:col-span-2 lg:col-span-3 flex justify-around p-4">
           <div className="text-center">
             <h4 className="text-xl font-bold">{bookingsData?.data?.Pending}</h4>
