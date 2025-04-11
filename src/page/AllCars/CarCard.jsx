@@ -31,7 +31,7 @@ const CarCard = ({ car }) => {
         mileAge,
         pricePerDay,
         location,
-        availability,
+        status,
         features,
         image,
         description,
@@ -50,9 +50,18 @@ const CarCard = ({ car }) => {
               className="h-full w-full object-cover rounded-md"
             />
           </AspectRatio>
-          <CardTitle className="text-lg font-semibold text-gray-800">
-            {brand}
-          </CardTitle>
+          <CardTitle className="text-lg font-bold text-gray-900 dark:text-white flex justify-between items-center">
+                        {brand} 
+                        <p>
+                        <span className="font-semibold"></span>
+                        <span className={status==='not_rent' ? 'text-green-600' : 'text-red-600'}>
+                          {
+                            status==='disable' ? 'Disabled' : status==='not_rent' ? 'Available' : 'Booked'
+                          }
+                        
+                        </span>
+                        </p>
+                        </CardTitle>
         </CardHeader>
         <CardContent className=" text-gray-600 text-sm ">
           <p><span className="font-semibold">Category:</span> {type}</p>

@@ -1,14 +1,30 @@
 import { Outlet } from "react-router";
 import Navbar from "../component/shared/Navbar/Navbar";
 import Footer from "../component/shared/Footer/Footer";
+// import CustomerChat from "@/page/chat/CustomerChat";
+// import { useState } from "react";
 
 const MainLayout = () => {
+    
+    // const [chatOpen, setChatOpen] = useState(false);
     return (
         <div>
             <Navbar></Navbar>
             <main className="min-h-screen">
                 <Outlet></Outlet>
+
+                {/* chatting window */}
+             {chatOpen && <CustomerChat  />}
+            {/* chat icon */}
+ 
+            <button
+                className="fixed bottom-8 right-6 z-10 bg-blue-500 text-white p-3 rounded-full shadow-lg"
+                onClick={() => setChatOpen(!chatOpen)}
+            >
+                💬
+            </button> */}
             </main>
+             
 
             <Footer></Footer>
         </div>

@@ -15,6 +15,7 @@ import About from './page/about/About'
 import { Toaster } from 'react-hot-toast'
 
 import AllCars from './page/AllCars/AllCars'
+import AdminChat from './page/chat/AdminChat'
 
 import AddCar from './page/addCar/AddCar';
 
@@ -33,6 +34,11 @@ import AllMyBooked from './page/dashboard/bookingManagement/AllMyBooked'
 import AllUserBooked from './page/dashboard/bookingManagement/AllUserBooked'
 import AllReviewDashboard from './page/dashboard/carManagement/AllReviewDashboard'
 import ManageAllCars from './page/AllCars/ManageAllCars'
+import AllMyPayment from './page/dashboard/paymentManagement/AllMyPayment'
+import AllUserPayment from './page/dashboard/paymentManagement/AllUserPayment'
+import PrivateRoute from './router/privateRoute'
+import ErrorPage from './component/shared/ErrorPage'
+import ForgetPassword from './component/Form/ForgetPassword'
 
 
 
@@ -45,15 +51,20 @@ createRoot(document.getElementById('root')).render(
 
      */} <BrowserRouter >
         <Routes>
-          <Route path="/" element={<MainLayout />}>
+          <Route path="/" element={<MainLayout />} >
             <Route index element={<Home />} />
             <Route path='register' element={<Register />} />
             <Route path='login' element={<Login />} />
             <Route path='about' element={<About></About>} />
             <Route path='allCars/:slug' element={<ManageAllCars />} />
-            <Route path='addCar' element={<AddCar />} />
+           
             <Route path='detailsCar/:id' element={<DetailsCar></DetailsCar>} />
+            
+            
+            <Route path='addCar' element={<AddCar />} />
+            <Route path='forget' element={<ForgetPassword />} />
 
+              
           </Route>
           <Route path="/dashboard" element={<DashboardLayout />}>
           <Route path='add_car' element={<AddCarrDashboard></AddCarrDashboard>} />
@@ -62,8 +73,11 @@ createRoot(document.getElementById('root')).render(
           <Route path='all_cars' element={<AllCarsDashboard></AllCarsDashboard>} />
           <Route path='all_my_booked' element={<AllMyBooked></AllMyBooked>} />
           <Route path='all_user_booked' element={<AllUserBooked></AllUserBooked>} />
+          <Route path='all_my_payment' element={<AllMyPayment></AllMyPayment>} />
+          <Route path='all_user_payment' element={<AllUserPayment></AllUserPayment>} />
           <Route path='all_users' element={<AllUserDashboard></AllUserDashboard>} />
           <Route path='profile' element={<Profile></Profile>} />
+          <Route path='adminchat' element={<AdminChat />} />
           <Route index element={<Dashboard />} />
           </Route>
         </Routes>

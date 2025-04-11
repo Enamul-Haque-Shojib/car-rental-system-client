@@ -1,52 +1,39 @@
-import { useApprovedBookMutation, useCanceledBookMutation, useGetAllOwnerBookQuery } from '@/redux/features/booking/bookingApi';
-import React from 'react';
+import useAuth from '@/hooks/useAuth';
+import { useGetAllOwnerPaymentQuery } from '@/redux/features/payment/paymentApi';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import useAuth from '@/hooks/useAuth';
-import toast from 'react-hot-toast';
 import { Loader } from 'lucide-react';
+import React from 'react';
+import toast from 'react-hot-toast';
 
 
-const AllUserBooked = () => {
-  const {user} = useAuth();
+const AllUserPayment = () => {
+    const {user} = useAuth();
 
   
   
     //  const {data: bookingsData, isLoading} = useGetAllOwnerBookQuery(user?._id);
-    const { data: bookingsData, isLoading } = useGetAllOwnerBookQuery(user?._id, {
+    const { data: paymentData, isLoading } = useGetAllOwnerPaymentQuery(user?._id, {
       skip: !user?._id, 
     });
 
-console.log(bookingsData)
-  const[approvedBook] = useApprovedBookMutation(undefined)
 
-     const handleApprovedBook = async(id, carId)=>{
+//   const[approvedBook] = useApprovedBookMutation(undefined)
+
+    //  const handleApprovedBook = async(id, carId)=>{
        
-          try {
-            const res = await approvedBook({id, car_id:{carId:carId._id}}).unwrap();
-            console.log(res);
-            toast.success(res.message)
-          } catch (error) {
-            console.log(error)
-            toast.error(error)
-          }
+    //       try {
+    //         const res = await approvedBook({id, car_id:{carId:carId._id}}).unwrap();
+    //         console.log(res);
+    //         toast.success(res.message)
+    //       } catch (error) {
+    //         console.log(error)
+    //         toast.error(error)
+    //       }
        
       
-    }
-
-     const [canceledBook] = useCanceledBookMutation(undefined);
-    
-        const handleCancelBook = async(id)=>{
-          try {
-            const res = await canceledBook(id).unwrap();
-            console.log(res);
-            toast.success(res.message)
-          } catch (error) {
-            console.log(error)
-            toast.error(error)
-          }
-        }
+    // }
     if (isLoading) {
       return (
         <div className="flex justify-center items-center h-96">
@@ -56,7 +43,7 @@ console.log(bookingsData)
     }
     return (
         <div className=''>
-        <h1 className='text-2xl text-center font-bold'>All User Bookings</h1>
+        <h1 className='text-2xl text-center font-bold'>All User Payments</h1>
         <Table>
       <TableCaption>A list of User Booked.</TableCaption>
       <TableHeader>
@@ -71,12 +58,13 @@ console.log(bookingsData)
           <TableHead>Pick Date</TableHead>
           <TableHead>Drop Date</TableHead>
           <TableHead className="">Total Cost</TableHead>
-          <TableHead className="">Status</TableHead>
+       
+          <TableHead className="">Transaction Id</TableHead>
           <TableHead className="">Action</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {bookingsData?.data?.map(({_id, carId, userId, pickUpLocation,dropOffLocation, pickUpDate, dropOffDate, totalCost, status}) => (
+        {paymentData?.data?.map(({_id, carId, userId, pickUpLocation,dropOffLocation, pickUpDate, dropOffDate, totalCost, status, transactionId}) => (
           <TableRow key={_id}>
             <TableCell className="">
            
@@ -107,15 +95,11 @@ console.log(bookingsData)
             <TableCell className="">{pickUpDate}</TableCell>
             <TableCell className="">{dropOffDate}</TableCell>
             <TableCell className="">${totalCost}</TableCell>
-            <TableCell className="">{status}</TableCell>
+     
+            <TableCell className="">{transactionId}</TableCell>
             <TableCell className="flex justify-around items-center ">
-              {
-                status==='Pending' && <button className='cursor-pointer bg-green-600 p-2 rounded-lg' onClick={()=>{handleApprovedBook(_id,carId)}}>Approved</button>
-              }
-              {
-                            status==='Pending' && <button className='cursor-pointer bg-red-600 p-2 rounded-lg' onClick={()=>{handleCancelBook(_id)}}>Cancel</button>
-                          }
-                
+                {/* <button className='cursor-pointer bg-green-600 p-2 rounded-lg' onClick={()=>{handleApprovedBook(_id,carId)}}>Approved</button> */}
+                delete
             </TableCell>
           </TableRow>
         ))}
@@ -131,4 +115,4 @@ console.log(bookingsData)
     );
 };
 
-export default AllUserBooked;
+export default AllUserPayment;

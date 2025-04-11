@@ -1,6 +1,6 @@
 import auth from "@/firebase/firebase.config";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile ,sendPasswordResetEmail} from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext(null)
@@ -8,9 +8,11 @@ const googleProvider = new GoogleAuthProvider()
 
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
+    const [role, setRole] = useState(null);
     const [cars, setCars] = useState([]);
 
-    console.log('---->>>>>',user)
+    // console.log('---->>>>>',user)
+    console.log('---->>>>>',role)
     const [loading, setLoading] = useState(true)
     const axiosPublic=useAxiosPublic()
 
@@ -45,12 +47,21 @@ const AuthProvider = ({children}) => {
             setLoading(false);
         }
     };
+    const sendPasswordReset = async (email) => {
+        setLoading(true);
+        try {
+            return await sendPasswordResetEmail(auth, email);
+        } finally {
+            setLoading(false);
+        }
+    };
     const logout = async () => {
         setLoading(true);
         try {
             await signOut(auth);
             await axiosPublic.post("/api/auth/logout", {}, { withCredentials: true });
             setUser(null);
+            setRole(null)
         } catch (error) {
             console.error("Logout Error:", error);
         } finally {
@@ -69,7 +80,7 @@ const AuthProvider = ({children}) => {
                 const userData = { email: currentUser.email, name: currentUser.displayName, photoUrl: currentUser.photoURL };
 
                 await axiosPublic.post("/api/auth/login", userData, { withCredentials: true })
-                    .then(res =>{console.log("Login success:", res.data); setUser(res?.data?.data)})
+                    .then(res =>{console.log("Login success:", res.data); setUser(res?.data?.data); setRole(res?.data?.data?.role)})
                     .catch(error => console.error("Login error:", error));
                     // setUser(res?.data)
             } else {
@@ -94,7 +105,9 @@ const AuthProvider = ({children}) => {
         setLoading,
         signInWithGoogle,
         cars,
-        setCars
+        setCars,
+        role,
+        sendPasswordReset
     }
     return (
         <AuthContext.Provider value={authInfo}>

@@ -5,33 +5,35 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import useAuth from '@/hooks/useAuth';
-import { useCanceledBookMutation, useGetAllUserBookQuery } from '@/redux/features/booking/bookingApi';
+import { useCanceledBookMutation } from '@/redux/features/booking/bookingApi';
+import { useGetAllUserPaymentQuery } from '@/redux/features/payment/paymentApi';
 import { Loader, Star } from 'lucide-react';
 import React from 'react';
 import toast from 'react-hot-toast';
 
-const AllMyBooked = () => {
-  const {user} = useAuth();
+const AllMyPayment = () => {
+    const {user} = useAuth();
     // const {data: bookingsData, isLoading} = useGetAllUserBookQuery(user?._id);
 
-    const { data: bookingsData, isLoading } = useGetAllUserBookQuery(user?._id, {
+    const { data: paymentData, isLoading } = useGetAllUserPaymentQuery(user?._id, {
           skip: !user?._id, 
         });
 
 
 
-    const [canceledBook] = useCanceledBookMutation(undefined);
+    // const [canceledBook] = useCanceledBookMutation(undefined);
 
-    const handleCancelBook = async(id)=>{
-      try {
-        const res = await canceledBook(id).unwrap();
-        console.log(res);
-        toast.success(res.message)
-      } catch (error) {
-        console.log(error)
-        toast.error(error)
-      }
-    }
+    // const handleCancelBook = async(id)=>{
+    //   try {
+    //     const res = await canceledBook(id).unwrap();
+    //     console.log(res);
+    //     toast.success(res.message)
+    //   } catch (error) {
+    //     console.log(error)
+    //     toast.error(error)
+    //   }
+    // }
+
     if (isLoading) {
       return (
         <div className="flex justify-center items-center h-96">
@@ -41,7 +43,7 @@ const AllMyBooked = () => {
     }
     return (
           <div className=''>
-                    <h1 className='text-2xl text-center font-bold'>All My Bookings</h1>
+                    <h1 className='text-2xl text-center font-bold'>All My Payments</h1>
                     <Table>
                   <TableCaption>A list of My Booked.</TableCaption>
                   <TableHeader>
@@ -56,12 +58,13 @@ const AllMyBooked = () => {
                       <TableHead>Pick Date</TableHead>
                       <TableHead>Drop Date</TableHead>
                       <TableHead className="">Total Cost</TableHead>
-                      <TableHead className="">Status</TableHead>
+                   
+                      <TableHead className="">Transaction Id</TableHead>
                       <TableHead className="">Action</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {bookingsData?.data?.map(({_id, ownerId, userId, carId, pickUpLocation,dropOffLocation, pickUpDate, dropOffDate, totalCost, status}) => (
+                    {paymentData?.data?.map(({_id, ownerId, userId, carId, pickUpLocation,dropOffLocation, pickUpDate, dropOffDate, totalCost, status, transactionId}) => (
                       <TableRow key={_id}>
                         <TableCell className="">
                        
@@ -92,31 +95,15 @@ const AllMyBooked = () => {
                         <TableCell className="">{pickUpDate}</TableCell>
                         <TableCell className="">{dropOffDate}</TableCell>
                         <TableCell className="">${totalCost}</TableCell>
-                        <TableCell className="">{status}</TableCell>
+                     
+                        <TableCell className="">{transactionId}</TableCell>
                         
                          <TableCell className="flex justify-around items-center ">
-                         <Dialog>
-                          <DialogTrigger asChild>
-                             {
-                              status==='Completed' && <button className='cursor-pointer'><Star></Star></button>
-                             }
-                              
-                          </DialogTrigger>
-                              <AddReviewModal carId={carId}></AddReviewModal>
-                          </Dialog>
-                          {
-                            status==='Pending' && <button className='cursor-pointer bg-red-600 p-2 rounded-lg' onClick={()=>{handleCancelBook(_id)}}>Cancel</button>
-                          }
+                         
+                            {/* <button className='cursor-pointer bg-red-600 p-2 rounded-lg' onClick={()=>{handleCancelBook(_id)}}>Cancel</button> */}
                             
-                            <Dialog>
-                          <DialogTrigger asChild>
-                              {
-                                status==='Approved' && <button className='cursor-pointer bg-green-500 p-2 rounded-lg'>Pay</button>
-                              }
-                              
-                          </DialogTrigger>
-                              <PayModal myBookingData={{_id, ownerId, userId, carId, pickUpLocation, dropOffLocation, pickUpDate, dropOffDate, totalCost, status}}></PayModal>
-                          </Dialog>
+                          Delete
+                         
                           </TableCell>
                         
                       </TableRow>
@@ -133,4 +120,4 @@ const AllMyBooked = () => {
     );
 };
 
-export default AllMyBooked;
+export default AllMyPayment;
