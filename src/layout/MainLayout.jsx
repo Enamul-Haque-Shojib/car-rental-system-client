@@ -10,7 +10,7 @@ const MainLayout = () => {
     return (
         <div>
             <Navbar></Navbar>
-            <main className="min-h-screen">
+            <main className="min-h-screen bg-base-300">
                 <Outlet></Outlet>
                 {/* chatting window */}
              {chatOpen && <CustomerChat userId="user123" />}

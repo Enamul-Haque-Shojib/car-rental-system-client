@@ -7,7 +7,6 @@ import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, Tabl
 import useAuth from '@/hooks/useAuth';
 import { useCanceledBookMutation, useGetAllUserBookQuery } from '@/redux/features/booking/bookingApi';
 import { Loader, Star } from 'lucide-react';
-import React from 'react';
 import toast from 'react-hot-toast';
 
 const AllMyBooked = () => {
@@ -55,6 +54,7 @@ const AllMyBooked = () => {
                    
                       <TableHead>Pick Date</TableHead>
                       <TableHead>Drop Date</TableHead>
+                      <TableHead>time</TableHead>
                       <TableHead className="">Total Cost</TableHead>
                       <TableHead className="">Status</TableHead>
                       <TableHead className="">Action</TableHead>
@@ -90,6 +90,7 @@ const AllMyBooked = () => {
                         <TableCell className="">{dropOffLocation}</TableCell>
                        
                         <TableCell className="">{pickUpDate}</TableCell>
+                        <TableCell className="">{dropOffDate}</TableCell>
                         <TableCell className="">{dropOffDate}</TableCell>
                         <TableCell className="">${totalCost}</TableCell>
                         <TableCell className="">{status}</TableCell>
