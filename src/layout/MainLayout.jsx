@@ -3,24 +3,27 @@ import Navbar from "../component/shared/Navbar/Navbar";
 import Footer from "../component/shared/Footer/Footer";
 import CustomerChat from "@/page/chat/CustomerChat";
 import { useState } from "react";
+import useAuth from "@/hooks/useAuth";
 
 const MainLayout = () => {
-    
+    const {role} = useAuth();
     const [chatOpen, setChatOpen] = useState(false);
     return (
         <div>
             <Navbar></Navbar>
             <main className="min-h-screen bg-base-300">
                 <Outlet></Outlet>
-                {/* chatting window */}
-             {chatOpen && <CustomerChat userId="user123" />}
-            {/* chat icon */}
-            <button
+
+          
+             { role!=='admin' && <>{chatOpen && <CustomerChat/>}
+             <button
                 className="fixed bottom-8 right-6 z-10 bg-blue-500 text-white p-3 rounded-full shadow-lg"
                 onClick={() => setChatOpen(!chatOpen)}
             >
                 💬
-            </button>
+            </button> 
+             </>  }
+            
             </main>
              
 

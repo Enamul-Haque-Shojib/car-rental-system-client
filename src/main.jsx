@@ -36,7 +36,7 @@ createRoot(document.getElementById('root')).render(
             <Route path='allCars/:slug' element={<ManageAllCars />} />
            
             <Route path='detailsCar/:id' element={<DetailsCar></DetailsCar>} />
-            <Route path='adminChat' element={<AdminChat />} />
+            
             
             <Route path='addCar' element={<PrivateRoute><AddCar /></PrivateRoute>} />
             <Route path='forget' element={<ForgetPassword />} />
@@ -54,6 +54,7 @@ createRoot(document.getElementById('root')).render(
           <Route path='all_user_payment' element={<AllUserPayment></AllUserPayment>} />
           <Route path='all_users' element={<AllUserDashboard></AllUserDashboard>} />
           <Route path='profile' element={<Profile></Profile>} />
+          <Route path='adminchat' element={<AdminChat />} />
           <Route index element={<Dashboard />} />
           </Route>
           

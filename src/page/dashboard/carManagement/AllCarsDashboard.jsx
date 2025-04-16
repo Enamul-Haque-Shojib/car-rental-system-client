@@ -66,12 +66,12 @@ const AllCarsDashboard = () => {
            
               <TableHead>Per Day</TableHead>
               <TableHead>Location</TableHead>
-              <TableHead className="">Available</TableHead>
+              <TableHead className="">Status</TableHead>
               <TableHead className="">Action</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {carsData?.data?.result?.map(({_id, registrationNumber, image,brand, carModel,year, type, fuelType, seats, transmission, mileAge, pricePerDay, location, availability, features}) => (
+            {carsData?.data?.result?.map(({_id, registrationNumber, image,brand, carModel,year, type, fuelType, seats, transmission, mileAge, pricePerDay, location, status, features}) => (
               <TableRow key={_id}>
                 <TableCell className="">
                 {/* <Avatar>
@@ -95,7 +95,12 @@ const AllCarsDashboard = () => {
                
                 <TableCell className="">${pricePerDay}</TableCell>
                 <TableCell className="">{location}</TableCell>
-                <TableCell className="">{availability ? 'Available' : 'Booked'}</TableCell>
+                {
+                  status === 'disable' ? <TableCell className="">{'Disabled'}</TableCell> 
+                  : 
+                  <TableCell className="">{status === 'not_rent' ? 'Available' : 'Booked'}</TableCell>
+                }
+               
                 <TableCell className="flex justify-around items-center ">
                 <Link to={`/dashboard/review_car/${_id}`}><button className='cursor-pointer'><Star></Star></button></Link>
                 <Dialog>
@@ -103,7 +108,7 @@ const AllCarsDashboard = () => {
                         {/* <Button variant="outline">Edit Profile</Button> */}
                         <button className='cursor-pointer'><Eye></Eye></button>
                     </DialogTrigger>
-                    <CarDetailsModal car={{_id, registrationNumber, image,brand, carModel,year, type, fuelType, seats, transmission, mileAge, pricePerDay, location, availability, features}}></CarDetailsModal>
+                    <CarDetailsModal car={{_id, registrationNumber, image,brand, carModel,year, type, fuelType, seats, transmission, mileAge, pricePerDay, location, status, features}}></CarDetailsModal>
                 </Dialog>
                     
                     <Link to={`/dashboard/edit_car/${_id}`}><button className='cursor-pointer'><Edit></Edit></button></Link>

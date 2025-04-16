@@ -2,6 +2,7 @@ import { Avatar } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
 import useAuth from '@/hooks/useAuth';
 import { useGetPieChartBookingsQuery } from '@/redux/features/statistics/statisticsApi';
+import { Loader } from 'lucide-react';
 import React from 'react';
 import Chart from "react-apexcharts";
 const UserDashboard = () => {
@@ -16,6 +17,14 @@ const {data: bookingsData, isLoading} = useGetPieChartBookingsQuery(user?._id,{
         labels: ["Pending", "Approved", "Canceled", "Completed"],
       };
       const pieChartSeries = [bookingsData?.data?.Pending, bookingsData?.data?.Approved, bookingsData?.data?.Canceled, bookingsData?.data?.Completed];
+
+      if (isLoading) {
+        return (
+          <div className="flex justify-center items-center h-96">
+            <Loader className="animate-spin text-gray-400 w-10 h-10" />
+          </div>
+        );
+      }
     return (
         <div className="p-6 grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
         {/* Profile Section */}
@@ -38,7 +47,9 @@ const {data: bookingsData, isLoading} = useGetPieChartBookingsQuery(user?._id,{
             </CardContent>
           </Card>
           :
-          <p>Loading---</p>
+          <div className="flex justify-center items-center h-96 col-span-1">
+          <Loader className="animate-spin text-gray-400 w-10 h-10" />
+        </div>
   
         }
         

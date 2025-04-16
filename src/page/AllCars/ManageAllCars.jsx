@@ -5,13 +5,15 @@ import React, { useEffect } from 'react';
 import AllCars from './AllCars';
 import { Loader } from 'lucide-react';
 import AllCategories from './AllCategories';
-import { useNavigate, useParams } from 'react-router';
+import { useParams } from 'react-router';
+import AllCarsPagination from '@/component/pagination/AllCarsPagination';
 
 const ManageAllCars = () => {
 
     const {setCars} = useAuth();
-    const {slug} = useParams()
-    const navigate = useNavigate();
+    const {slug} = useParams();
+
+
     // const { data: carsData, isLoading } = useGetAllCarsQuery();
     const [getAllFilterQueryCars, {isLoading}] = useGetAllFilterQueryCarsMutation(undefined)
 
@@ -19,7 +21,7 @@ const ManageAllCars = () => {
     useEffect(() => {
       const getData = async()=>{
         const res = await getAllFilterQueryCars(slug).unwrap();
-        setCars(res?.data?.result)
+        setCars(res?.data)
       }
        
         getData();
@@ -27,7 +29,7 @@ const ManageAllCars = () => {
 
     const handleCategories = async(slug)=>{
       const res = await getAllFilterQueryCars(slug).unwrap();
-      setCars(res?.data?.result)
+      setCars(res?.data)
     
     }
 
@@ -44,7 +46,9 @@ const ManageAllCars = () => {
              <div className='flex lg:flex-row flex-col lg:justify-center lg:items-start gap-x-5'>
         <AllCategories handleCategories={handleCategories}></AllCategories>
         <AllCars></AllCars>
+        
     </div>
+    <AllCarsPagination></AllCarsPagination>
         </div>
        
     );

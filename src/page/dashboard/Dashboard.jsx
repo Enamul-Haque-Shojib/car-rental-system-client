@@ -6,6 +6,7 @@ import UserDashboard from './UserDashboard';
 
 const Dashboard = () => {
   const {user, role} = useAuth();
+  
 
     return (
         <div>
