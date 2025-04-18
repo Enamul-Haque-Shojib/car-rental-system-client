@@ -39,12 +39,14 @@ import AllUserPayment from './page/dashboard/paymentManagement/AllUserPayment'
 import PrivateRoute from './router/privateRoute'
 import ErrorPage from './component/shared/ErrorPage'
 import ForgetPassword from './component/Form/ForgetPassword'
+import { ThemeProvider } from './Provider/Theme.provider'
 
 
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <ThemeProvider>
     <Provider store={store}>
     <AuthProvider>
       {/* <RouterProvider router={router}></RouterProvider>
@@ -56,7 +58,7 @@ createRoot(document.getElementById('root')).render(
             <Route path='register' element={<Register />} />
             <Route path='login' element={<Login />} />
             <Route path='about' element={<About></About>} />
-            <Route path='allCars/:slug' element={<ManageAllCars />} />
+            <Route path='allCars' element={<ManageAllCars />} />
            
             <Route path='detailsCar/:id' element={<DetailsCar></DetailsCar>} />
             
@@ -87,5 +89,6 @@ createRoot(document.getElementById('root')).render(
       <Toaster position='top-center' reverseOrder={false} />
     </AuthProvider>
     </Provider>
+    </ThemeProvider>
   </StrictMode>,
 )
