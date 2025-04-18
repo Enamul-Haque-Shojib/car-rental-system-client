@@ -4,6 +4,7 @@ import "./Navbar.css"
 import useAuth from '@/hooks/useAuth';
 import toast from 'react-hot-toast';
 import { Menu, X } from 'lucide-react';
+import { ModeToggle } from '@/component/theme/ModeToggle';
 const Navbar = () => {
      const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -39,7 +40,7 @@ const handlelogout=()=>{
                 Home
               </NavLink>
               <NavLink
-                to="/allCars/all"
+                to="/allCars"
                 className="transition duration-300 hover:text-yellow-300"
                 activeclassName="text-yellow-300"
               >
@@ -69,6 +70,11 @@ const handlelogout=()=>{
               </NavLink>
 
               </>}
+              <
+              
+              >
+                <ModeToggle></ModeToggle>
+              </>
               
         
                 
@@ -146,7 +152,7 @@ const handlelogout=()=>{
                   Home
                 </NavLink>
                 <NavLink
-                  to="/allCars/all"
+                  to="/allCars"
                   className="block text-lg hover:text-indigo-500"
                   activeclassName="text-indigo-500"
                   onClick={handleNavField}

@@ -40,7 +40,7 @@ const CarCard = ({ car }) => {
     } = car
 
     return (
-        <Card className="w-full lg:w-[320px] sm:w-[350px] bg-white shadow-md rounded-lg overflow-hidden">
+        <Card className="w-full lg:w-[320px] sm:w-[350px] light: bg-white dark: bg-dark shadow-md rounded-lg overflow-hidden">
         <CardHeader className="p-4">
           <AspectRatio ratio={16 / 9} className="bg-gray-100 rounded-md">
             <img

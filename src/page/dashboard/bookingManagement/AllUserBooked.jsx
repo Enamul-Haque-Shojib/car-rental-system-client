@@ -6,6 +6,7 @@ import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, Tabl
 import useAuth from '@/hooks/useAuth';
 import toast from 'react-hot-toast';
 import { Loader } from 'lucide-react';
+import ReturnCountdown from '@/component/dashboard/counterDate/ReturnCountDown';
 
 
 const AllUserBooked = () => {
@@ -106,6 +107,11 @@ console.log(bookingsData)
            
             <TableCell className="">{pickUpDate}</TableCell>
             <TableCell className="">{dropOffDate}</TableCell>
+            <TableCell className="">
+                              {(status === 'Approved' || status === 'Pending') ? (
+                                <ReturnCountdown returnDate={dropOffDate} />
+                              ) : '—'}
+                            </TableCell>
             <TableCell className="">${totalCost}</TableCell>
             <TableCell className="">{status}</TableCell>
             <TableCell className="flex justify-around items-center ">
