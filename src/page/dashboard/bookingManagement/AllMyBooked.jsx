@@ -16,7 +16,7 @@ import toast from 'react-hot-toast';
 
 const AllMyBooked = () => {
   const { user } = useAuth();
-  const [showMap, setShowMap] = useState(false);
+
   const [timers, setTimers] = useState([])
 
   const { data: bookingsData, isLoading } = useGetAllUserBookQuery(user?._id, {

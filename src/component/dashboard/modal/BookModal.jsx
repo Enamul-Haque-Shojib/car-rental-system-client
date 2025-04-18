@@ -41,7 +41,7 @@ import { useState } from 'react';
 
 
 const getCoordinates = async (location) => {
-    const apiKey = 'f2e2f68e66824dc0b867442c52a2a616'; // Replace with your actual OpenCage API key
+    const apiKey = import.meta.env.VITE_LOCATION_API_KEY; // Replace with your actual OpenCage API key
     const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(location)}&key=${apiKey}`);
     const data = await response.json();
   
