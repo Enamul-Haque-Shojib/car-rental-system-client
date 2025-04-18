@@ -26,7 +26,7 @@ import toast from 'react-hot-toast';
 import useAuth from '@/hooks/useAuth';
 import uploadImage from '@/hooks/uploadImage';
 import { useGetOneCarQuery } from '@/redux/features/car/carApi';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 const formSchema = z.object({
     registrationNumber: z.string().min(2).max(50),
@@ -58,7 +58,7 @@ const formSchema = z.object({
   };
 const UpdateCarDashboard = () => {
     const {id} = useParams();
-
+const navigate = useNavigate();
      const {user} = useAuth();
        const [updateCar, {isLoading}] = useUpdateCarMutation(undefined);
        const {data: oneCarData} = useGetOneCarQuery(id);
@@ -156,6 +156,7 @@ const UpdateCarDashboard = () => {
             form.reset();
           
             toast.success(res.message);
+            navigate('/dashboard/all_cars')
         } catch (error) {
             toast.error('Could not add car')
             console.error('Error submitting form:', error);

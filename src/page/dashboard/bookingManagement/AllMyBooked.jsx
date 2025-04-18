@@ -1,7 +1,10 @@
+import ReturnCountdown from '@/component/dashboard/counterDate/ReturnCountDown';
+import MapWithPins from '@/component/dashboard/map/MapWithPins';
 import AddReviewModal from '@/component/dashboard/modal/AddReviewModal';
 import PayModal from '@/component/dashboard/modal/PayModal';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import useAuth from '@/hooks/useAuth';
@@ -9,6 +12,21 @@ import { useCanceledBookMutation, useGetAllUserBookQuery } from '@/redux/feature
 import { Loader, Star } from 'lucide-react';
 import React from 'react';
 import toast from 'react-hot-toast';
+
+
+// const getRemainingTime = (dropOffDate) => {
+//   const now = new Date();
+//   const returnDate = new Date(dropOffDate);
+//   const diff = returnDate - now;
+
+//   if (diff <= 0) return "Expired";
+
+//   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+//   const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+//   const minutes = Math.floor((diff / (1000 * 60)) % 60);
+
+//   return `${days}d ${hours}h ${minutes}m`;
+// };
 
 const AllMyBooked = () => {
   const {user} = useAuth();
@@ -55,13 +73,15 @@ const AllMyBooked = () => {
                    
                       <TableHead>Pick Date</TableHead>
                       <TableHead>Drop Date</TableHead>
+                      <TableHead>Return Time</TableHead>
+                      <TableHead>Location</TableHead>
                       <TableHead className="">Total Cost</TableHead>
                       <TableHead className="">Status</TableHead>
                       <TableHead className="">Action</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {bookingsData?.data?.map(({_id, ownerId, userId, carId, pickUpLocation,dropOffLocation, pickUpDate, dropOffDate, totalCost, status}) => (
+                    {bookingsData?.data?.map(({_id, ownerId, userId, carId, pickUpLocation,dropOffLocation, pickUpCoord, dropOffCoord, pickUpDate, dropOffDate, totalCost, status}) => (
                       <TableRow key={_id}>
                         <TableCell className="">
                        
@@ -91,22 +111,58 @@ const AllMyBooked = () => {
                        
                         <TableCell className="">{pickUpDate}</TableCell>
                         <TableCell className="">{dropOffDate}</TableCell>
+                        {/* <TableCell className="">
+                        {(status === 'Approved' || status === 'Pending') ? getRemainingTime(dropOffDate) : '—'}
+                      </TableCell> */}
+
+
+                            <TableCell className="">
+                              {(status === 'Approved' || status === 'Pending') ? (
+                                <ReturnCountdown returnDate={dropOffDate} />
+                              ) : '—'}
+                            </TableCell>
+
+                        
+                            <TableCell className="text-center">
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <Button variant="outline" className="w-full text-sm bg-blue-600 hover:bg-blue-700 text-white py-1 px-3 rounded-md">
+                              View Location
+                            </Button>
+                          </DialogTrigger>
+                          <MapWithPins
+                            start_address={pickUpLocation}
+                            start_latitude={pickUpCoord.lat}
+                            start_longitude={pickUpCoord.lng}
+                            end_address={dropOffLocation}
+                            end_latitude={dropOffCoord.lat}
+                            end_longitude={dropOffCoord.lng}
+                          />
+                        </Dialog>
+                      </TableCell>
                         <TableCell className="">${totalCost}</TableCell>
                         <TableCell className="">{status}</TableCell>
                         
                          <TableCell className="flex justify-around items-center ">
                          <Dialog>
                           <DialogTrigger asChild>
-                              {/* <Button variant="outline">Edit Profile</Button> */}
-                              <button className='cursor-pointer'><Star></Star></button>
+                             {
+                              status==='Completed' && <button className='cursor-pointer'><Star></Star></button>
+                             }
+                              
                           </DialogTrigger>
                               <AddReviewModal carId={carId}></AddReviewModal>
                           </Dialog>
-                            <button className='cursor-pointer bg-red-600 p-2 rounded-lg' onClick={()=>{handleCancelBook(_id)}}>Cancel</button>
+                          {
+                            status==='Pending' && <button className='cursor-pointer bg-red-600 p-2 rounded-lg' onClick={()=>{handleCancelBook(_id)}}>Cancel</button>
+                          }
+                            
                             <Dialog>
                           <DialogTrigger asChild>
-                              {/* <Button variant="outline">Edit Profile</Button> */}
-                              <button className='cursor-pointer bg-green-500 p-2 rounded-lg'>Pay</button>
+                              {
+                                status==='Approved' && <button className='cursor-pointer bg-green-500 p-2 rounded-lg'>Pay</button>
+                              }
+                              
                           </DialogTrigger>
                               <PayModal myBookingData={{_id, ownerId, userId, carId, pickUpLocation, dropOffLocation, pickUpDate, dropOffDate, totalCost, status}}></PayModal>
                           </Dialog>

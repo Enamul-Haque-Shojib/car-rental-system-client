@@ -1,4 +1,4 @@
-import { useApprovedBookMutation, useGetAllOwnerBookQuery } from '@/redux/features/booking/bookingApi';
+import { useApprovedBookMutation, useCanceledBookMutation, useGetAllOwnerBookQuery } from '@/redux/features/booking/bookingApi';
 import React from 'react';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -6,6 +6,7 @@ import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, Tabl
 import useAuth from '@/hooks/useAuth';
 import toast from 'react-hot-toast';
 import { Loader } from 'lucide-react';
+import ReturnCountdown from '@/component/dashboard/counterDate/ReturnCountDown';
 
 
 const AllUserBooked = () => {
@@ -34,6 +35,19 @@ console.log(bookingsData)
        
       
     }
+
+     const [canceledBook] = useCanceledBookMutation(undefined);
+    
+        const handleCancelBook = async(id)=>{
+          try {
+            const res = await canceledBook(id).unwrap();
+            console.log(res);
+            toast.success(res.message)
+          } catch (error) {
+            console.log(error)
+            toast.error(error)
+          }
+        }
     if (isLoading) {
       return (
         <div className="flex justify-center items-center h-96">
@@ -93,10 +107,21 @@ console.log(bookingsData)
            
             <TableCell className="">{pickUpDate}</TableCell>
             <TableCell className="">{dropOffDate}</TableCell>
+            <TableCell className="">
+                              {(status === 'Approved' || status === 'Pending') ? (
+                                <ReturnCountdown returnDate={dropOffDate} />
+                              ) : '—'}
+                            </TableCell>
             <TableCell className="">${totalCost}</TableCell>
             <TableCell className="">{status}</TableCell>
             <TableCell className="flex justify-around items-center ">
-                <button className='cursor-pointer bg-green-600 p-2 rounded-lg' onClick={()=>{handleApprovedBook(_id,carId)}}>Approved</button>
+              {
+                status==='Pending' && <button className='cursor-pointer bg-green-600 p-2 rounded-lg' onClick={()=>{handleApprovedBook(_id,carId)}}>Approved</button>
+              }
+              {
+                            status==='Pending' && <button className='cursor-pointer bg-red-600 p-2 rounded-lg' onClick={()=>{handleCancelBook(_id)}}>Cancel</button>
+                          }
+                
             </TableCell>
           </TableRow>
         ))}

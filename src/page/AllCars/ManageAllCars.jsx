@@ -1,37 +1,59 @@
 
+
+
 import useAuth from '@/hooks/useAuth';
-import { useGetAllCarsQuery, useGetAllFilterQueryCarsMutation } from '@/redux/features/car/carApi';
+
 import React, { useEffect } from 'react';
 import AllCars from './AllCars';
 import { Loader } from 'lucide-react';
 import AllCategories from './AllCategories';
-import { useParams } from 'react-router';
+
 import AllCarsPagination from '@/component/pagination/AllCarsPagination';
+
+import { debounce } from "lodash";
+import { useGetAllQueryCarsMutation } from '@/redux/features/car/carApi';
+
 
 const ManageAllCars = () => {
 
-    const {setCars} = useAuth();
-    const {slug} = useParams();
+    const {cars, setCars, updateFilter, filters, setFilters} = useAuth();
+   
+    // const [filters, setFilters] = React.useState({
+    //   status: '',
+    //   mileAge: '',
+    //   seats: '',
+    //   brand: '',
+    //   carModel: '',
+    //   year: '',
+    //   slugType: '',
+    //   pricePerDay: '',
+    //   page: 1,
+    // });
 
 
-    // const { data: carsData, isLoading } = useGetAllCarsQuery();
-    const [getAllFilterQueryCars, {isLoading}] = useGetAllFilterQueryCarsMutation(undefined)
+    // const updateFilter = (key, value) => {
+    //   setFilters(prev => ({ ...prev, [key]: value }));
+    // };
 
-    
+    const [triggerQuery, { data, isLoading }] = useGetAllQueryCarsMutation();
+
+    const debouncedTrigger = React.useMemo(() => debounce(async(query) => {
+
+      const res = await triggerQuery(query);
+      console.log(res?.data)
+      setCars(res?.data?.data)
+
+    }, 300), [triggerQuery, setCars]);
+
     useEffect(() => {
-      const getData = async()=>{
-        const res = await getAllFilterQueryCars(slug).unwrap();
-        setCars(res?.data)
-      }
-       
-        getData();
-    },[getAllFilterQueryCars,setCars, slug]);
-
-    const handleCategories = async(slug)=>{
-      const res = await getAllFilterQueryCars(slug).unwrap();
-      setCars(res?.data)
+      const queryParams = new URLSearchParams();
+      Object.entries(filters).forEach(([key, value]) => {
+        if (value) queryParams.append(key, value);
+      });
     
-    }
+      debouncedTrigger(queryParams.toString());
+
+    }, [filters,  debouncedTrigger]);
 
     if (isLoading) {
         return (
@@ -44,11 +66,11 @@ const ManageAllCars = () => {
     return (
         <div className='container mx-auto px-4 my-12'>
              <div className='flex lg:flex-row flex-col lg:justify-center lg:items-start gap-x-5'>
-        <AllCategories handleCategories={handleCategories}></AllCategories>
+        <AllCategories updateFilter={updateFilter} filters={filters}></AllCategories>
         <AllCars></AllCars>
         
     </div>
-    <AllCarsPagination></AllCarsPagination>
+    <AllCarsPagination updateFilter={updateFilter} filters={filters} setFilters={setFilters}></AllCarsPagination>
         </div>
        
     );

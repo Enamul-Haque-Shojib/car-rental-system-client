@@ -2,24 +2,26 @@ import React, { useEffect, useState } from 'react';
 import Category from './Category';
 import { Link, useNavigate } from 'react-router';
 import { CategoriesFilter } from '@/constant';
+import useAuth from '@/hooks/useAuth';
 
 
 
 
 const Categories = () => {
+  const {cars, setCars, updateFilter, filters, setFilters} = useAuth();
     const [categories, setCategories] = useState([]);
 
     const navigate = useNavigate();
         useEffect(() => {
     
-        
             setCategories(CategoriesFilter);
         
-    
         },[])
 
         const handleHomeCategories=(slug)=>{
-          navigate(`allCars/${slug}`)
+          (updateFilter('slugType', slug), updateFilter('page', 1))
+          navigate(`allCars`)
+          
             
             
         }
@@ -41,7 +43,7 @@ const Categories = () => {
         ))}
       </div>
       <div className="flex justify-center mt-8">
-        <Link to="allCars/all" className='btn border p-3 rounded-lg'>
+        <Link to="allCars" className='btn border p-3 rounded-lg'>
           View All
         </Link>
       </div>
