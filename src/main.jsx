@@ -12,28 +12,43 @@ import AuthProvider from './Provider/AuthProvider'
 
 
 import { Provider } from 'react-redux'
-import { store } from './redux/store'
+import AddCarrDashboard from './page/dashboard/carManagement/AddCarrDashboard'
+import AllCarsDashboard from './page/dashboard/carManagement/AllCarsDashboard'
 
-import router from './router/router'
+import AllUserDashboard from './page/dashboard/userManagement/AllUserDashboard'
+import Profile from './page/dashboard/profileManagement/Profile'
+import UpdateCarDashboard from './page/dashboard/carManagement/updateCarDashboard'
+import DetailsCar from './page/AllCars/detailsCar'
+import AllMyBooked from './page/dashboard/bookingManagement/AllMyBooked'
+import AllUserBooked from './page/dashboard/bookingManagement/AllUserBooked'
+import AllReviewDashboard from './page/dashboard/carManagement/AllReviewDashboard'
+import ManageAllCars from './page/AllCars/ManageAllCars'
+import AllMyPayment from './page/dashboard/paymentManagement/AllMyPayment'
+import AllUserPayment from './page/dashboard/paymentManagement/AllUserPayment'
+import PrivateRoute from './router/privateRoute'
+import ErrorPage from './component/shared/ErrorPage'
+import ForgetPassword from './component/Form/ForgetPassword'
+import { ThemeProvider } from './Provider/Theme.provider'
+import { store } from './redux/store'
 
 
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <ThemeProvider>
     <Provider store={store}>
     <AuthProvider>
-     <RouterProvider router={router}></RouterProvider>
+      {/* <RouterProvider router={router}></RouterProvider>
 
-     
-     {/* <BrowserRouter >
+     */} <BrowserRouter >
         <Routes>
           <Route path="/" element={<MainLayout />}  >
             <Route index element={<Home />} />
             <Route path='register' element={<Register />} />
             <Route path='login' element={<Login />} />
             <Route path='about' element={<About></About>} />
-            <Route path='allCars/:slug' element={<ManageAllCars />} />
+            <Route path='allCars' element={<ManageAllCars />} />
            
             <Route path='detailsCar/:id' element={<DetailsCar></DetailsCar>} />
             
@@ -59,11 +74,12 @@ createRoot(document.getElementById('root')).render(
           </Route>
           
         </Routes>
-      </BrowserRouter> */}
+      </BrowserRouter>
 
 
       <Toaster position='top-center' reverseOrder={false} />
     </AuthProvider>
     </Provider>
+    </ThemeProvider>
   </StrictMode>,
 )

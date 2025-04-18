@@ -11,6 +11,22 @@ const AuthProvider = ({children}) => {
     const [role, setRole] = useState(null);
     const [cars, setCars] = useState([]);
 
+    const [filters, setFilters] = useState({
+        status: '',
+        mileAge: '',
+        seats: '',
+        brand: '',
+        carModel: '',
+        year: '',
+        slugType: '',
+        pricePerDay: '',
+        page: 1,
+      });
+
+    const updateFilter = (key, value) => {
+        setFilters(prev => ({ ...prev, [key]: value }));
+      };
+
     // console.log('---->>>>>',user)
     console.log('---->>>>>',role)
     const [loading, setLoading] = useState(true)
@@ -98,7 +114,10 @@ console.log(user)
         cars,
         setCars,
         role,
-        sendPasswordReset
+        sendPasswordReset,
+        updateFilter,
+        filters, 
+        setFilters
     }
     return (
         <AuthContext.Provider value={authInfo}>

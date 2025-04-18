@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 const About = () => {
     return (
-        <div className="min-h-screen bg-base-200 py-12 px-6">
+        <div className="min-h-screen py-12 px-6">
           <div className="container mx-auto flex flex-col md:flex-row items-center gap-12">
             {/* Image Section */}
             <div className="w-full md:w-1/2">

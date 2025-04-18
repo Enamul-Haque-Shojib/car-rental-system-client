@@ -6,6 +6,8 @@
   --font-charm: "Charm", "sans-serif";
   --color-primaryColor: #F5B754;
 }
+
+
 @import "tailwindcss";
 
 @plugin "tailwindcss-animate";
