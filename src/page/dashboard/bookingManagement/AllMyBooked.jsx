@@ -1,4 +1,4 @@
-import ReturnCountdown from '@/component/dashboard/counterDate/ReturnCountDown';
+
 import MapWithPins from '@/component/dashboard/map/MapWithPins';
 import AddReviewModal from '@/component/dashboard/modal/AddReviewModal';
 import PayModal from '@/component/dashboard/modal/PayModal';
@@ -10,14 +10,14 @@ import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, Tabl
 import useAuth from '@/hooks/useAuth';
 import { useCanceledBookMutation, useGetAllUserBookQuery } from '@/redux/features/booking/bookingApi';
 import { Loader, Star } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
+import CountDownTimer from './CountDownTimer';
 
 
 const AllMyBooked = () => {
   const { user } = useAuth();
   const [showMap, setShowMap] = useState(false);
-  const [timers, setTimers] = useState([])
 
   const { data: bookingsData, isLoading } = useGetAllUserBookQuery(user?._id, {
     skip: !user?._id,
@@ -28,66 +28,7 @@ const AllMyBooked = () => {
   const [canceledBook] = useCanceledBookMutation(undefined);
 
 
-  const formatTime = (ms) => {
-    const days = Math.floor(ms / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((ms / (1000 * 60 * 60)) % 24);
-    const minutes = Math.floor((ms / (1000 * 60)) % 60);
-    const seconds = Math.floor((ms / 1000) % 60);
-    return `${days}d ${hours}h ${minutes}m ${seconds}s`;
-
-  }
-  // let count = 0;
-
-
-  const updateCountDown = (pickupDate, dropOffDate, timer, index) => {
-    const now = new Date()
-
-    if (now < pickupDate) {
-      timers[index] = 'will start soon'
-      setTimers([...timers])
-
-    }
-    else if (now > pickupDate && now < dropOffDate) {
-      const timeLeft = dropOffDate - now;
-      timers[index] = ` ${formatTime(timeLeft)}`
-      setTimers([...timers])
-
-
-    } else {
-
-      clearInterval(timer)
-      // console.log('timer stop');
-      timers[index] = 'Booking expired'
-      setTimers([...timers])
-    }
-
-  }
-
-
-  
-
-
-  useEffect(() => {
-    
-    const intervals = []
-    if (bookingsData) {
-
-      bookingsData.data.map((booking, index) => {
-        const pickupDate = new Date(booking.pickUpDate)
-        const dropOffDate = new Date(booking.dropOffDate)
-        const timer = setInterval(() => {
-          updateCountDown(pickupDate, dropOffDate, timer, index)
-
-        }, 1000)
-        intervals.push(timer)
-      })
-
-    }
-    return () => {
-      intervals.forEach(interval => clearInterval(interval))
-    }
-
-  }, [bookingsData])
+  console.log(bookingsData);
 
   const handleCancelBook = async (id) => {
     try {
@@ -161,7 +102,8 @@ const AllMyBooked = () => {
 
               <TableCell className="">{pickUpDate}</TableCell>
               <TableCell className="">{dropOffDate}</TableCell>
-              <TableCell className="text-red-500 font-bold ">{timers[index]}</TableCell>
+              <CountDownTimer booking={{pickUpDate,dropOffDate}} index={index}/>
+             
               <TableCell className="text-center">
                         <Dialog>
                           <DialogTrigger asChild>
