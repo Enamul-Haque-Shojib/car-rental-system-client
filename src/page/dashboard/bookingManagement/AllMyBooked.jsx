@@ -16,8 +16,7 @@ import toast from 'react-hot-toast';
 
 const AllMyBooked = () => {
   const { user } = useAuth();
-  // const {data: bookingsData, isLoading} = useGetAllUserBookQuery(user?._id);
-  // const [remainingTime, setRemainingTime] = useState(null)
+  const [showMap, setShowMap] = useState(false);
   const [timers, setTimers] = useState([])
 
   const { data: bookingsData, isLoading } = useGetAllUserBookQuery(user?._id, {
@@ -40,55 +39,36 @@ const AllMyBooked = () => {
   // let count = 0;
 
 
-  // const updateCountDown = (pickupDate, dropOffDate, timer, index) => {
-  //   const now = new Date()
-
-  //   if (now < pickupDate) {
-  //     timers[index] = 'will start soon'
-  //     setTimers([...timers])
-
-  //   }
-  //   else if (now > pickupDate && now < dropOffDate) {
-  //     const timeLeft = dropOffDate - now;
-  //     timers[index] = ` ${formatTime(timeLeft)}`
-  //     setTimers([...timers])
-
-
-  //   } else {
-
-  //     clearInterval(timer)
-  //     // console.log('timer stop');
-  //     timers[index] = 'Booking expired'
-  //     setTimers([...timers])
-  //   }
-
-  // }
-
-
   const updateCountDown = (pickupDate, dropOffDate, timer, index) => {
-    const now = new Date();
-    let newValue = timers[index];
-  
+    const now = new Date()
+
     if (now < pickupDate) {
-      newValue = 'will start soon';
-    } else if (now > pickupDate && now < dropOffDate) {
+      timers[index] = 'will start soon'
+      setTimers([...timers])
+
+    }
+    else if (now > pickupDate && now < dropOffDate) {
       const timeLeft = dropOffDate - now;
-      newValue = `${formatTime(timeLeft)}`;
+      timers[index] = ` ${formatTime(timeLeft)}`
+      setTimers([...timers])
+
+
     } else {
-      clearInterval(timer);
-      newValue = 'Booking expired';
+
+      clearInterval(timer)
+      // console.log('timer stop');
+      timers[index] = 'Booking expired'
+      setTimers([...timers])
     }
-  
-    if (newValue !== timers[index]) {
-      const newTimers = [...timers];
-      newTimers[index] = newValue;
-      setTimers(newTimers);
-    }
-  };
+
+  }
+
+
   
 
 
   useEffect(() => {
+    
     const intervals = []
     if (bookingsData) {
 
