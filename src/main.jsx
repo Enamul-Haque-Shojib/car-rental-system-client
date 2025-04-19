@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { RouterProvider } from 'react-router'
+import { BrowserRouter, Route, RouterProvider, Routes } from 'react-router'
 import './index.css'
 
 import 'swiper/css'
@@ -30,6 +30,15 @@ import ErrorPage from './component/shared/ErrorPage'
 import ForgetPassword from './component/Form/ForgetPassword'
 import { ThemeProvider } from './Provider/Theme.provider'
 import { store } from './redux/store'
+import MainLayout from './layout/MainLayout'
+import Home from './page/home/Home'
+import Register from './page/Register'
+import Login from './page/Login'
+import About from './page/about/About'
+import DashboardLayout from './layout/DashboardLayout'
+import AdminChat from './page/chat/AdminChat'
+import Dashboard from './page/dashboard/Dashboard'
+import AddCar from './page/addCar/AddCar'
 
 
 
