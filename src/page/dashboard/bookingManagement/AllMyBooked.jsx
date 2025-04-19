@@ -72,7 +72,7 @@ const AllMyBooked = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {bookingsData?.data?.map(({ _id, ownerId, userId, carId, pickUpLocation, dropOffLocation, pickUpDate, dropOffDate, totalCost, status, pickUpCoord, dropOffCoord }, index) => (
+          {bookingsData?.data?.map(({ _id, ownerId, userId, carId, pickUpLocation, dropOffLocation, pickUpDate, dropOffDate, totalCost, status, pickUpCoord, dropOffCoord }, ) => (
             <TableRow key={_id}>
               <TableCell className="">
 
