@@ -1,3 +1,4 @@
+
 import MapWithPins from '@/component/dashboard/map/MapWithPins';
 import AddReviewModal from '@/component/dashboard/modal/AddReviewModal';
 import PayModal from '@/component/dashboard/modal/PayModal';
@@ -9,7 +10,9 @@ import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, Tabl
 import useAuth from '@/hooks/useAuth';
 import { useCanceledBookMutation, useGetAllUserBookQuery } from '@/redux/features/booking/bookingApi';
 import { Loader, Star } from 'lucide-react';
+import React from 'react';
 import toast from 'react-hot-toast';
+import CountDownTimer from './CountDownTimer';
 
 
 const AllMyBooked = () => {
@@ -25,22 +28,7 @@ const AllMyBooked = () => {
   const [canceledBook] = useCanceledBookMutation(undefined);
 
 
-
- 
-
-
- 
-
-   
-
-  
-
-
-  
-
-
- 
-  
+  console.log(bookingsData);
 
   const handleCancelBook = async (id) => {
     try {
@@ -115,6 +103,8 @@ const AllMyBooked = () => {
               <TableCell className="">{pickUpDate}</TableCell>
               <TableCell className="">{dropOffDate}</TableCell>
 
+              <CountDownTimer booking={{pickUpDate,dropOffDate}} index={index}/>
+             
               <TableCell className="text-center">
                         <Dialog>
                           <DialogTrigger asChild>
