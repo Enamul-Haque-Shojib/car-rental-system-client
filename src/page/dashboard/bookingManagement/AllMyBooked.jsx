@@ -1,4 +1,3 @@
-
 import MapWithPins from '@/component/dashboard/map/MapWithPins';
 import AddReviewModal from '@/component/dashboard/modal/AddReviewModal';
 import PayModal from '@/component/dashboard/modal/PayModal';
@@ -72,7 +71,7 @@ const AllMyBooked = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {bookingsData?.data?.map(({ _id, ownerId, userId, carId, pickUpLocation, dropOffLocation, pickUpDate, dropOffDate, totalCost, status, pickUpCoord, dropOffCoord }, ) => (
+          {bookingsData?.data?.map(({ _id, ownerId, userId, carId, pickUpLocation, dropOffLocation, pickUpDate, dropOffDate, totalCost, status, pickUpCoord, dropOffCoord }, index) => (
             <TableRow key={_id}>
               <TableCell className="">
 
