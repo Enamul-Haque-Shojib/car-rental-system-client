@@ -77,7 +77,7 @@ const AllMyBooked = () => {
 
                 <AspectRatio ratio={16 / 9} className="bg-muted">
                   <img
-                    src={carId?.image}
+                    src={carId?.image}  
                     alt="Photo by Drew Beamer"
                     fill
                     className="h-full w-full rounded-md object-cover"

@@ -76,7 +76,7 @@ const ChatAI = () => {
                     <img
                       src={car.image}
                       alt={car.model}
-                      className="w-full h-40 object-cover rounded mb-2"
+                      className="w-full h-40  object-cover rounded mb-2"
                     />
                     <h3 className="font-bold">{car.brand} {car.model}</h3>
                     <p className="text-sm text-gray-600">{car.year} • {car.type}</p>
