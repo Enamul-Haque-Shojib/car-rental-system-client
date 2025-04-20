@@ -10,7 +10,7 @@ import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, Tabl
 import useAuth from '@/hooks/useAuth';
 import { useCanceledBookMutation, useGetAllUserBookQuery } from '@/redux/features/booking/bookingApi';
 import { Loader, Star } from 'lucide-react';
-import React from 'react';
+import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import CountDownTimer from './CountDownTimer';
 
@@ -18,6 +18,7 @@ import CountDownTimer from './CountDownTimer';
 const AllMyBooked = () => {
   const { user } = useAuth();
 
+  const [showMap, setShowMap] = useState(false);
 
   const { data: bookingsData, isLoading } = useGetAllUserBookQuery(user?._id, {
     skip: !user?._id,
