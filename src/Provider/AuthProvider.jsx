@@ -34,19 +34,14 @@ const AuthProvider = ({children}) => {
 
     const registerUser = async (email, password) => {
         setLoading(true);
-        try {
             return await createUserWithEmailAndPassword(auth, email, password);
-        } finally {
-            setLoading(false);
-        }
+       
     };
     const login = async (email, password) => {
         setLoading(true);
-        try {
+       
             return await signInWithEmailAndPassword(auth, email, password);
-        } finally {
-            setLoading(false);
-        }
+        
     };
     const updateUserProfile = (name, photo) => {
         setLoading(true)
@@ -57,19 +52,15 @@ const AuthProvider = ({children}) => {
     }
     const signInWithGoogle = async () => {
         setLoading(true);
-        try {
+        
             return await signInWithPopup(auth, googleProvider);
-        } finally {
-            setLoading(false);
-        }
+        
     };
     const sendPasswordReset = async (email) => {
         setLoading(true);
-        try {
+      
             return await sendPasswordResetEmail(auth, email);
-        } finally {
-            setLoading(false);
-        }
+        
     };
     const logout = async () => {
         setLoading(true);
@@ -84,12 +75,12 @@ const AuthProvider = ({children}) => {
             setLoading(false);
         }
     };
-
+console.log(user)
  
 // console.log(user?.displayName,user?.photoURL)
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async(currentUser) => {
-            // setUser(currentUser);
+            setUser(currentUser);
             setLoading(false);
 
             if (currentUser?.email && currentUser?.displayName && currentUser?.photoURL ) {

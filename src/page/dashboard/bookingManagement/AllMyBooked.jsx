@@ -17,6 +17,7 @@ import CountDownTimer from './CountDownTimer';
 
 const AllMyBooked = () => {
   const { user } = useAuth();
+
   const [showMap, setShowMap] = useState(false);
 
   const { data: bookingsData, isLoading } = useGetAllUserBookQuery(user?._id, {
@@ -64,7 +65,7 @@ const AllMyBooked = () => {
 
             <TableHead>Pick Date</TableHead>
             <TableHead>Drop Date</TableHead>
-            <TableHead>Remaining Time</TableHead>
+
             <TableHead>Location</TableHead>
             <TableHead className="">Total Cost</TableHead>
             <TableHead className="">Status</TableHead>
@@ -72,7 +73,7 @@ const AllMyBooked = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {bookingsData?.data?.map(({ _id, ownerId, userId, carId, pickUpLocation, dropOffLocation, pickUpDate, dropOffDate, totalCost, status, pickUpCoord, dropOffCoord }, index) => (
+          {bookingsData?.data?.map(({ _id, ownerId, userId, carId, pickUpLocation, dropOffLocation, pickUpDate, dropOffDate, totalCost, status, pickUpCoord, dropOffCoord }, ) => (
             <TableRow key={_id}>
               <TableCell className="">
 
@@ -102,6 +103,7 @@ const AllMyBooked = () => {
 
               <TableCell className="">{pickUpDate}</TableCell>
               <TableCell className="">{dropOffDate}</TableCell>
+
               <CountDownTimer booking={{pickUpDate,dropOffDate}} index={index}/>
              
               <TableCell className="text-center">
