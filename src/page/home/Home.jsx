@@ -6,6 +6,7 @@ import Slider from "../../component/slider/Slider";
 import StatsCar from "../../component/stats/StatsCar";
 import TopThreeCars from "@/component/topThreeCars/TopThreeCars";
 import FAQ from "./FAQ";
+import ChatBotToggle from "@/component/AI-assitent/ChatBotToggle";
 
 
 
@@ -24,7 +25,7 @@ const Home = () => {
             <TopThreeCars></TopThreeCars>
             <FAQ></FAQ>
             <Feedback></Feedback>
-            <ChatBotToggle></ChatBotToggle>
+            {/* <ChatBotToggle></ChatBotToggle> */}
             
 
            
