@@ -5,6 +5,7 @@ import Feedback from "../../component/feedback/Feedback";
 import Slider from "../../component/slider/Slider";
 import StatsCar from "../../component/stats/StatsCar";
 import TopThreeCars from "@/component/topThreeCars/TopThreeCars";
+import FAQ from "./FAQ";
 
 
 
@@ -21,6 +22,7 @@ const Home = () => {
             <Categories></Categories>
             <FeaturedCar/>
             <TopThreeCars></TopThreeCars>
+            <FAQ></FAQ>
             <Feedback></Feedback>
             
 
