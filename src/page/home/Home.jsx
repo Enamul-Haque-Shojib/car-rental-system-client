@@ -24,6 +24,7 @@ const Home = () => {
             <TopThreeCars></TopThreeCars>
             <FAQ></FAQ>
             <Feedback></Feedback>
+            <ChatBotToggle></ChatBotToggle>
             
 
            

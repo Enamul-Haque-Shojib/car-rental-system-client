@@ -1,4 +1,3 @@
-
 import MapWithPins from '@/component/dashboard/map/MapWithPins';
 import AddReviewModal from '@/component/dashboard/modal/AddReviewModal';
 import PayModal from '@/component/dashboard/modal/PayModal';
@@ -10,6 +9,8 @@ import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, Tabl
 import useAuth from '@/hooks/useAuth';
 import { useCanceledBookMutation, useGetAllUserBookQuery } from '@/redux/features/booking/bookingApi';
 import { Loader, MapPin, Star, X } from 'lucide-react';
+
+
 import React from 'react';
 import toast from 'react-hot-toast';
 import CountDownTimer from './CountDownTimer';
@@ -17,6 +18,7 @@ import CountDownTimer from './CountDownTimer';
 
 const AllMyBooked = () => {
   const { user } = useAuth();
+
 
 
   const { data: bookingsData, isLoading } = useGetAllUserBookQuery(user?._id, {
@@ -79,7 +81,7 @@ const AllMyBooked = () => {
 
                 <AspectRatio ratio={16 / 9} className="bg-muted">
                   <img
-                    src={carId?.image}
+                    src={carId?.image}  
                     alt="Photo by Drew Beamer"
                     fill
                     className="h-full w-full rounded-md object-cover"
