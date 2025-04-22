@@ -35,7 +35,10 @@ const AllCars = () => {
 
     return (
         <div className="container mx-auto px-4">
-            <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white text-center mb-8 mt-5 lg:mt-0">All Cars</h1>
+            <h1 className="text-2xl font-extrabold text-gray-900 dark:text-white text-center mb-8 mt-5 lg:mt-0">All Available Cars</h1>
+            <p className="text-lg text-gray-600  text-center mb-8">
+                Your next adventure starts here. Explore our latest cars available for rent at the best prices.</p>
+
             <div className="bg-white dark:bg-gray-900 rounded-lg">
                 <Form {...form}>
                     <form

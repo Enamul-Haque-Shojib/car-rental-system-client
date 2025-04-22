@@ -10,7 +10,7 @@ const TopThreeCars = () => {
 
     return (
       <div className="lg:w-[90%] w-[95%] mx-auto my-12">
-        <h1 className="text-4xl font-extrabold text-center mb-10 text-gray-800">
+        <h1 className="text-4xl font-extrabold text-center mb-10 ">
           Top 3 Cars
         </h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -19,6 +19,8 @@ const TopThreeCars = () => {
               key={index}
               className="group w-full max-w-sm mx-auto rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300 bg-gradient-to-br from-gray-50 to-white border border-gray-200"
             >
+
+
               <CardHeader className="p-4">
                 <AspectRatio ratio={16 / 9} className="bg-gray-200 rounded-md">
                   <img

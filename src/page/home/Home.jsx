@@ -1,12 +1,11 @@
 
 import { FeaturedCar } from "@/component/featured/featuredCar";
+import TopThreeCars from "@/component/topThreeCars/TopThreeCars";
+import ScrollReveal from "@/components/Gsap-animation/ScrollReveal";
 import Categories from "../../component/categories/Categories";
 import Feedback from "../../component/feedback/Feedback";
 import Slider from "../../component/slider/Slider";
 import StatsCar from "../../component/stats/StatsCar";
-import TopThreeCars from "@/component/topThreeCars/TopThreeCars";
-import ChatAI from "@/component/AI-assitent/ChatAI";
-import ChatBotToggle from "@/component/AI-assitent/ChatBotToggle";
 
 
 
@@ -23,12 +22,12 @@ const Home = () => {
             <Categories></Categories>
             <FeaturedCar/>
             <TopThreeCars></TopThreeCars>
+            <ScrollReveal direction='up'>
             <Feedback></Feedback>
-            <ChatBotToggle></ChatBotToggle>
+            </ScrollReveal>
             
-
+            </div>
            
-        </div>
     );
 };
 

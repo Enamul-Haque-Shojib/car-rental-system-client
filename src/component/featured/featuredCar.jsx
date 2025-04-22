@@ -1,12 +1,12 @@
 import featuredCar from "../../assets/images/featuredCar1.png"
 export const FeaturedCar = () => {
     return (
-        <div className="relative container mx-auto h-80 md:h-96 lg:h-[450px] xl:h-[510px] ">
+        <div className="relative dark:bg-[#F7F7F7] container mx-auto h-80 md:h-96 lg:h-[450px] xl:h-[510px] ">
             {/* background image */}
             <img src={featuredCar} alt="image" className="w-full h-full object-contain " />
 
             {/* bottom-to-top gradient Overlay */}
-            <div className="absolute  bottom-0 left-0 h-[200px] w-full bg-gradient-to-t from-black/70 to-transparent"></div>
+            <div className="absolute  bottom-0 left-0 h-[200px] w-full  bg-gradient-to-t from-black/70 to-transparent"></div>
             {/* left-to-bottom-right gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-black/80 to-transparent"></div>
 
