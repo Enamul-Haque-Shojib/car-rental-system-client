@@ -145,7 +145,7 @@ const AllMyBooked = () => {
                 <Dialog>
                   <DialogTrigger asChild>
                   {
-                    status==='Approved' && <button className='cursor-pointer bg-green-500 p-2 rounded-lg'>Pay</button>
+                     <button className='cursor-pointer bg-green-500 p-2 rounded-lg'>Pay</button>
                   }
                     
                   </DialogTrigger>

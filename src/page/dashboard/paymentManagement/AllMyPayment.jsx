@@ -2,14 +2,16 @@ import AddReviewModal from '@/component/dashboard/modal/AddReviewModal';
 import PayModal from '@/component/dashboard/modal/PayModal';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import useAuth from '@/hooks/useAuth';
 import { useCanceledBookMutation } from '@/redux/features/booking/bookingApi';
-import { useGetAllUserPaymentQuery } from '@/redux/features/payment/paymentApi';
+import { useGetAllUserPaymentQuery, useRefundPaymentMutation } from '@/redux/features/payment/paymentApi';
 import { Loader, Star } from 'lucide-react';
 import React from 'react';
 import toast from 'react-hot-toast';
+import Swal from 'sweetalert2';
 
 const AllMyPayment = () => {
     const {user} = useAuth();
@@ -18,6 +20,8 @@ const AllMyPayment = () => {
     const { data: paymentData, isLoading } = useGetAllUserPaymentQuery(user?._id, {
           skip: !user?._id, 
         });
+
+      const [refundPayment,{isLoading:isRefundProcessing}]  = useRefundPaymentMutation()
 
 
 
@@ -41,6 +45,39 @@ const AllMyPayment = () => {
         </div>
       );
     }
+
+    const handleRefund = async (transactionId) => {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes!"
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+
+          const res = await refundPayment(transactionId).unwrap()
+          if (res.success) {
+            Swal.fire({
+              title: "Refund Successful",
+              text: "Your refund has been processed successfully.",
+              icon: "success"
+            });
+          } else {
+            Swal.fire({
+              title: "Refund Failed",
+              text: "Something went wrong. Please try again.",
+              icon: "error"
+            });
+          }
+          
+        }
+      });
+    
+    };
+    
     return (
           <div className=''>
                     <h1 className='text-2xl text-center font-bold'>All My Payments</h1>
@@ -98,12 +135,13 @@ const AllMyPayment = () => {
                      
                         <TableCell className="">{transactionId}</TableCell>
                         
-                         <TableCell className="flex justify-around items-center ">
+                         <TableCell className="flex  items-center justify-center ">
+
+                          {
+                            status === 'paid' ? <Button disabled={isRefundProcessing} className={'bg-red-600 cursor-pointer'} onClick={() => handleRefund(transactionId)} >Cancel & Refund</Button> :  <Button className={'bg-yellow-600'} >Booking cancelled</Button>
+                          }
                          
-                            {/* <button className='cursor-pointer bg-red-600 p-2 rounded-lg' onClick={()=>{handleCancelBook(_id)}}>Cancel</button> */}
-                            
-                          Delete
-                         
+                        
                           </TableCell>
                         
                       </TableRow>
