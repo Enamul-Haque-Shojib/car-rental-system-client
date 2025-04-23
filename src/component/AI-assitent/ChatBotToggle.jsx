@@ -6,7 +6,7 @@ const ChatBotToggle = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-      <div className="fixed bottom-16  right-6 z-50">
+      <div className="fixed bottom-22  right-6 z-50">
         {/* Floating AI Icon Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -19,7 +19,7 @@ const ChatBotToggle = () => {
   
         {/* Chat Window */}
         <div
-          className={`fixed bottom-20 right-16 w-[350px] max-h-[90vh] bg-white border border-gray-300 shadow-xl rounded-xl overflow-y-auto transition-all duration-500 ${
+          className={`fixed bottom-22 right-16 w-[350px] max-h-[90vh] bg-white border border-gray-300 shadow-xl rounded-xl overflow-y-auto transition-all duration-500 ${
             isOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"
           }`}
         >

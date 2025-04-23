@@ -67,10 +67,12 @@ const Routing = ({ start, end }) => {
 };
 
 const MapWithPins = ( location ) => {
-  console.log('------location-------',location)
+
+
+  
   const [loading, setLoading] = useState(true);
 
-//   const defaultCenter = [23.8429, 90.4004];
+
   const defaultCenter = [location.start_latitude, location.start_longitude];
   const defaultZoom = 11;
 
@@ -138,14 +140,7 @@ const MapWithPins = ( location ) => {
           <Routing start={defaultCenter} end={[location.end_latitude, location.end_longitude]} />
         </MapContainer>
       </div>
-      <div className="mt-4 flex justify-center">
-        <button
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
-          onClick={() => window.location.reload()}
-        >
-          Reload Map
-        </button>
-      </div>
+    
     </DialogContent>
   );
 };

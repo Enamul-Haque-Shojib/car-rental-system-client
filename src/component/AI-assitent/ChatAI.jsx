@@ -70,7 +70,7 @@ const ChatAI = () => {
             </div>
 
             {msg.cars?.length > 0 && (
-              <div className="grid md:grid-cols-2 gap-4 mt-4">
+              <div className="grid md:grid-cols-1 gap-4 mt-4">
                 {msg.cars.map((car) => (
                   <div key={car.id} className="border rounded shadow p-3">
                     <img

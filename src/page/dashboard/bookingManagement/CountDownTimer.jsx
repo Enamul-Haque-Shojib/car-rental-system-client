@@ -32,7 +32,7 @@ const CountDownTimer = ({ booking, index }) => {
 
             clearInterval(timer)
             // console.log('timer stop');
-            timers[index] = 'Booking expired'
+            timers[index] = 'Expired'
             setTimers([...timers])
         }
 
@@ -60,7 +60,7 @@ const CountDownTimer = ({ booking, index }) => {
 
 
     return (
-        <TableCell className="text-red-500 font-bold ">{timers[index]}</TableCell>
+        <h2 className="text-red-500 font-bold ">{timers[index]}</h2>
     )
 }
 

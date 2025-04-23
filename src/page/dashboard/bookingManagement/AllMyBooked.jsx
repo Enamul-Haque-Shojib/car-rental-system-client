@@ -8,7 +8,9 @@ import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import useAuth from '@/hooks/useAuth';
 import { useCanceledBookMutation, useGetAllUserBookQuery } from '@/redux/features/booking/bookingApi';
-import { Loader, Star } from 'lucide-react';
+import { Loader, MapPin, Star, X } from 'lucide-react';
+
+
 import React from 'react';
 import toast from 'react-hot-toast';
 import CountDownTimer from './CountDownTimer';
@@ -16,6 +18,7 @@ import CountDownTimer from './CountDownTimer';
 
 const AllMyBooked = () => {
   const { user } = useAuth();
+
 
 
   const { data: bookingsData, isLoading } = useGetAllUserBookQuery(user?._id, {
@@ -57,14 +60,15 @@ const AllMyBooked = () => {
             <TableHead className="">Avatar</TableHead>
             <TableHead className="">Registration</TableHead>
             <TableHead className="">Owner</TableHead>
-            <TableHead>Pick Location</TableHead>
-
-            <TableHead>Drop Location</TableHead>
-
-            <TableHead>Pick Date</TableHead>
-            <TableHead>Drop Date</TableHead>
-
             <TableHead>Location</TableHead>
+
+  
+
+            <TableHead>Date</TableHead>
+          
+            <TableHead>Time Remaining</TableHead>
+
+            <TableHead>Map</TableHead>
             <TableHead className="">Total Cost</TableHead>
             <TableHead className="">Status</TableHead>
             <TableHead className="">Action</TableHead>
@@ -95,21 +99,21 @@ const AllMyBooked = () => {
                   <p>{ownerId?.email}</p>
                 </div>
               </TableCell>
-              <TableCell>{pickUpLocation}</TableCell>
+              <TableCell>{pickUpLocation} to {dropOffLocation}</TableCell>
 
-              <TableCell className="">{dropOffLocation}</TableCell>
+          
 
-              <TableCell className="">{pickUpDate}</TableCell>
-              <TableCell className="">{dropOffDate}</TableCell>
-
-              <CountDownTimer booking={{pickUpDate,dropOffDate}} index={index}/>
-             
+              <TableCell className="">{pickUpDate} to {dropOffDate}</TableCell>
+    
+              <TableCell className="">
+                  <CountDownTimer booking={{pickUpDate,dropOffDate}} index={index}/>     
+              </TableCell>
               <TableCell className="text-center">
                         <Dialog>
                           <DialogTrigger asChild>
-                            <Button variant="outline" className="w-full text-sm bg-blue-600 hover:bg-blue-700 text-white py-1 px-3 rounded-md">
+                          <MapPin variant="outline" className="w-full text-lg cursor-pointer">
                               View Location
-                            </Button>
+                            </MapPin>
                           </DialogTrigger>
                           <MapWithPins
                             start_address={pickUpLocation}
@@ -127,16 +131,23 @@ const AllMyBooked = () => {
               <TableCell className="flex justify-around items-center ">
                 <Dialog>
                   <DialogTrigger asChild>
-                    {/* <Button variant="outline">Edit Profile</Button> */}
-                    <button className='cursor-pointer'><Star></Star></button>
+                    {
+                      status==='Completed' && <button className='cursor-pointer'><Star></Star></button>
+                    }
+                    
                   </DialogTrigger>
                   <AddReviewModal carId={carId}></AddReviewModal>
                 </Dialog>
-                <button className='cursor-pointer bg-red-600 p-2 rounded-lg' onClick={() => { handleCancelBook(_id) }}>Cancel</button>
+              
+                {
+                            status==='Pending' && <X className='cursor-pointer text-red-600 m-1 text-lg' onClick={()=>{handleCancelBook(_id)}}>Cancel</X>
+                          }
                 <Dialog>
                   <DialogTrigger asChild>
-                    {/* <Button variant="outline">Edit Profile</Button> */}
-                    <button className='cursor-pointer bg-green-500 p-2 rounded-lg'>Pay</button>
+                  {
+                     <button className='cursor-pointer bg-green-500 p-2 rounded-lg'>Pay</button>
+                  }
+                    
                   </DialogTrigger>
                   <PayModal myBookingData={{ _id, ownerId, userId, carId, pickUpLocation, dropOffLocation, pickUpDate, dropOffDate, totalCost, status }}></PayModal>
                 </Dialog>

@@ -4,6 +4,7 @@ import Footer from "../component/shared/Footer/Footer";
 import CustomerChat from "@/page/chat/CustomerChat";
 import { useState } from "react";
 import useAuth from "@/hooks/useAuth";
+import ChatBotToggle from "@/component/AI-assitent/ChatBotToggle";
 
 const MainLayout = () => {
     const {role} = useAuth();
@@ -15,6 +16,8 @@ const MainLayout = () => {
                 <Outlet></Outlet>
 
           
+             { role!=='admin' && <ChatBotToggle></ChatBotToggle> }
+
              { role!=='admin' && <>{chatOpen && <CustomerChat/>}
              <button
                 className="fixed bottom-8 right-6 z-10 bg-blue-500 text-white p-3 rounded-full shadow-lg"
