@@ -140,14 +140,15 @@ const AllMyBooked = () => {
                 </Dialog>
               
                 {
-                            status==='Pending' && <X className='cursor-pointer text-red-600 m-1 text-lg' onClick={()=>{handleCancelBook(_id)}}>Cancel</X>
-                          }
+                      status==='Pending' && <X className='cursor-pointer text-red-600 m-1 text-lg' onClick={()=>{handleCancelBook(_id)}}>Cancel</X>
+                  }
                 <Dialog>
                   <DialogTrigger asChild>
                   {
                     status==='Approved' && <button className='cursor-pointer bg-green-500 p-2 rounded-lg'>Pay</button>
                   }
                     
+                   
                   </DialogTrigger>
                   <PayModal myBookingData={{ _id, ownerId, userId, carId, pickUpLocation, dropOffLocation, pickUpDate, dropOffDate, totalCost, status }}></PayModal>
                 </Dialog>

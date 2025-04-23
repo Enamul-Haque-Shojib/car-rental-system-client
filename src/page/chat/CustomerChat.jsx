@@ -33,11 +33,12 @@ const CustomerChat = () => {
 
   return (
     <div className="fixed bottom-10 right-20 w-80 bg-white border shadow-lg rounded-lg p-4 z-1">
+      <h1>How can I help You?</h1>
       <div className="h-64 overflow-y-auto">
         {messages.filter(msg => (msg.senderId === userId && msg.receiverId === 'admin') || (msg.senderId === 'admin' && msg.receiverId === userId)).map((msg, index) => (
           <p
             key={index}
-            className={`p-2 my-1 ${msg?.senderId === "admin" ? "bg-gray-100 text-right" : "bg-blue-100 "
+            className={`p-2 my-1 ${msg?.senderId === "admin" ? "bg-gray-100" : "bg-blue-100 text-right"
               } rounded`}
           >
             {msg.text}
