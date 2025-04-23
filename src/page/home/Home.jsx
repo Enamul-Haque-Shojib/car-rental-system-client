@@ -6,12 +6,8 @@ import Categories from "../../component/categories/Categories";
 import Feedback from "../../component/feedback/Feedback";
 import Slider from "../../component/slider/Slider";
 import StatsCar from "../../component/stats/StatsCar";
-<<<<<<< HEAD
-=======
-import TopThreeCars from "@/component/topThreeCars/TopThreeCars";
 import FAQ from "./FAQ";
 import ChatBotToggle from "@/component/AI-assitent/ChatBotToggle";
->>>>>>> development
 
 
 
@@ -28,15 +24,12 @@ const Home = () => {
             <Categories></Categories>
             <FeaturedCar/>
             <TopThreeCars></TopThreeCars>
-<<<<<<< HEAD
             <ScrollReveal direction='up'>
             <Feedback></Feedback>
             </ScrollReveal>
-=======
             <FAQ></FAQ>
-            <Feedback></Feedback>
+            
             {/* <ChatBotToggle></ChatBotToggle> */}
->>>>>>> development
             
             </div>
            

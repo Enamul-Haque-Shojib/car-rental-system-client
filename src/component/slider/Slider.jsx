@@ -32,7 +32,7 @@ const Slider = () => {
                 <p className="text-lg  text-center mt-4 max-w-xl mx-auto">
                   Your ultimate destination for reliable, affordable, and stylish car rentals.
                 </p>
-                <Link to=''>
+                <Link to='/allCars'>
                   <button className="btn btn-primary px-8 py-3 text-lg rounded-full shadow-md hover:bg-blue-600 transition">
                     Get Started
                   </button>
@@ -82,7 +82,7 @@ const Slider = () => {
                 <p className="text-lg leading-relaxed mb-6">
                   Choose from a wide range of cars and book hassle-free today!
                 </p>
-                <Link to=''>
+                <Link to='login'>
                   <button className="btn btn-primary px-8 py-3 text-lg rounded-full shadow-md hover:bg-blue-600 transition">
                     Join Now
                   </button>

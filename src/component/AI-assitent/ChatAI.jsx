@@ -46,7 +46,7 @@ const ChatAI = () => {
   return (
     <div className="max-w-2xl mx-auto px-4 py-6">
         <h1 className='text-xl text-center'> Ai chatBot  </h1>
-      <div className="bg-white rounded-lg px-4 border h-[60vh] overflow-y-auto space-y-4">
+      <div className=" bg-card rounded-lg px-4 border h-[60vh] overflow-y-auto space-y-4">
         {messages.map((msg, i) => (
           <div key={i} className={msg.sender === "user" ? "text-right" : "text-left"}>
             <div
@@ -104,7 +104,7 @@ const ChatAI = () => {
             }}
             onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             placeholder="Ask me to find a car..."
-            className="flex-1 border border-gray-300 rounded-l-lg p-2 focus:outline-none"
+            className="flex-1 text-foreground border border-gray-300 rounded-l-lg p-2 focus:outline-none"
           />
         <button
           onClick={sendMessage}
