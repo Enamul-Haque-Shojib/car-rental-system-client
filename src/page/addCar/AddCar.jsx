@@ -107,14 +107,14 @@ const AddCar = () => {
 
   return (<div>
     <h2 className="text-xl font-bold text-center">Add a New Car</h2>
-    <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg mx-auto grid md:grid-cols-2 gap-2 bg-base-200 border border-base-300  p-6 shadow-lg rounded-lg space-y-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg mx-auto grid md:grid-cols-2 gap-2  bg-card border text-foreground border-base-300  p-6 shadow-lg rounded-lg space-y-4">
 
 
 
 
-      <label className="floating-label">
-        <span>Brand</span>
-        <input {...register("brand")} placeholder="Brand" className="input input-md" />
+      <label className="floating-label text-foreground">
+        <span className="text-blue-600">Brand</span>
+        <input {...register("brand")} placeholder="Brand" className="input bg-card  input-md" />
         {errors.brand && <p className="text-red-500">{errors.brand.message}</p>}
       </label>
       <label className="floating-label">
