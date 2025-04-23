@@ -6,7 +6,7 @@ const About = () => {
         <div className="min-h-screen py-12 px-6">
           <div className="container mx-auto flex flex-col md:flex-row items-center gap-12">
             {/* Image Section */}
-            <div className="w-full md:w-1/2">
+            <div   className="w-full md:w-1/2">
               <img
                 src="https://media.istockphoto.com/id/1478431022/photo/cars-for-sale-stock-lot-row.jpg?s=612x612&w=0&k=20&c=w68j0FXPz9PagD7Lab_DWLD8jV8Hoaakw6XxwedBeLY="
                 alt="language exchange"

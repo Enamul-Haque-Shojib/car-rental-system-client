@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import Category from './Category';
-import { Link, useNavigate } from 'react-router';
 import { CategoriesFilter } from '@/constant';
 import useAuth from '@/hooks/useAuth';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router';
+import Category from './Category';
 
 
 
@@ -28,17 +28,22 @@ const Categories = () => {
     return (
         <div>
            <div className='container mx-auto my-12 px-4 lg:px-0'>
-           <h1 className="text-4xl font-bold text-center mb-10 text-black">
+           <h1 className="text-4xl font-bold text-center mb-10 text-foreground">
         Categories
       </h1>
-           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+      {/*  */}
+           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5
+           relative
+            gap-6">
         {categories.map((category, index) => (
           <div
             key={index}
             className="cursor-pointer hover:shadow-lg transition-shadow duration-300"
             onClick={() => handleHomeCategories(category.slug)}
           >
+            
             <Category category={category} />
+           
           </div>
         ))}
       </div>

@@ -17,7 +17,7 @@ const Login = () => {
   const location = useLocation()
   const navigate = useNavigate()
  
-  const forms = location.state?.from?.pathname || '/'
+  const forms = location.state?.from?.pathname 
   console.log(typeof(forms))
   console.log()
  
@@ -35,7 +35,7 @@ const Login = () => {
       await login(email, password);
       // Redirect to the desired page after successful login
       
-      
+      navigate(location.state?.from?.pathname || '/', { replace: true });
       toast.success("Login successful");
       setError(null); // Reset error state on success
     } catch (error) {
@@ -53,7 +53,7 @@ const Login = () => {
             toast.success("Login successful");
             // navigate("/dashboard", { replace: true });
             
-           navigate(location.state?.from?.pathname, { replace: true });
+           navigate(location.state?.from?.pathname || '/', { replace: true });
            
            
            

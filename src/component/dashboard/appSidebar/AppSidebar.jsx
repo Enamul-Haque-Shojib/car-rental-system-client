@@ -23,11 +23,11 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 import {
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
-    
-  } from "@/components/ui/sidebar"
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+
+} from "@/components/ui/sidebar"
 import NavMain from "./NavMain";
 import NavUser from "./NavUser";
 
@@ -44,7 +44,7 @@ const data = {
     email: "m@example.com",
     avatar: "/avatars/shadcn.jpg",
   },
-  
+
   navAdmin: [
     {
       title: "Car Management",
@@ -60,7 +60,7 @@ const data = {
           title: "All Cars",
           url: "/dashboard/all_cars",
         },
-       
+
       ],
     },
     {
@@ -72,7 +72,7 @@ const data = {
           title: "All User Booked",
           url: "/dashboard/all_user_booked",
         },
-      
+
       ],
     },
     {
@@ -84,10 +84,10 @@ const data = {
           title: "All User Payment",
           url: "/dashboard/all_user_payment",
         },
-      
+
       ],
     },
-  
+
     {
       title: "User Management",
       url: "#",
@@ -137,7 +137,7 @@ const data = {
           title: "All Cars",
           url: "/dashboard/all_cars",
         },
-       
+
       ],
     },
     {
@@ -153,7 +153,7 @@ const data = {
           title: "All User Booked",
           url: "/dashboard/all_user_booked",
         },
-      
+
       ],
     },
     {
@@ -169,7 +169,7 @@ const data = {
           title: "All User Payment",
           url: "/dashboard/all_user_payment",
         },
-      
+
       ],
     },
     {
@@ -194,8 +194,8 @@ const data = {
           title: "All My Booked",
           url: "/dashboard/all_my_booked",
         },
-       
-      
+
+
       ],
     },
     {
@@ -207,8 +207,8 @@ const data = {
           title: "All My Payment",
           url: "/dashboard/all_my_payment",
         },
-      
-      
+
+
       ],
     },
     {
@@ -232,55 +232,52 @@ const data = {
   ],
 }
 const AppSidebar = ({ ...props }) => {
-  const {user, role} = useAuth();
+  const { user, role } = useAuth();
 
-  
-    return (
-        <Sidebar collapsible="icon" {...props}>
-          <SidebarHeader>
-          <SidebarMenu>
-            <SidebarMenuItem>
+
+  return (
+    <Sidebar collapsible="icon" {...props}>
+      <SidebarHeader>
+        <SidebarMenu>
+          <SidebarMenuItem>
             <Link to='/'>
-                    <SidebarMenuButton
-                    size="lg"
-                    className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-                    >
-                        
-                    <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                        SM
-                    </div>
-                    <div className="grid flex-1 text-left text-sm leading-tight">
-                        <span className="truncate font-semibold">
-                        SmartCar Rentals
-                        </span>
-                        <span className="truncate text-xs">Car</span>
-                    </div>
-                    
-                    </SidebarMenuButton>
-                    </Link>
-            </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarHeader>
-          <SidebarContent>
-             <NavProject projects={data.projects} />
-             {
-              role==='admin' && <NavMain items={data.navAdmin} />
-             }
-             {
-              role==='owner' && <NavMain items={data.navOwner} />
-             }
-             {
-              role==='user' && <NavMain items={data.navUser} />
-             }
-            
-           
-          </SidebarContent>
-          <SidebarFooter>
-            <NavUser />
-          </SidebarFooter>
-          <SidebarRail />
-        </Sidebar>
-      )
+              <SidebarMenuButton
+                size="lg"
+                className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              >
+
+                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                  DE
+                </div>
+                <div className='w-20 h-[50px]  relative'>
+                  <img className="object-cover rounded-[10px]" src="/driveEase1.png" alt=" DriveEase" />
+                </div>
+
+              </SidebarMenuButton>
+            </Link>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
+      <SidebarContent>
+        <NavProject projects={data.projects} />
+        {
+          role === 'admin' && <NavMain items={data.navAdmin} />
+        }
+        {
+          role === 'owner' && <NavMain items={data.navOwner} />
+        }
+        {
+          role === 'user' && <NavMain items={data.navUser} />
+        }
+
+
+      </SidebarContent>
+      <SidebarFooter>
+        <NavUser />
+      </SidebarFooter>
+      <SidebarRail />
+    </Sidebar>
+  )
 };
 
 export default AppSidebar;

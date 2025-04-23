@@ -88,6 +88,7 @@ const CheckoutForm = ({myBookingData}) => {
           const res = await addPayment({
             ...myBookingData,
             transactionId: paymentIntent?.id,
+            status:'paid'
           }).unwrap();
           console.log(res)
           
