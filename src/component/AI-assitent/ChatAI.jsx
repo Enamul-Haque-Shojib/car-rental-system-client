@@ -24,7 +24,11 @@ const ChatAI = () => {
     setLoading(true);
     setShowSuggestions(false);
     try {
-      const res = await axios.post("http://localhost:5000/api/ai/ask", {
+      const res = await axios.post(
+        // "http://localhost:5000/api/ai/ask"
+        "https://car-rental-system-server-gray.vercel.app/api/ai/ask"
+        ,
+         {
         message: input,
       });
 
