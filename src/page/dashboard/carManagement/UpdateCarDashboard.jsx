@@ -26,7 +26,7 @@ import toast from 'react-hot-toast';
 import useAuth from '@/hooks/useAuth';
 import uploadImage from '@/hooks/uploadImage';
 import { useGetOneCarQuery } from '@/redux/features/car/carApi';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 
 const formSchema = z.object({
     registrationNumber: z.string().min(2).max(50),
@@ -58,7 +58,7 @@ const formSchema = z.object({
   };
 const UpdateCarDashboard = () => {
     const {id} = useParams();
-
+const navigate = useNavigate();
      const {user} = useAuth();
        const [updateCar, {isLoading}] = useUpdateCarMutation(undefined);
        const {data: oneCarData} = useGetOneCarQuery(id);
@@ -109,7 +109,7 @@ const UpdateCarDashboard = () => {
                 pricePerDay: String(oneCarData.data.pricePerDay || ''),
                 location: oneCarData.data.location || '',
                 description: oneCarData.data.description || '',
-                availability: oneCarData.data.availability || false,
+                status: oneCarData.data.status || '',
                 features: {
                     airConditioner: oneCarData.data.features?.airConditioner || false,
                     gps: oneCarData.data.features?.gps || false,
@@ -139,6 +139,11 @@ const UpdateCarDashboard = () => {
         data.userId = user?._id;
         data.image = carImgUrl;
         data.slugType = formatSlug(data.type)
+        if(data.availability==true){
+            data.status='not_rent'
+        }else{
+            data.status='disable'
+        }
         // data.year = parseInt(data.year);
         // data.mileAge = parseInt(data.mileAge);
         // data.seats = parseInt(data.seats);
@@ -151,6 +156,7 @@ const UpdateCarDashboard = () => {
             form.reset();
           
             toast.success(res.message);
+            navigate('/dashboard/all_cars')
         } catch (error) {
             toast.error('Could not add car')
             console.error('Error submitting form:', error);

@@ -8,11 +8,12 @@ import CarCard from './CarCard';
 import { Loader } from 'lucide-react';
 import useAuth from '@/hooks/useAuth';
 
+
 const AllCars = () => {
-const {cars, setCars} = useAuth();
+    const { cars, setCars } = useAuth();
 
 
-const [getAllSearchQueryCars,{isLoading}] = useGetAllSearchQueryCarsMutation();
+    const [getAllSearchQueryCars, { isLoading }] = useGetAllSearchQueryCarsMutation();
 
     const form = useForm({
         defaultValues: {
@@ -23,18 +24,21 @@ const [getAllSearchQueryCars,{isLoading}] = useGetAllSearchQueryCarsMutation();
     const onSubmit = async (data) => {
         try {
             const res = await getAllSearchQueryCars(data.search).unwrap();
-            setCars(res?.data?.result)
+            setCars(res?.data)
             console.log(res);
         } catch (error) {
             console.log(error);
-        } 
+        }
     };
 
-      
+
 
     return (
         <div className="container mx-auto px-4">
-            <h1 className="text-4xl font-extrabold text-gray-900 dark:text-white text-center mb-8">All Cars</h1>
+            <h1 className="text-2xl font-extrabold text-gray-900 dark:text-white text-center mb-8 mt-5 lg:mt-0">All Available Cars</h1>
+            <p className="text-lg text-gray-600  text-center mb-8">
+                Your next adventure starts here. Explore our latest cars available for rent at the best prices.</p>
+
             <div className="bg-white dark:bg-gray-900 rounded-lg">
                 <Form {...form}>
                     <form
@@ -69,12 +73,13 @@ const [getAllSearchQueryCars,{isLoading}] = useGetAllSearchQueryCarsMutation();
                 </Form>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {cars?.length > 0 ? (
-                    cars?.map((car) => <CarCard key={car._id} car={car} />)
+                {cars?.result?.length > 0 ? (
+                    cars?.result?.map((car) => <CarCard key={car._id} car={car} />)
                 ) : (
-                    <p className="text-center text-gray-500 dark:text-gray-400 col-span-full">No products found</p>
+                    <p className="text-center text-gray-500 dark:text-gray-400 col-span-full">No cars found</p>
                 )}
             </div>
+
         </div>
     );
 };

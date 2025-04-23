@@ -78,7 +78,7 @@ const Feedback = () => {
         >
           {feedbacks.map((feedback) => (
             <SwiperSlide key={feedback.id}>
-              <div className="flex flex-col items-center justify-evenly w-full h-[350px] p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 bg-white">
+              <div className="bg-card flex flex-col items-center justify-evenly w-full h-[350px] p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300 ">
                 <img
                   src={feedback.feedbackUserPhoto}
                   alt={`${feedback.name}'s photo`}

@@ -1,3 +1,5 @@
+
+
 import React from 'react';
 import { Button } from "@/components/ui/button"
 import {
@@ -19,7 +21,7 @@ import { useAddBookMutation } from '@/redux/features/booking/bookingApi';
 import useAuth from '@/hooks/useAuth';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { useState } from 'react';
+
 
 
 
@@ -34,7 +36,24 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { useState } from 'react';
 
+
+
+const getCoordinates = async (location) => {
+    const apiKey = import.meta.env.VITE_LOCATION_API_KEY; // Replace with your actual OpenCage API key
+    const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(location)}&key=${apiKey}`);
+    const data = await response.json();
+  
+    if (data.results.length > 0) {
+      const { lat, lng } = data.results[0].geometry;
+      return { lat, lng };
+    } else {
+      console.warn("No results found for location:", location);
+      toast.error(`No results found for location: ${location}`)
+      return null;
+    }
+  };
 
 
 const formSchema = z.object({
@@ -59,8 +78,13 @@ function countDaysBetween(pickUpDate, dropOffDate) {
 const BookModal = ({carData}) => {
    
        const {user} = useAuth();
-       const [date, setDate] = useState()
+
        const [addBook, {isLoading}] = useAddBookMutation(undefined);
+
+       const [pickupCoords, setPickupCoords] = useState(null);
+        const [dropoffCoords, setDropoffCoords] = useState(null);
+
+        // console.log('pick: ',pickupCoords, 'drop: ', dropoffCoords)
     
        const form = useForm({
         resolver: zodResolver(formSchema),
@@ -82,6 +106,10 @@ const BookModal = ({carData}) => {
             data.carId=carData?._id;
             data.userId=user?._id;
             data.totalCost = countDaysBetween(data.pickUpDate, data.dropOffDate) * parseFloat(carData?.pricePerDay)
+            data.pickUpCoord = pickupCoords;
+            data.dropOffCoord = dropoffCoords;
+
+            console.log(data)
 
         try {
             const res = await addBook(data).unwrap();
@@ -106,108 +134,45 @@ const BookModal = ({carData}) => {
             <CardContent>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                        <FormField control={form.control} name="pickUpLocation" render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>pickUpLocation</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="Enter brand name" required {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
+                    <FormField control={form.control} name="pickUpLocation" render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Pick Up Location</FormLabel>
+                            <FormControl>
+                            <Input
+                                placeholder="Enter pick-up location"
+                                required
+                                {...field}
+                                onBlur={async (e) => {
+                                field.onBlur?.();
+                                const coords = await getCoordinates(e.target.value);
+                                setPickupCoords(coords); // Store in state
+                                }}
+                            />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
                         )} />
-                        <FormField control={form.control} name="dropOffLocation" render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>dropOffLocation</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="Enter model name" required {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )} />
-                        {/* <FormField
-                            control={form.control}
-                            name="pickUpDate"
-                            render={({ field }) => (
-                                <FormItem>
-                                <FormLabel>Pick Up Date</FormLabel>
-                                <FormControl>
-                                    <Controller
-                                    control={form.control}
-                                    name="pickUpDate"
-                                    render={({ field }) => (
-                                        <Popover>
-                                        <PopoverTrigger asChild>
-                                            <Button
-                                            variant={"outline"}
-                                            className={cn(
-                                                "w-[240px] justify-start text-left font-normal",
-                                                !field.value && "text-muted-foreground"
-                                            )}
-                                            >
-                                            <CalendarIcon />
-                                            {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
-                                            </Button>
-                                        </PopoverTrigger>
-                                        <PopoverContent className="w-auto p-0" align="start">
-                                            <Calendar
-                                            mode="single"
-                                            selected={field.value}
-                                            onSelect={field.onChange} // Connects selected date to form state
-                                            initialFocus
-                                            />
-                                        </PopoverContent>
-                                        </Popover>
-                                    )}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                                </FormItem>
-                            )}
-                            /> */}
 
-                   {/* <FormField
-                            control={form.control}
-                            name="dropOffDate"
-                            render={({ field }) => (
-                                <FormItem>
-                                <FormLabel>Drop Off Date</FormLabel>
-                                <FormControl>
-                                    <Controller
-                                    control={form.control}
-                                    name="dropOffDate"
-                                    render={({ field }) => (
-                                        <Popover>
-                                        <PopoverTrigger asChild>
-                                            <Button
-                                            variant={"outline"}
-                                            className={cn(
-                                                "w-[240px] justify-start text-left font-normal",
-                                                !field.value && "text-muted-foreground"
-                                            )}
-                                            >
-                                            <CalendarIcon />
-                                            {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
-                                            </Button>
-                                        </PopoverTrigger>
-                                        <PopoverContent className="w-auto p-0" align="start">
-                                            <Calendar
-                                            mode="single"
-                                            selected={field.value}
-                                            onSelect={field.onChange} // Update form state on selection
-                                            initialFocus
-                                            />
-                                        </PopoverContent>
-                                        </Popover>
-                                    )}
-                                    />
-                                    </FormControl>
-                                    <FormMessage />
-                                    </FormItem>
-                                )}
-                                /> */}
+<FormField control={form.control} name="dropOffLocation" render={({ field }) => (
+  <FormItem>
+    <FormLabel>Drop Off Location</FormLabel>
+    <FormControl>
+      <Input
+        placeholder="Enter drop-off location"
+        required
+        {...field}
+        onBlur={async (e) => {
+          field.onBlur?.();
+          const coords = await getCoordinates(e.target.value);
+          setDropoffCoords(coords);
+        }}
+      />
+    </FormControl>
+    <FormMessage />
+  </FormItem>
+)} />
 
-
-
+                    
 
 <Controller
     control={form.control}
@@ -282,7 +247,7 @@ const BookModal = ({carData}) => {
                         
                      
 
-                        <Button type="submit" className="w-full bg-[#ff004f] hover:bg-red-700 transition">
+                        <Button disabled={pickupCoords == null || dropoffCoords==null} type="submit" className="w-full bg-[#ff004f] hover:bg-red-700 transition">
                             Submit
                         </Button>
                     </form>

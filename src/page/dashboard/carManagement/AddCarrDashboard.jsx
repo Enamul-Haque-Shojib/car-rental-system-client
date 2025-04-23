@@ -93,12 +93,18 @@ const form = useForm({
 
 
 const onSubmit= async (data) => {
+    console.log(data)
     const imageFile = data.image?.[0];
     const carImgUrl = await uploadImage(imageFile);
 
     data.userId = user?._id;
     data.image = carImgUrl;
     data.slugType = formatSlug(data.type)
+    if(data.availability==true){
+        data.status='not_rent'
+    }else{
+        data.status='disable'
+    }
     // data.year = data.year;
     // data.mileAge = data.mileAge;
     // data.seats = data.seats;
@@ -237,6 +243,7 @@ return (
                                         />
                                     </FormControl>
                                     <FormLabel>Availability</FormLabel>
+                                    <FormMessage />
                                 </FormItem>
                             )}
                         />

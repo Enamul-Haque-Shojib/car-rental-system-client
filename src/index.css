@@ -1,11 +1,16 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Charm:wght@400;700&display=swap");
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 @import "tailwindcss";
 @plugin "daisyui";
 @theme {
-  --font-charm: "Charm", "sans-serif";
+  --font-charm:  "Montserrat", sans-serif;
   --color-primaryColor: #F5B754;
 }
+
+
 @import "tailwindcss";
 
 @plugin "tailwindcss-animate";
@@ -13,9 +18,10 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: #EAE8E1;
+  --foreground: #111827;
   --card: oklch(1 0 0);
+  --royal-blue:#2563EB;
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
@@ -49,10 +55,18 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.145 0 0);
-  --card-foreground: oklch(0.985 0 0);
+  --background:#131313;
+   /* #121212; */
+  /* --background: oklch(0.145 0 0); */
+  /* --foreground: oklch(0.985 0 0); */
+  --foreground: #F7F7F7;  
+  --subtext:#DBDBDB;
+   /* #F9FAFB ; */
+  /* #F7F7F7; */
+  /* --card: oklch(0.145 0 0); */
+  --card: #262829;
+  /* --card-foreground: oklch(0.985 0 0); */
+  --card-foreground: #F7F7F7;
   --popover: oklch(0.145 0 0);
   --popover-foreground: oklch(0.985 0 0);
   --primary: oklch(0.985 0 0);
@@ -81,11 +95,13 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(0.269 0 0);
   --sidebar-ring: oklch(0.439 0 0);
+  
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-subtext: var(--subtext);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
@@ -127,7 +143,8 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-charm;
   }
 }
+
 

@@ -1,6 +1,6 @@
 import auth from "@/firebase/firebase.config";
 import useAxiosPublic from "@/hooks/useAxiosPublic";
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile ,sendPasswordResetEmail} from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext(null)
@@ -8,27 +8,38 @@ const googleProvider = new GoogleAuthProvider()
 
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
+    const [role, setRole] = useState(null);
     const [cars, setCars] = useState([]);
 
-    console.log('---->>>>>',user)
+    const [filters, setFilters] = useState({
+        status: '',
+        mileAge: '',
+        seats: '',
+        brand: '',
+        carModel: '',
+        year: '',
+        slugType: '',
+        pricePerDay: '',
+        page: 1,
+      });
+
+    const updateFilter = (key, value) => {
+        setFilters(prev => ({ ...prev, [key]: value }));
+      };
+
     const [loading, setLoading] = useState(true)
     const axiosPublic=useAxiosPublic()
 
     const registerUser = async (email, password) => {
         setLoading(true);
-        try {
             return await createUserWithEmailAndPassword(auth, email, password);
-        } finally {
-            setLoading(false);
-        }
+       
     };
     const login = async (email, password) => {
         setLoading(true);
-        try {
+       
             return await signInWithEmailAndPassword(auth, email, password);
-        } finally {
-            setLoading(false);
-        }
+        
     };
     const updateUserProfile = (name, photo) => {
         setLoading(true)
@@ -39,11 +50,15 @@ const AuthProvider = ({children}) => {
     }
     const signInWithGoogle = async () => {
         setLoading(true);
-        try {
+        
             return await signInWithPopup(auth, googleProvider);
-        } finally {
-            setLoading(false);
-        }
+        
+    };
+    const sendPasswordReset = async (email) => {
+        setLoading(true);
+      
+            return await sendPasswordResetEmail(auth, email);
+        
     };
     const logout = async () => {
         setLoading(true);
@@ -51,6 +66,7 @@ const AuthProvider = ({children}) => {
             await signOut(auth);
             await axiosPublic.post("/api/auth/logout", {}, { withCredentials: true });
             setUser(null);
+            setRole(null)
         } catch (error) {
             console.error("Logout Error:", error);
         } finally {
@@ -62,14 +78,14 @@ const AuthProvider = ({children}) => {
 // console.log(user?.displayName,user?.photoURL)
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async(currentUser) => {
-            // setUser(currentUser);
+            setUser(currentUser);
             setLoading(false);
 
             if (currentUser?.email && currentUser?.displayName && currentUser?.photoURL ) {
                 const userData = { email: currentUser.email, name: currentUser.displayName, photoUrl: currentUser.photoURL };
 
                 await axiosPublic.post("/api/auth/login", userData, { withCredentials: true })
-                    .then(res =>{console.log("Login success:", res.data); setUser(res?.data?.data)})
+                    .then(res =>{console.log("Login success:", res.data); setUser(res?.data?.data); setRole(res?.data?.data?.role)})
                     .catch(error => console.error("Login error:", error));
                     // setUser(res?.data)
             } else {
@@ -94,7 +110,12 @@ const AuthProvider = ({children}) => {
         setLoading,
         signInWithGoogle,
         cars,
-        setCars
+        setCars,
+        role,
+        sendPasswordReset,
+        updateFilter,
+        filters, 
+        setFilters
     }
     return (
         <AuthContext.Provider value={authInfo}>

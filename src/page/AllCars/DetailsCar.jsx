@@ -1,6 +1,7 @@
 import CarReviews from '@/component/carReviews/CarReviews';
 import ReviewForm from '@/component/carReviews/reviewForm';
 import BookModal from '@/component/dashboard/modal/BookModal';
+import RelatedCar from '@/component/relatedCar/RelatedCar';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
@@ -8,18 +9,22 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import { Separator } from '@/components/ui/separator';
+import useAuth from '@/hooks/useAuth';
 import { useGetOneCarQuery } from '@/redux/features/car/carApi';
-import { UserRound } from 'lucide-react';
+import { Loader, UserRound } from 'lucide-react';
 
 import React from 'react';
 
 import { useParams } from 'react-router';
 
 const DetailsCar = () => {
+  const {user,role} = useAuth();
     const {id} = useParams();
      const {data: oneCarData, isLoading} = useGetOneCarQuery(id);
    
-
+     let profileId = user?._id;
+     let carUserId = oneCarData?.data?.userId?._id;
+    
    
     //  const {data} = oneCarData;
     //  const {
@@ -40,9 +45,13 @@ const DetailsCar = () => {
     //     description
     //   } = data
 
-      if(isLoading){
-        return <p></p>
-      }
+    if (isLoading) {
+      return (
+        <div className="flex justify-center items-center h-96">
+          <Loader className="animate-spin text-gray-400 w-10 h-10" />
+        </div>
+      );
+    }
     
     return (
 
@@ -71,7 +80,18 @@ const DetailsCar = () => {
         </div>
         <div className="p-6 lg:w-1/2 flex flex-col justify-between">
    
-            <CardTitle className="text-3xl font-bold text-gray-900 dark:text-white flex justify-between items-center">{oneCarData?.data?.registrationNumber} <p><span className="font-semibold"></span><span className={!oneCarData?.data?.availability ?'text-red-600' : 'text-green-600'}>{oneCarData?.data?.availability ? 'Available' : 'Booked'}</span></p></CardTitle>
+            <CardTitle className="text-3xl font-bold text-gray-900 dark:text-white flex justify-between items-center">
+              {oneCarData?.data?.registrationNumber} 
+              <p>
+              <span className="font-semibold"></span>
+              <span className={oneCarData?.data?.status==='not_rent' ? 'text-green-600' : 'text-red-600'}>
+                {
+                  oneCarData?.data?.status==='disable' ? 'Disabled' : oneCarData?.data?.status==='not_rent' ? 'Available' : 'Booked'
+                }
+              
+              </span>
+              </p>
+              </CardTitle>
             <CardDescription className=" text-gray-600 dark:text-gray-400">{oneCarData?.data?.description}</CardDescription>
             <Separator></Separator>
           <CardContent className="text-gray-800 dark:text-gray-300">
@@ -108,10 +128,13 @@ const DetailsCar = () => {
             {/* {user && user?._id !== userId?._id && ( */}
               <Dialog>
             <DialogTrigger asChild>
-            <Button disabled={oneCarData?.data?.availability=== false} variant="default" size="lg" 
-               className="px-6 py-2 text-lg">
-                Book Now
-              </Button>
+              {
+                (role !== 'admin' && profileId!=carUserId)  && <Button disabled={oneCarData?.data?.status=== 'rent' || oneCarData?.data?.status=== 'disable'} variant="default" size="lg" 
+                className="px-6 py-2 text-lg">
+                 Book Now
+               </Button>
+              }
+            
             </DialogTrigger>
             <BookModal carData={oneCarData?.data}></BookModal>
             </Dialog>
@@ -123,11 +146,18 @@ const DetailsCar = () => {
 
     </div>
     <div className='container mx-auto px-4 my-12'>
-      <CarReviews carId={id}></CarReviews>
+      <RelatedCar slugType={oneCarData?.data?.slugType}></RelatedCar>
     </div>
     <div className='container mx-auto px-4 my-12'>
+      <CarReviews carId={id}></CarReviews>
+    </div>
+    {
+      role !=='admin' && <div className='container mx-auto px-4 my-12'>
       <ReviewForm carId={id}></ReviewForm>
     </div>
+    }
+    
+    
        </div>
   
     );

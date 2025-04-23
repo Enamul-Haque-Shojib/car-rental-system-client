@@ -1,6 +1,3 @@
-import { useState } from "react";
-import toast from "react-hot-toast";
-import { Link } from "react-router"
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,12 +9,19 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import useAuth from "@/hooks/useAuth";
-import { useNavigate } from "react-router";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { Link,useLocation, useNavigate } from "react-router";
 
 const Login = () => {
-
-  const navigate=useNavigate();
-  const { login } = useAuth();
+  const location = useLocation()
+  const navigate = useNavigate()
+ 
+  const forms = location.state?.from?.pathname 
+  console.log(typeof(forms))
+  console.log()
+ 
+  const { login ,signInWithGoogle,} = useAuth();
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -29,14 +33,39 @@ const Login = () => {
 
     try {
       await login(email, password);
-      navigate("/");
+      // Redirect to the desired page after successful login
+      
+      navigate(location.state?.from?.pathname || '/', { replace: true });
       toast.success("Login successful");
       setError(null); // Reset error state on success
     } catch (error) {
       toast.error(error.message);
       setError(error.message);
     }
-  };
+  }; 
+  const handlegoogle = async () => {
+    try {
+      console.log(forms,"forms route")
+      const { user } = await signInWithGoogle() 
+       
+        if (user) {
+          // navigate("/dashboard", { replace: true });
+            toast.success("Login successful");
+            // navigate("/dashboard", { replace: true });
+            
+           navigate(location.state?.from?.pathname || '/', { replace: true });
+           
+           
+           
+        } else {
+            toast.error("Google sign-in failed. Please try again.");
+        }
+    } catch (error) {
+        console.error("Google sign-in error:", error);
+        toast.error("An error occurred during Google sign-in.");
+    }
+}
+
 
   return (
     <div className="flex min-h-screen w-full items-center justify-center p-6 md:p-10">
@@ -64,12 +93,12 @@ const Login = () => {
                 <div className="grid gap-3">
                   <div className="flex items-center">
                     <Label htmlFor="password">Password</Label>
-                    <a
-                      href="#"
+                    <Link
+                      to={"/forget"}
                       className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                    >
-                      Forgot your password?
-                    </a>
+                    > Forgot your password? 
+                      
+                    </Link>
                   </div>
                   <Input
                     id="password"
@@ -83,7 +112,7 @@ const Login = () => {
                   <Button type="submit" className="w-full">
                     Login
                   </Button>
-                  <Button variant="outline" className="w-full">
+                  <Button variant="outline" className="w-full" onClick={handlegoogle}>
                     Login with Google
                   </Button>
                 </div>
