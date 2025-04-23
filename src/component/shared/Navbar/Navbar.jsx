@@ -23,8 +23,8 @@ const Navbar = () => {
   }
   const toggleDropdown = () => setDropdownOpen((prev) => !prev);
   return (
-    <div className=" shadow-md sticky top-0 z-50 text-black">
-      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+    <div className=" shadow-md sticky top-0 z-50  ">
+      <div className="container mx-auto px-6 py-4 bg-background/70 flex justify-between items-center">
         {/* Logo */}
         <Link to="/" >
           <div className='w-20 h-[50px]  relative'>
@@ -152,24 +152,30 @@ const Navbar = () => {
           <div className="space-y-4">
             <NavLink
               to="/"
-              className="block text-lg hover:text-indigo-500"
-              activeclassName="text-indigo-500"
+              
+              className={({ isActive }) =>
+              isActive ? "text-[#2563EB]" : "text-foreground hover:text-green-800 font-semibold "
+            }
               onClick={handleNavField}
             >
               Home
             </NavLink>
             <NavLink
               to="/allCars"
-              className="block text-lg hover:text-indigo-500"
-              activeclassName="text-indigo-500"
+              
+              className={({ isActive }) =>
+              isActive ? "text-[#2563EB]" : "text-foreground hover:text-green-800 font-semibold "
+            }
               onClick={handleNavField}
             >
               All Cars
             </NavLink>
             <NavLink
               to="/about"
-              className="block text-lg hover:text-indigo-500"
-              activeclassName="text-indigo-500"
+              
+              className={({ isActive }) =>
+              isActive ? "text-[#2563EB]" : "text-foreground hover:text-green-800 font-semibold "
+            }
               onClick={handleNavField}
             >
               About
@@ -191,8 +197,9 @@ const Navbar = () => {
                 <>
                   <NavLink
                     to="/login"
-                    className="block text-lg hover:text-indigo-500"
-                    activeclassName="text-indigo-500"
+                    className={({ isActive }) =>
+              isActive ? "text-[#2563EB]" : "text-foreground hover:text-green-800 font-semibold "
+            }
                     onClick={handleNavField}
                   >
                     Login

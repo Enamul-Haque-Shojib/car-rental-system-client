@@ -27,8 +27,6 @@ const AuthProvider = ({children}) => {
         setFilters(prev => ({ ...prev, [key]: value }));
       };
 
-    // console.log('---->>>>>',user)
-    console.log('---->>>>>',role)
     const [loading, setLoading] = useState(true)
     const axiosPublic=useAxiosPublic()
 
@@ -75,7 +73,7 @@ const AuthProvider = ({children}) => {
             setLoading(false);
         }
     };
-console.log(user)
+
  
 // console.log(user?.displayName,user?.photoURL)
     useEffect(() => {
