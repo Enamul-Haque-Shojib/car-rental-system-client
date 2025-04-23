@@ -32,7 +32,7 @@ const CustomerChat = () => {
   };
 
   return (
-    <div className="fixed bottom-20 right-5 w-80 bg-white border shadow-lg rounded-lg p-4 z-1">
+    <div className="fixed bottom-10 right-20 w-80 bg-white border shadow-lg rounded-lg p-4 z-1">
       <div className="h-64 overflow-y-auto">
         {messages.filter(msg => (msg.senderId === userId && msg.receiverId === 'admin') || (msg.senderId === 'admin' && msg.receiverId === userId)).map((msg, index) => (
           <p

@@ -25,12 +25,14 @@ const Slider = () => {
             }}
           >
             <div className="hero-content text-center text-white">
-              <div className="max-w-md">
-                <h1 className="text-5xl font-extrabold mb-4">Welcome to SmartCar Rental</h1>
-                <p className="text-lg leading-relaxed mb-6">
-                  Find the perfect ride for any journey – fast, affordable, and hassle-free. Book your car today and hit the road with confidence!
+              <div className="max-w-md space-y-4">
+                <h1 className="text-4xl md:text-5xl font-bold text-center mt-10">
+                  Welcome to <span className="text-blue-600">DriveEase</span>
+                </h1>
+                <p className="text-lg  text-center mt-4 max-w-xl mx-auto">
+                  Your ultimate destination for reliable, affordable, and stylish car rentals.
                 </p>
-                <Link to=''>
+                <Link to='/allCars'>
                   <button className="btn btn-primary px-8 py-3 text-lg rounded-full shadow-md hover:bg-blue-600 transition">
                     Get Started
                   </button>
@@ -80,7 +82,7 @@ const Slider = () => {
                 <p className="text-lg leading-relaxed mb-6">
                   Choose from a wide range of cars and book hassle-free today!
                 </p>
-                <Link to=''>
+                <Link to='login'>
                   <button className="btn btn-primary px-8 py-3 text-lg rounded-full shadow-md hover:bg-blue-600 transition">
                     Join Now
                   </button>

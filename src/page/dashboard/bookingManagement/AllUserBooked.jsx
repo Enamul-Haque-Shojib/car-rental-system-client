@@ -5,7 +5,12 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import useAuth from '@/hooks/useAuth';
 import toast from 'react-hot-toast';
-import { Loader } from 'lucide-react';
+import { Check, Loader, MapPin, X } from 'lucide-react';
+
+import CountDownTimer from './CountDownTimer';
+import MapWithPins from '@/component/dashboard/map/MapWithPins';
+import { Dialog, DialogTrigger } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 
 
 const AllUserBooked = () => {
@@ -64,19 +69,18 @@ console.log(bookingsData)
           <TableHead className="">Avatar</TableHead>
           <TableHead className="">Registration</TableHead>
           <TableHead className="">User</TableHead>
-          <TableHead>Pick Location</TableHead>
-    
-          <TableHead>Drop Location</TableHead>
+          <TableHead>Location</TableHead>
        
-          <TableHead>Pick Date</TableHead>
-          <TableHead>Drop Date</TableHead>
+          <TableHead>Date</TableHead>
+          <TableHead>Time Remaining</TableHead>
+          <TableHead>Map</TableHead>
           <TableHead className="">Total Cost</TableHead>
           <TableHead className="">Status</TableHead>
           <TableHead className="">Action</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {bookingsData?.data?.map(({_id, carId, userId, pickUpLocation,dropOffLocation, pickUpDate, dropOffDate, totalCost, status}) => (
+        {bookingsData?.data?.map(({_id, carId, userId, pickUpLocation,dropOffLocation, pickUpDate, dropOffDate, totalCost, status, pickUpCoord, dropOffCoord}, index) => (
           <TableRow key={_id}>
             <TableCell className="">
            
@@ -100,20 +104,38 @@ console.log(bookingsData)
                     <p>{userId?.email}</p>
                 </div>
             </TableCell>
-            <TableCell>{pickUpLocation}</TableCell>
-         
-            <TableCell className="">{dropOffLocation}</TableCell>
+            <TableCell>{pickUpLocation} to {dropOffLocation}</TableCell>
            
-            <TableCell className="">{pickUpDate}</TableCell>
-            <TableCell className="">{dropOffDate}</TableCell>
+            <TableCell className="">{pickUpDate} to {dropOffDate}</TableCell>
+     
+            <TableCell className="">
+                  <CountDownTimer booking={{pickUpDate,dropOffDate}} index={index}/>        
+            </TableCell>
+            <TableCell className="text-center">
+                        <Dialog>
+                          <DialogTrigger asChild>
+                            <MapPin variant="outline" className="w-full text-lg cursor-pointer">
+                              View Location
+                            </MapPin>
+                          </DialogTrigger>
+                          <MapWithPins
+                            start_address={pickUpLocation}
+                            start_latitude={pickUpCoord.lat}
+                            start_longitude={pickUpCoord.lng}
+                            end_address={dropOffLocation}
+                            end_latitude={dropOffCoord.lat}
+                            end_longitude={dropOffCoord.lng}
+                          />
+                        </Dialog>
+                      </TableCell>
             <TableCell className="">${totalCost}</TableCell>
             <TableCell className="">{status}</TableCell>
             <TableCell className="flex justify-around items-center ">
               {
-                status==='Pending' && <button className='cursor-pointer bg-green-600 p-2 rounded-lg' onClick={()=>{handleApprovedBook(_id,carId)}}>Approved</button>
+                status==='Pending' && <Check className='cursor-pointer text-lg text-green-600 m-1' onClick={()=>{handleApprovedBook(_id,carId)}}>Approved</Check>
               }
               {
-                            status==='Pending' && <button className='cursor-pointer bg-red-600 p-2 rounded-lg' onClick={()=>{handleCancelBook(_id)}}>Cancel</button>
+                            status==='Pending' && <X className='cursor-pointer text-lg text-red-600 m-1' onClick={()=>{handleCancelBook(_id)}}>Cancel</X>
                           }
                 
             </TableCell>

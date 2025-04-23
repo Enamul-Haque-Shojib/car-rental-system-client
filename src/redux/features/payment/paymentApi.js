@@ -37,10 +37,18 @@ const paymentApi = baseApi.injectEndpoints({
             }),
             providesTags:["payments"]
         }),
+        refundPayment: builder.mutation({
+            query:(transactionId) => ({
+                url:`payments/refund`,
+                method:'POST',
+                body:{transactionId}
+            }),
+            invalidatesTags:['payments']
+        })
        
       
     })
 })
 
-export const {useAddPaymentMutation, useGetAllOwnerPaymentQuery, useGetAllUserPaymentQuery,useDeletePaymentMutation} = paymentApi;
+export const {useAddPaymentMutation, useGetAllOwnerPaymentQuery, useGetAllUserPaymentQuery,useDeletePaymentMutation,useRefundPaymentMutation} = paymentApi;
 

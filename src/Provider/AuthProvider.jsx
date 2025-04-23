@@ -11,26 +11,35 @@ const AuthProvider = ({children}) => {
     const [role, setRole] = useState(null);
     const [cars, setCars] = useState([]);
 
-    // console.log('---->>>>>',user)
-    console.log('---->>>>>',role)
+    const [filters, setFilters] = useState({
+        status: '',
+        mileAge: '',
+        seats: '',
+        brand: '',
+        carModel: '',
+        year: '',
+        slugType: '',
+        pricePerDay: '',
+        page: 1,
+      });
+
+    const updateFilter = (key, value) => {
+        setFilters(prev => ({ ...prev, [key]: value }));
+      };
+
     const [loading, setLoading] = useState(true)
     const axiosPublic=useAxiosPublic()
 
     const registerUser = async (email, password) => {
         setLoading(true);
-        try {
             return await createUserWithEmailAndPassword(auth, email, password);
-        } finally {
-            setLoading(false);
-        }
+       
     };
     const login = async (email, password) => {
         setLoading(true);
-        try {
+       
             return await signInWithEmailAndPassword(auth, email, password);
-        } finally {
-            setLoading(false);
-        }
+        
     };
     const updateUserProfile = (name, photo) => {
         setLoading(true)
@@ -41,19 +50,15 @@ const AuthProvider = ({children}) => {
     }
     const signInWithGoogle = async () => {
         setLoading(true);
-        try {
+        
             return await signInWithPopup(auth, googleProvider);
-        } finally {
-            setLoading(false);
-        }
+        
     };
     const sendPasswordReset = async (email) => {
         setLoading(true);
-        try {
+      
             return await sendPasswordResetEmail(auth, email);
-        } finally {
-            setLoading(false);
-        }
+        
     };
     const logout = async () => {
         setLoading(true);
@@ -73,7 +78,7 @@ const AuthProvider = ({children}) => {
 // console.log(user?.displayName,user?.photoURL)
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async(currentUser) => {
-            // setUser(currentUser);
+            setUser(currentUser);
             setLoading(false);
 
             if (currentUser?.email && currentUser?.displayName && currentUser?.photoURL ) {
@@ -107,7 +112,10 @@ const AuthProvider = ({children}) => {
         cars,
         setCars,
         role,
-        sendPasswordReset
+        sendPasswordReset,
+        updateFilter,
+        filters, 
+        setFilters
     }
     return (
         <AuthContext.Provider value={authInfo}>

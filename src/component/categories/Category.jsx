@@ -3,7 +3,7 @@ import React from 'react';
 const Category = ({category}) => {
     return (
         <div>
-            <div className="rounded-lg overflow-hidden">
+            <div className="rounded-lg  w-full  bg-card">
 
         <img
           src={category.image}
