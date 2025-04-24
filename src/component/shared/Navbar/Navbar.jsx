@@ -23,8 +23,8 @@ const Navbar = () => {
   }
   const toggleDropdown = () => setDropdownOpen((prev) => !prev);
   return (
-    <div className=" shadow-md sticky top-0 z-50  ">
-      <div className="container mx-auto px-6 py-4 bg-background/70 flex justify-between items-center">
+    <div className=" shadow-md sticky top-0 z-50 bg-background/70 ">
+      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
         <Link to="/" >
           <div className='w-20 h-[50px]  relative'>

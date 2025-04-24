@@ -129,10 +129,10 @@ const DetailsCar = () => {
               <Dialog>
             <DialogTrigger asChild>
               {
-                (role !== 'admin' && profileId!=carUserId)  && <Button disabled={oneCarData?.data?.status=== 'rent' || oneCarData?.data?.status=== 'disable'} variant="default" size="lg" 
+                user && ((role !== 'admin' && profileId!=carUserId)  && <Button disabled={oneCarData?.data?.status=== 'rent' || oneCarData?.data?.status=== 'disable'} variant="default" size="lg" 
                 className="px-6 py-2 text-lg">
                  Book Now
-               </Button>
+               </Button>)
               }
             
             </DialogTrigger>
