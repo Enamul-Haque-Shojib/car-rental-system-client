@@ -47,6 +47,7 @@ const AllMyPayment = () => {
     }
 
     const handleRefund = async (transactionId) => {
+      
       Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",
@@ -137,9 +138,11 @@ const AllMyPayment = () => {
                         
                          <TableCell className="flex  items-center justify-center ">
 
-                          {
+                          {/* {
                             status === 'paid' ? <Button disabled={isRefundProcessing} className={'bg-red-600 cursor-pointer'} onClick={() => handleRefund(transactionId)} >Cancel & Refund</Button> :  <Button className={'bg-yellow-600'} >Booking cancelled</Button>
-                          }
+                          } */}
+
+<Button disabled={isRefundProcessing} className={'bg-red-600 cursor-pointer'} onClick={() => handleRefund(transactionId)} >Cancel & Refund</Button>
                          
                         
                           </TableCell>
