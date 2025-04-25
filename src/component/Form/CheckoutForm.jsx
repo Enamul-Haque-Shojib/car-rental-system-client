@@ -16,6 +16,7 @@ const CheckoutForm = ({myBookingData}) => {
     const elements = useElements();
     const navigate = useNavigate()
     const [clientSecret, setClientSecret] = useState('');
+    const [processing, setProcessing] = useState(false)
 
     const [createPayment] = useCreatePaymentMutation(undefined);
 
@@ -35,6 +36,7 @@ const CheckoutForm = ({myBookingData}) => {
 
 
     const handleSubmit = async (event) => {
+      setProcessing(true)
       // Block native form submission.
       event.preventDefault();
   
@@ -45,6 +47,7 @@ const CheckoutForm = ({myBookingData}) => {
       const card = elements.getElement(CardElement);
   
       if (card == null) {
+        setProcessing(false)
         return;
       }
   
@@ -55,6 +58,7 @@ const CheckoutForm = ({myBookingData}) => {
       });
   
       if (error) {
+        setProcessing(false)
         console.log('[error]', error);
       } else {
         console.log('[PaymentMethod]', paymentMethod);
@@ -99,7 +103,7 @@ const CheckoutForm = ({myBookingData}) => {
         } catch (error) {
           console.log(error)
         } finally {
-        //   setProcessing(false)
+          setProcessing(false)
           
         }
       }
@@ -129,7 +133,8 @@ const CheckoutForm = ({myBookingData}) => {
         </button> */}
         <div className='flex justify-around mt-2 gap-2'>
         <button className='btn bg-green-500 p-5 rounded-lg text-xl'
-          disabled={!stripe || !clientSecret || isLoading}
+          // disabled={!stripe || !clientSecret || isLoading}
+          disabled={!stripe || !clientSecret || processing}
           type='submit'
          
         >
