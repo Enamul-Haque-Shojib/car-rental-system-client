@@ -7,8 +7,6 @@
 
 ## Team
  - Enamul Haque (Leader)
- - Md. Rafiqul Islam
- - Md. Rakib Hossen Sarka
  - Md. Rabiul Khan
 
 ## Website client link:

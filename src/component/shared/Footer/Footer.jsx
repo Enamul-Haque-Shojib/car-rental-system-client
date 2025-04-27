@@ -18,7 +18,7 @@ const Footer = () => {
       
             <article className="flex flex-col gap-y-6">
               <div className="flex items-center gap-4">
-                <h3 className="font-extrabold text-3xl">SmartCar Rental</h3>
+                <h3 className="font-extrabold text-3xl">Drive Ease</h3>
               </div>
               <div className="text-gray-400 leading-loose">
                 <p>Location: Av. Washington 165, NYCA</p>
