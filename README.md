@@ -1,9 +1,9 @@
 
-## Category: Lotus
+
 ### Car Rental System
 
 ## Website Name:
-### SmartCar Rentals
+### Drive Ease
 
 ## Team
  - Enamul Haque (Leader)
